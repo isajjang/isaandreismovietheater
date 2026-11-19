@@ -119,6 +119,10 @@ body.booster-locked{overflow:hidden}
 .booster-mini-copy{font-family:'Cinzel Decorative',Georgia,serif;font-size:12px;font-weight:700;letter-spacing:.03em;white-space:nowrap}
 .booster-mini:hover{background:#2b1b3c;border-color:#c8a3e5}
 @media(max-width:480px){.hero-actions{gap:9px}.booster-mini{padding:9px 11px}.booster-mini-copy{font-size:10px}}
+/* Explicitly visible spellbook launcher next to the watch button */
+.hero .hero-actions{display:flex!important;align-items:center!important;flex-wrap:wrap!important;gap:12px!important;position:relative!important;z-index:20!important}
+.hero .hero-actions #boosterOpen{display:inline-flex!important;visibility:visible!important;opacity:1!important;position:relative!important;flex:0 0 49px!important;width:49px!important;height:46px!important;min-height:46px!important;padding:0!important;align-items:center!important;justify-content:center!important;background:#392052!important;border:1px solid #c89be9!important;border-radius:5px!important;color:#f3d9ff!important;box-shadow:none!important;animation:none!important;transform:none!important}
+.hero .hero-actions #boosterOpen svg{display:block!important;width:28px!important;height:28px!important;stroke:#f3d9ff!important;fill:none!important;stroke-width:1.8!important}
 </style>
 </head>
 <body>
@@ -146,7 +150,7 @@ body.booster-locked{overflow:hidden}
      </button>
 <button class="booster-mini" id="boosterOpen" type="button" aria-label="Open a booster pack" title="Open a booster pack">
 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6.5c-2.5-1.8-5.2-2-9-1.4v13c3.8-.6 6.5-.4 9 1.4 2.5-1.8 5.2-2 9-1.4v-13c-3.8-.6-6.5-.4-9 1.4Z"/><path d="M12 6.5v13M6.7 9.5l1.1 1.1 1.1-1.1-1.1-1.1-1.1 1.1ZM16.5 10.5l.9 1 .9-1-.9-1-.9 1ZM6 14h3M15 15h3"/></svg>
-<span class="booster-mini-copy">Open a Booster Pack</span>
+
 </button>
 </div>
 </div>
