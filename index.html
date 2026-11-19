@@ -57,6 +57,42 @@ body{background:radial-gradient(circle at 95% 20%,#251346 0,transparent 40%),#09
 .booster-exit{position:absolute;right:clamp(16px,4vw,45px);top:10px;z-index:2;border:1px solid #e8b9ff;border-radius:50px;background:#34104f;color:white;padding:8px 16px;font:700 15px Arial,sans-serif}
 body.booster-locked{overflow:hidden}
 @media(max-width:680px){header{height:auto;min-height:76px;flex-wrap:wrap;gap:8px}.nav{gap:8px;flex-wrap:wrap}.booster-launch{padding:9px 11px!important;font-size:12px!important}.booster-modal{padding:52px 5px 5px}}
+
+/* Booster invitation: image-first, no homepage launcher */
+.pack-invite{position:fixed;inset:0;z-index:9998;display:none;align-items:center;justify-content:center;padding:24px;background:rgba(7,3,16,.76);backdrop-filter:blur(9px)}
+.pack-invite.active{display:flex}
+.pack-invite-panel{position:relative;text-align:center;width:min(100%,380px);animation:inviteArrive .45s ease-out both}
+.pack-invite-art{display:block;width:min(61vw,235px);height:auto;margin:0 auto 17px;filter:drop-shadow(0 12px 28px rgba(169,67,240,.42));clip-path:polygon(0 0,100% 0,100% 100%,0 100%)}
+.pack-invite h2{font-family:'Cinzel Decorative',Georgia,serif;font-size:clamp(19px,4.5vw,25px);color:#f4dba7;margin:0 0 19px;text-shadow:0 2px 18px #6e3298}
+.pack-invite-actions{display:flex;justify-content:center;gap:11px;flex-wrap:wrap}
+.pack-invite-actions button{border-radius:9px;padding:11px 20px;font-weight:750;border:1px solid #a26cc9;background:#7b40b3;color:white}
+.pack-invite-actions .pack-invite-later{background:transparent;color:#ded0e9;border-color:#71617c}
+.pack-invite-close{position:absolute;right:0;top:0;background:rgba(18,10,30,.8);color:#f6eaff;border:1px solid #8a6eaa;border-radius:50%;width:34px;height:34px;font-size:20px}
+@keyframes inviteArrive{from{opacity:0;transform:translateY(18px) scale(.96)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.pack-invite-panel{animation:none}}
+
+
+/* Floating booster-pack invitation: full cutout, no card/panel */
+.pack-invite{background:rgba(5,3,14,.40)!important;backdrop-filter:blur(2px)!important;overflow:hidden;align-items:center!important;justify-content:center!important}
+.pack-invite-panel{width:min(94vw,440px)!important;max-width:440px;display:flex;flex-direction:column;align-items:center;justify-content:center;isolation:isolate;animation:none!important;background:none!important;border:0!important;box-shadow:none!important;overflow:visible!important}
+.pack-invite-art{position:relative;z-index:3;width:min(55vw,255px)!important;max-height:57vh;object-fit:contain;height:auto!important;margin:0 auto 14px!important;clip-path:none!important;filter:drop-shadow(0 22px 28px rgba(0,0,0,.7)) drop-shadow(0 0 18px rgba(187,85,255,.48))!important;animation:packShootUp 1.05s cubic-bezier(.17,.78,.22,1.07) both,packHover 3.6s ease-in-out 1.1s infinite!important;transform-origin:center center;will-change:transform,opacity}
+@keyframes packShootUp{0%{transform:translate3d(0,110vh,0) rotate(-17deg) scale(.55);opacity:.2}52%{opacity:1}75%{transform:translate3d(0,-24px,0) rotate(7deg) scale(1.08)}100%{transform:translate3d(0,0,0) rotate(0deg) scale(1);opacity:1}}
+@keyframes packHover{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-10px) rotate(1deg)}}
+.pack-invite h2,.pack-invite-actions{position:relative;z-index:4;animation:inviteTextIn .65s ease 1.05s both!important}
+.pack-invite h2{font-size:clamp(20px,4.2vw,28px)!important;margin:5px 0 17px!important;text-shadow:0 3px 15px #12041e,0 0 22px #6d249a!important}
+.pack-invite-actions button{box-shadow:0 6px 24px rgba(12,4,25,.45)}
+.pack-invite-close{z-index:6;top:-15px!important;right:0!important}
+@keyframes inviteTextIn{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:translateY(0)}}
+.pack-sparkles{position:absolute;inset:-20vh -20vw;pointer-events:none;z-index:2;overflow:visible}
+.pack-spark{position:absolute;left:50%;top:52%;width:var(--sz);height:var(--sz);opacity:0;transform:translate(-50%,-50%);animation:sparkBlast var(--dur) cubic-bezier(.12,.72,.28,1) var(--delay) both;filter:drop-shadow(0 0 7px currentColor)}
+.pack-spark:before,.pack-spark:after{content:'';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:currentColor;border-radius:100%}
+.pack-spark:before{width:18%;height:100%}.pack-spark:after{height:18%;width:100%}
+@keyframes sparkBlast{0%{opacity:0;transform:translate(-50%,130px) scale(.1) rotate(0deg)}20%{opacity:1}75%{opacity:1}100%{opacity:0;transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(.3) rotate(var(--rot))}}
+.pack-magic-ring{position:absolute;z-index:1;left:50%;top:43%;width:min(74vw,340px);aspect-ratio:1;border:1px solid rgba(214,149,255,.6);border-radius:50%;box-shadow:0 0 0 10px rgba(158,60,235,.045),0 0 45px rgba(176,64,250,.45),inset 0 0 45px rgba(176,64,250,.18);transform:translate(-50%,-50%) scale(.1);opacity:0;animation:magicRing 1.3s ease-out .55s both;pointer-events:none}
+@keyframes magicRing{0%{opacity:0;transform:translate(-50%,-50%) scale(.1)}35%{opacity:.85}100%{opacity:0;transform:translate(-50%,-50%) scale(1.65)}}
+@media(max-width:550px){.pack-invite-art{width:min(61vw,245px)!important;max-height:52vh}.pack-invite-close{right:9px!important;top:-30px!important}}
+@media(prefers-reduced-motion:reduce){.pack-invite-art,.pack-invite h2,.pack-invite-actions,.pack-spark,.pack-magic-ring{animation:none!important;opacity:1!important}}
+
 </style>
 <style>
    /* Cinematic anime hero: characters visible, text readable, no competing movie card. */
@@ -148,10 +184,7 @@ body.booster-locked{overflow:hidden}
 <button class="primary" onclick="document.querySelector('#collection').scrollIntoView({behavior:'smooth'})">
       r u still watching?
      </button>
-<button class="booster-mini" id="boosterOpen" type="button" aria-label="Open a booster pack" title="Open a booster pack">
-<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6.5c-2.5-1.8-5.2-2-9-1.4v13c3.8-.6 6.5-.4 9 1.4 2.5-1.8 5.2-2 9-1.4v-13c-3.8-.6-6.5-.4-9 1.4Z"/><path d="M12 6.5v13M6.7 9.5l1.1 1.1 1.1-1.1-1.1-1.1-1.1 1.1ZM16.5 10.5l.9 1 .9-1-.9-1-.9 1ZM6 14h3M15 15h3"/></svg>
 
-</button>
 </div>
 </div>
 </section>
@@ -390,15 +423,41 @@ render();if(localStorage.getItem(TOKEN))fetchMissingPosters(localStorage.getItem
 })();
   </script>
 
+
+<div class="pack-invite" id="packInvite" role="dialog" aria-modal="true" aria-labelledby="packInviteTitle" aria-hidden="true">
+ <div class="pack-invite-panel">
+  <button class="pack-invite-close" id="packInviteClose" type="button" aria-label="Dismiss invitation">×</button>
+  <div class="pack-magic-ring" aria-hidden="true"></div><div class="pack-sparkles" id="packSparkles" aria-hidden="true"></div><img class="pack-invite-art" src="booster-pack-cutout.png" alt="Isa and Rei's collector booster pack" />
+  <h2 id="packInviteTitle">Open a booster pack?</h2>
+  <div class="pack-invite-actions"><button id="packInviteYes" type="button">✦ Open Pack</button><button class="pack-invite-later" id="packInviteLater" type="button">Maybe Later</button></div>
+ </div>
+</div>
 <div class="booster-modal" id="boosterModal" role="dialog" aria-modal="true" aria-label="Open a collector booster pack" aria-hidden="true">
 <button class="booster-exit" id="boosterExit" type="button" aria-label="Close booster pack">✕ Close</button>
 <iframe class="booster-frame" id="boosterFrame" title="Isa and Rei's interactive booster pack" allow="autoplay" loading="lazy"></iframe>
 </div>
 <script>
-(()=>{const modal=document.getElementById('boosterModal'),frame=document.getElementById('boosterFrame'),launch=document.getElementById('boosterOpen'),exit=document.getElementById('boosterExit');let previous=null;
-function openBooster(){previous=document.activeElement;frame.src='booster.html';modal.classList.add('active');modal.setAttribute('aria-hidden','false');document.body.classList.add('booster-locked');exit.focus()}
+(()=>{
+const modal=document.getElementById('boosterModal'),frame=document.getElementById('boosterFrame'),exit=document.getElementById('boosterExit');
+const invite=document.getElementById('packInvite');let previous=null;
+function dismissInvite(){invite.classList.remove('active');invite.setAttribute('aria-hidden','true');document.body.classList.remove('booster-locked')}
+function openBooster(){dismissInvite();previous=document.activeElement;frame.src='booster.html';modal.classList.add('active');modal.setAttribute('aria-hidden','false');document.body.classList.add('booster-locked');exit.focus()}
 function closeBooster(){modal.classList.remove('active');modal.setAttribute('aria-hidden','true');document.body.classList.remove('booster-locked');frame.src='about:blank';if(previous&&previous.focus)previous.focus()}
-launch.addEventListener('click',openBooster);exit.addEventListener('click',closeBooster);modal.addEventListener('click',e=>{if(e.target===modal)closeBooster()});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal.classList.contains('active')){e.stopImmediatePropagation();closeBooster()}},true);
+document.getElementById('packInviteYes').addEventListener('click',openBooster);
+for(const id of ['packInviteLater','packInviteClose'])document.getElementById(id).addEventListener('click',dismissInvite);
+invite.addEventListener('click',e=>{if(e.target===invite)dismissInvite()});
+exit.addEventListener('click',closeBooster);modal.addEventListener('click',e=>{if(e.target===modal)closeBooster()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(modal.classList.contains('active')){e.stopImmediatePropagation();closeBooster()}else if(invite.classList.contains('active'))dismissInvite()}},true);
+let shown=false;try{shown=sessionStorage.getItem('isaReiPackInviteShown')==='1';if(!shown)sessionStorage.setItem('isaReiPackInviteShown','1')}catch(e){}
+if(!shown){invite.classList.add('active');invite.setAttribute('aria-hidden','false');document.body.classList.add('booster-locked');
+const sparkRoot=document.getElementById('packSparkles');
+for(let i=0;i<90;i++){const sp=document.createElement('i');sp.className='pack-spark';
+const angle=(i/90)*Math.PI*2+(Math.random()-.5)*.5,dist=85+Math.random()*255;
+sp.style.setProperty('--dx',Math.round(Math.cos(angle)*dist)+'px');sp.style.setProperty('--dy',Math.round(Math.sin(angle)*dist-35)+'px');
+sp.style.setProperty('--sz',(5+Math.random()*13).toFixed(1)+'px');sp.style.setProperty('--dur',(0.9+Math.random()*1.2).toFixed(2)+'s');
+sp.style.setProperty('--delay',(0.38+Math.random()*.65).toFixed(2)+'s');sp.style.setProperty('--rot',(90+Math.random()*350).toFixed(0)+'deg');
+sp.style.color=['#f8db82','#f7f1ff','#ca82ff','#9b7cff','#fff6c8'][i%5];sparkRoot.appendChild(sp)}
+}
 })();
 </script>
 </body>
