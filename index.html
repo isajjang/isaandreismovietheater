@@ -49,6 +49,14 @@ body{background:radial-gradient(circle at 95% 20%,#251346 0,transparent 40%),#09
 @media(hover:none){.movie .poster::before{opacity:.18;background:linear-gradient(125deg,transparent 20%,#cba1ff38 48%,transparent 70%);animation:foilDrift 6s ease-in-out infinite alternate}}
 @keyframes foilDrift{from{background-position:-180px 0}to{background-position:180px 0}}
 @media(prefers-reduced-motion:reduce){.movie .poster{transform:none!important;transition:none!important}.movie .poster::before{animation:none!important;transition:none!important}}
+
+/* Booster activity overlay */
+.booster-launch{background:linear-gradient(120deg,#6626a3,#b854e9)!important;border:1px solid #d8a6ff!important;border-radius:999px!important;box-shadow:0 0 16px #a643df70;white-space:nowrap}
+.booster-modal{position:fixed;inset:0;z-index:99999;display:none;background:rgba(5,2,13,.92);backdrop-filter:blur(14px);padding:54px 12px 12px}
+.booster-modal.active{display:block}.booster-frame{width:100%;height:100%;border:1px solid #a75bda;border-radius:16px;background:#12051d;box-shadow:0 0 55px #a045e04d}
+.booster-exit{position:absolute;right:clamp(16px,4vw,45px);top:10px;z-index:2;border:1px solid #e8b9ff;border-radius:50px;background:#34104f;color:white;padding:8px 16px;font:700 15px Arial,sans-serif}
+body.booster-locked{overflow:hidden}
+@media(max-width:680px){header{height:auto;min-height:76px;flex-wrap:wrap;gap:8px}.nav{gap:8px;flex-wrap:wrap}.booster-launch{padding:9px 11px!important;font-size:12px!important}.booster-modal{padding:52px 5px 5px}}
 </style>
 <style>
    /* Cinematic anime hero: characters visible, text readable, no competing movie card. */
@@ -104,6 +112,14 @@ body{background:radial-gradient(circle at 95% 20%,#251346 0,transparent 40%),#09
  .hero-content .theater-logo { width:min(100%, 500px); height:170px; max-height:170px; object-fit:contain; object-position:left center; transform:translateY(-55px); margin-bottom:14px; }
 }
 </style>
+<style id="booster-mini-style">
+.hero-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.booster-mini{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:46px;padding:9px 15px;border:1px solid #9d78bd;border-radius:5px;background:#20142e;color:#f5e8ff;cursor:pointer;animation:none!important;transition:none!important;transform:none!important}
+.booster-mini svg{width:24px;height:24px;flex-shrink:0;stroke:#d8b4f7;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.booster-mini-copy{font-family:'Cinzel Decorative',Georgia,serif;font-size:12px;font-weight:700;letter-spacing:.03em;white-space:nowrap}
+.booster-mini:hover{background:#2b1b3c;border-color:#c8a3e5}
+@media(max-width:480px){.hero-actions{gap:9px}.booster-mini{padding:9px 11px}.booster-mini-copy{font-size:10px}}
+</style>
 </head>
 <body>
 <header>
@@ -115,6 +131,7 @@ body{background:radial-gradient(circle at 95% 20%,#251346 0,transparent 40%),#09
 <button id="addTop">
      + Add movie
     </button>
+
 </nav>
 </header>
 <section class="hero">
@@ -127,6 +144,10 @@ body{background:radial-gradient(circle at 95% 20%,#251346 0,transparent 40%),#09
 <button class="primary" onclick="document.querySelector('#collection').scrollIntoView({behavior:'smooth'})">
       r u still watching?
      </button>
+<button class="booster-mini" id="boosterOpen" type="button" aria-label="Open a booster pack" title="Open a booster pack">
+<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6.5c-2.5-1.8-5.2-2-9-1.4v13c3.8-.6 6.5-.4 9 1.4 2.5-1.8 5.2-2 9-1.4v-13c-3.8-.6-6.5-.4-9 1.4Z"/><path d="M12 6.5v13M6.7 9.5l1.1 1.1 1.1-1.1-1.1-1.1-1.1 1.1ZM16.5 10.5l.9 1 .9-1-.9-1-.9 1ZM6 14h3M15 15h3"/></svg>
+<span class="booster-mini-copy">Open a Booster Pack</span>
+</button>
 </div>
 </div>
 </section>
@@ -364,5 +385,17 @@ $('exportBtn').onclick=()=>{const blob=new Blob([JSON.stringify({version:1,movie
 render();if(localStorage.getItem(TOKEN))fetchMissingPosters(localStorage.getItem(TOKEN));else loadStarterPosters();
 })();
   </script>
+
+<div class="booster-modal" id="boosterModal" role="dialog" aria-modal="true" aria-label="Open a collector booster pack" aria-hidden="true">
+<button class="booster-exit" id="boosterExit" type="button" aria-label="Close booster pack">✕ Close</button>
+<iframe class="booster-frame" id="boosterFrame" title="Isa and Rei's interactive booster pack" allow="autoplay" loading="lazy"></iframe>
+</div>
+<script>
+(()=>{const modal=document.getElementById('boosterModal'),frame=document.getElementById('boosterFrame'),launch=document.getElementById('boosterOpen'),exit=document.getElementById('boosterExit');let previous=null;
+function openBooster(){previous=document.activeElement;frame.src='booster.html';modal.classList.add('active');modal.setAttribute('aria-hidden','false');document.body.classList.add('booster-locked');exit.focus()}
+function closeBooster(){modal.classList.remove('active');modal.setAttribute('aria-hidden','true');document.body.classList.remove('booster-locked');frame.src='about:blank';if(previous&&previous.focus)previous.focus()}
+launch.addEventListener('click',openBooster);exit.addEventListener('click',closeBooster);modal.addEventListener('click',e=>{if(e.target===modal)closeBooster()});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal.classList.contains('active')){e.stopImmediatePropagation();closeBooster()}},true);
+})();
+</script>
 </body>
 </html>
