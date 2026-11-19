@@ -1,1 +1,44 @@
-
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Isa & Rei — Booster Pack Opening</title>
+<style>
+:root{color-scheme:dark;font-family:Georgia,serif}*{box-sizing:border-box}body{margin:0;min-height:100vh;color:#ffe8ff;background:radial-gradient(ellipse at 50% 20%,#4a145e 0%,#1c092c 48%,#090511 100%);overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.35;background-image:radial-gradient(#d887ff 1px,transparent 1px);background-size:37px 43px}
+main{position:relative;max-width:1150px;margin:auto;text-align:center;padding:24px 18px 70px}
+h1{font-size:clamp(24px,4vw,48px);margin:12px 0 6px;text-shadow:0 0 22px #d84cff;color:#ffe5ab}p{margin:0 auto 18px;color:#d9bde7;font:15px system-ui,sans-serif}
+.stage{min-height:610px;display:flex;align-items:center;justify-content:center;position:relative;perspective:1200px}
+.pack{width:min(270px,63vw);cursor:pointer;filter:drop-shadow(0 0 22px #ba40ff);animation:float 2.6s ease-in-out infinite;transition:transform .3s,opacity .45s;z-index:4}
+.pack:hover{transform:scale(1.06) rotate(-2deg)}.pack img{display:block;width:100%;border-radius:9px}.pack.opening{animation:rip .7s ease-in forwards;pointer-events:none}
+@keyframes float{50%{translate:0 -14px}}@keyframes rip{35%{transform:scale(1.16) rotate(5deg);filter:brightness(2) drop-shadow(0 0 40px #fff)}100%{transform:scale(1.7) rotate(-13deg);opacity:0;filter:brightness(3)}}
+.flash{position:absolute;inset:0;background:radial-gradient(circle,#fff 0%,#d64cff80 35%,transparent 70%);opacity:0;pointer-events:none;z-index:5}.flash.go{animation:flash .8s forwards}@keyframes flash{25%{opacity:1}100%{opacity:0}}
+.cards{position:absolute;inset:0;display:flex;justify-content:center;align-items:center;gap:clamp(8px,2vw,25px);opacity:0;pointer-events:none;transition:opacity .4s}
+.cards.visible{opacity:1;pointer-events:auto}.card{width:clamp(94px,26vw,265px);aspect-ratio:1050/1440;perspective:1200px;cursor:pointer;position:relative;opacity:0;transform:translateY(140px) scale(.5);transition:transform .8s cubic-bezier(.2,1.5,.4,1),opacity .6s;filter:drop-shadow(0 10px 20px #0009)}
+.cards.visible .card{opacity:1;transform:translateY(0) rotate(var(--angle))}.cards.visible .card:nth-child(1){transition-delay:.08s}.cards.visible .card:nth-child(2){transition-delay:.2s}.cards.visible .card:nth-child(3){transition-delay:.32s}
+.inner{position:absolute;inset:0;transform-style:preserve-3d;transition:transform .75s cubic-bezier(.2,.7,.2,1)}.card.revealed .inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:9px;overflow:hidden;box-shadow:0 0 0 2px #f4b5ff55,0 0 28px #af44ff77}
+.front{transform:rotateY(180deg)}.front img{width:100%;height:100%;object-fit:fill}.back{background:repeating-radial-gradient(ellipse at 50% 50%,#09040d 0 7px,#ba5817 9px 12px,#1a0815 15px 22px,#f29b38 24px 26px);border:5px solid #9b541d}.back:after{content:"✦";font-size:clamp(34px,9vw,95px);position:absolute;inset:0;display:grid;place-items:center;color:#ffc66c;text-shadow:0 0 15px #000}
+.card.revealed{filter:drop-shadow(0 0 20px #ec7bff)}.card.revealed:after{content:"";position:absolute;inset:0;pointer-events:none;border-radius:9px;background:linear-gradient(110deg,transparent 30%,#ffffff50 45%,transparent 60%);background-size:250% 100%;animation:shine 1.4s ease-out}@keyframes shine{from{background-position:100%}to{background-position:-100%}}
+.controls{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:6px}button{border:1px solid #f5b6ff;background:linear-gradient(140deg,#6e208e,#2d0d4a);color:white;border-radius:30px;padding:13px 22px;font:600 14px system-ui,sans-serif;cursor:pointer;box-shadow:0 0 18px #a742b555}button:hover{background:#852da9}button:disabled{opacity:.4;cursor:default}
+#status{min-height:28px;margin:10px 0 5px;font:600 15px system-ui,sans-serif;color:#ffd6a0}
+@media(max-width:650px){.stage{min-height:440px}.cards{gap:7px}.card{width:30vw}.back{border-width:3px}main{padding:20px 9px 45px}}
+@media(prefers-reduced-motion:reduce){.pack{animation:none}.inner,.card,.cards{transition-duration:.01ms}}
+</style></head>
+<body><main><h1>✦ Isa & Rei's Movie Theater ✦</h1><p>Collector Booster Pack · Three cards · One magical reveal</p>
+<div class="stage"><div class="flash" id="flash"></div>
+<div class="pack" id="pack" role="button" tabindex="0" aria-label="Open booster pack"><img src="booster-pack.png" alt="Isa and Rei collector booster pack"></div>
+<div class="cards" id="cards">
+<div class="card" style="--angle:-7deg" tabindex="0" role="button" aria-label="Reveal Isa card"><div class="inner"><div class="face back"></div><div class="face front"><img src="isa.png" alt="Isa, Arcane Overlord"></div></div></div>
+<div class="card" style="--angle:0deg" tabindex="0" role="button" aria-label="Reveal Rei card"><div class="inner"><div class="face back"></div><div class="face front"><img src="rei.png" alt="The Eternal Archmage"></div></div></div>
+<div class="card" style="--angle:7deg" tabindex="0" role="button" aria-label="Reveal Athena card"><div class="inner"><div class="face back"></div><div class="face front"><img src="athena.png" alt="Athena, Arcane Companion"></div></div></div>
+</div></div><div id="status" aria-live="polite">Click the pack to open it!</div>
+<div class="controls"><button id="reveal" disabled>Reveal all cards</button><button id="reset">Open another pack ↻</button></div>
+</main><script>
+const pack=document.getElementById('pack'),cards=document.getElementById('cards'),flash=document.getElementById('flash'),status=document.getElementById('status'),reveal=document.getElementById('reveal');
+const individual=[...document.querySelectorAll('.card')];let busy=false,opened=false;
+function openPack(){if(busy||opened)return;busy=true;pack.classList.add('opening');flash.classList.add('go');status.textContent='The magic is awakening…';setTimeout(()=>{pack.style.display='none';cards.classList.add('visible');opened=true;busy=false;reveal.disabled=false;status.textContent='Click each card to reveal it!'},800)}
+function flip(c){if(!opened)return;c.classList.toggle('revealed');const n=individual.filter(x=>x.classList.contains('revealed')).length;status.textContent=n===3?'✨ All three cards revealed!':`${n} of 3 cards revealed`;}
+pack.addEventListener('click',openPack);pack.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openPack()}});
+individual.forEach(c=>{c.addEventListener('click',()=>flip(c));c.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();flip(c)}})});
+reveal.addEventListener('click',()=>{individual.forEach((c,i)=>setTimeout(()=>{c.classList.add('revealed');status.textContent=i===2?'✨ All three cards revealed!':'Revealing cards…'},i*450))});
+document.getElementById('reset').addEventListener('click',()=>{busy=false;opened=false;cards.classList.remove('visible');individual.forEach(c=>c.classList.remove('revealed'));flash.classList.remove('go');pack.classList.remove('opening');pack.style.display='block';reveal.disabled=true;status.textContent='Click the pack to open it!'});
+</script></body></html>
