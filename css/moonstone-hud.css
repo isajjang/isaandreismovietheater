@@ -1,0 +1,30 @@
+/* Live illustrated mana and piles. Later/more specific than bare-bottom UI. */
+.lower .energyzone[data-moonstone-hud="ready"]{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:4px!important;min-width:0;}
+.lower .energy.moonstone-energy{position:relative!important;isolation:isolate;width:138px!important;height:138px!important;min-width:0!important;margin:0 auto!important;padding:0!important;border:0!important;background:transparent!important;display:grid!important;place-items:center!important;gap:0!important;overflow:visible;}
+.lower .energy.moonstone-energy .moonstone-art{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;pointer-events:none;filter:drop-shadow(0 0 8px #96adff55);}
+.lower .energy.moonstone-energy #energy{position:relative;z-index:1;margin:0;padding:0;color:#fffcff!important;font:700 29px/1 Georgia,'Times New Roman',serif!important;letter-spacing:.035em;text-shadow:0 2px 4px #251841,0 0 7px #8bb9ff,0 0 15px #c3a8ff;transform:translateY(1px);}
+.lower .energy.moonstone-energy small{display:none!important;}
+.lower .moonstone-piles{display:flex;align-items:center;justify-content:center;gap:4px;width:100%;}
+.lower .pile.moonstone-pile{position:relative!important;display:flex!important;flex-direction:column;align-items:center;justify-content:flex-end;width:76px!important;height:99px!important;min-height:0!important;margin:0!important;padding:0 0 3px!important;border:0!important;border-radius:8px!important;background:transparent!important;color:#fff0cf!important;overflow:visible!important;}
+.lower .pile.moonstone-pile .moonstone-pile-art{position:absolute;top:0;left:0;width:100%;height:77px;object-fit:contain;pointer-events:none;}
+.lower .pile.moonstone-pile>span:not(.moonstone-pile-caption){position:absolute!important;z-index:1;top:44px;left:50%;transform:translateX(-50%);display:grid;place-items:center;min-width:30px;height:25px;padding:0 7px!important;border:1px solid #d1a35d!important;border-radius:11px!important;background:linear-gradient(#351446ed,#140a25f5)!important;box-shadow:0 2px 7px #0009!important;}
+.lower .pile.moonstone-pile>span b{color:#fff0ce!important;display:block!important;font:700 17px/1 Georgia,serif!important;text-shadow:0 1px 3px #000;}
+.lower .pile.moonstone-pile>span:before,.lower .pile.moonstone-pile:before,.lower .pile.moonstone-pile:after{content:none!important;display:none!important;}
+.lower .pile.moonstone-pile .moonstone-pile-caption{position:relative!important;display:block!important;margin-top:auto!important;padding:2px 0 0!important;font:600 13px/1.2 Georgia,serif!important;letter-spacing:.035em;color:#ead0ab!important;text-shadow:0 1px 4px #10051d;}
+.lower .pile.moonstone-pile:hover{filter:drop-shadow(0 0 7px #b87aff88)!important;}
+.lower .pile.moonstone-pile:focus-visible{outline:2px solid #f7d896!important;outline-offset:3px!important;}
+@media(max-width:850px){
+  .lower .energyzone[data-moonstone-hud="ready"]{flex-direction:row!important;gap:14px!important;}
+  .lower .energy.moonstone-energy{width:104px!important;height:104px!important;margin:0!important;}
+  .lower .energy.moonstone-energy #energy{font-size:25px!important;}
+  .lower .moonstone-piles{width:auto;gap:8px;}
+}
+@media(orientation:landscape) and (max-height:550px){
+  .lower .energyzone[data-moonstone-hud="ready"]{gap:8px!important;}
+  .lower .energy.moonstone-energy{width:82px!important;height:82px!important;}
+  .lower .energy.moonstone-energy #energy{font-size:22px!important;}
+  .lower .pile.moonstone-pile{width:63px!important;height:76px!important;}
+  .lower .pile.moonstone-pile .moonstone-pile-art{height:60px;}
+  .lower .pile.moonstone-pile>span:not(.moonstone-pile-caption){top:32px;height:23px;}
+  .lower .pile.moonstone-pile .moonstone-pile-caption{font-size:12px!important;}
+}

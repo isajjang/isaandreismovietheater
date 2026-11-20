@@ -1,0 +1,6 @@
+
+/* Keep enemy intent over the enemy's lane but outside the character art. */
+.arena #intent{position:absolute!important;top:5%!important;right:5%!important;left:auto!important;bottom:auto!important;transform:none!important;z-index:15!important;box-sizing:border-box;max-width:37%!important;width:max-content!important;padding:8px 13px!important;pointer-events:none!important;box-shadow:0 4px 16px #0d052477!important}
+.arena #intent .intent-action{font-size:clamp(10px,1vw,14px)!important;overflow-wrap:anywhere}
+.arena #intent .intent-phase{font-size:clamp(9px,.8vw,12px)!important}
+@media(max-width:650px){.arena #intent{top:4%!important;right:3%!important;max-width:46%!important;padding:6px 8px!important}.arena #intent .intent-action{font-size:10px!important}.arena #intent .intent-phase{font-size:9px!important}}

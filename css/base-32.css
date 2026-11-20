@@ -1,0 +1,29 @@
+
+#moonLaunch{position:fixed;inset:0;z-index:900000;background:#080414;display:grid;place-items:center}
+#moonLaunch.hidden,#moonDeckModal.hidden{display:none!important}
+#moonLaunchScene{position:relative;width:min(100vw,177.8vh);aspect-ratio:1648/928;background-position:center;background-size:100% 100%;box-shadow:0 0 60px #aa4bff55}
+.moonLaunchHotspot{position:absolute;left:75%;width:22%;height:8.5%;border:1px solid transparent;border-radius:12px;background:transparent;cursor:pointer}
+.moonLaunchHotspot:hover,.moonLaunchHotspot:focus-visible{outline:2px solid #ffe3a4;background:#ff8ef027;box-shadow:0 0 22px #f0b6ff}
+#moonLaunchDuel{top:35%}#moonLaunchStory{top:44.5%}#moonLaunchDeck{top:53.5%}#moonLaunchCollection{top:62.5%}#moonLaunchSettings{top:71%}
+#moonDeckModal{position:fixed;inset:0;z-index:900001;background:#090417eF;display:flex;align-items:center;justify-content:center;padding:14px;overflow:auto}
+#moonDeckShell{width:min(1100px,96vw);max-height:94vh;overflow:auto;border:2px solid #e5b668;border-radius:18px;background:linear-gradient(145deg,#2d124a,#110822 75%);box-shadow:0 0 60px #8d40d880;color:#fff0dc;padding:22px;font-family:Georgia,serif}
+#moonDeckShell h2{font-size:30px;color:#ffe1a0;margin:0 0 6px}
+#moonDeckShell p{margin:5px 0 12px;color:#e9d0f9}
+#moonDeckShell button,#moonDeckShell input{font:inherit}
+#moonDeckShell button{border:1px solid #c99b67;background:#3c1c57;color:#ffe4b1;border-radius:9px;padding:9px 12px;cursor:pointer}
+#moonDeckShell button:disabled{opacity:.35;cursor:not-allowed}
+#moonDeckShell button.active{background:#76358b;box-shadow:0 0 12px #d17dff}
+#moonDeckShell input{background:#150925;border:1px solid #ae78b8;border-radius:7px;color:#fff;padding:10px;width:min(360px,100%)}
+#moonDeckTop{display:flex;justify-content:space-between;gap:12px;align-items:center}
+#moonGrimoires{display:flex;gap:7px;flex-wrap:wrap;margin:10px 0}
+#moonEditorGrid{display:grid;grid-template-columns:1.5fr 1fr;gap:14px}
+#moonAvailableCards{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:8px;max-height:43vh;overflow:auto;padding:5px}
+#moonAvailableCards button{text-align:left;min-height:90px}
+#moonAvailableCards strong,#moonAvailableCards small{display:block}
+#moonAvailableCards small{font:12px system-ui;line-height:1.35;margin-top:5px;color:#e8cffa}
+#moonSelectedCards{max-height:43vh;overflow:auto;display:flex;flex-direction:column;gap:5px}
+#moonSelectedCards button{text-align:left}
+#moonDeckFooter{display:flex;align-items:center;flex-wrap:wrap;gap:9px;margin-top:14px}
+#moonDeckStatus{font:13px system-ui;color:#ffca92;flex:1;min-width:180px}
+#moonSavedDecks{display:flex;flex-wrap:wrap;gap:8px;margin:9px 0}
+@media(max-width:650px){#moonEditorGrid{grid-template-columns:1fr}#moonAvailableCards,#moonSelectedCards{max-height:26vh}#moonDeckShell{padding:12px}#moonDeckShell h2{font-size:22px}}

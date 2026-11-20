@@ -1,0 +1,11 @@
+
+.cards .card.beast-card{color:#fff9e3!important;filter:drop-shadow(0 4px 8px #071a08)}
+.beast-card .chaos-art{top:20%!important;left:12%!important;width:76%!important;height:29%!important;box-shadow:0 0 10px #a9ff3766!important}
+.beast-card .chaos-name{top:10.7%!important;left:22%!important;width:68%!important;height:8%!important;color:#fff7df!important}
+.beast-card .chaos-type{top:53.3%!important;color:#c5f89a!important}
+.beast-card .chaos-desc{top:64.5%!important;left:13%!important;width:74%!important;height:24%!important;color:#fffbe9!important}
+.beast-card .chaos-cost{top:1%!important;left:1%!important;width:20%!important;height:14%!important;background:radial-gradient(ellipse,#1c7520,#083710 75%,#061b08)!important;font-size:clamp(20px,2vw,30px)!important;clip-path:polygon(50% 0,100% 45%,50% 100%,0 45%)!important}
+.beast-card.chaos-title-medium .chaos-name{font-size:12px!important}.beast-card.chaos-title-long .chaos-name{font-size:10px!important}
+
+#intent.boss-phase-flash{animation:bossFlash 1.3s ease-out}
+@keyframes bossFlash{0%{filter:brightness(2.6);text-shadow:0 0 25px #f94cff;transform:scale(1.08)}100%{filter:brightness(1);transform:scale(1)}}

@@ -1,0 +1,9 @@
+
+/* Single existing card-frame asset, with repositioned live text fields. */
+.chaos-card .chaos-name{top:10.4%!important;left:19%!important;width:70%!important;height:8.5%!important;font-size:clamp(11px,1.13vw,17px)!important;letter-spacing:-.035em!important;text-shadow:0 2px 4px #000,0 0 5px #1c0732!important;z-index:2}
+.chaos-card .chaos-art{top:20%!important;left:11%!important;width:78%!important;height:31.5%!important}
+.chaos-card .chaos-type{top:53.6%!important;left:16%!important;width:68%!important;height:7.4%!important;display:flex!important;align-items:center;justify-content:center;font-size:clamp(10px,1.01vw,15px)!important;font-style:normal!important;font-weight:bold!important;color:#fff0cf!important;text-shadow:0 1px 4px #090014!important}
+.chaos-card .chaos-desc{top:65.2%!important;height:23%!important}
+.chaos-card .chaos-cost{top:0.5%!important;left:0.8%!important;width:22.8%!important;height:16.3%!important;font-size:clamp(24px,2.45vw,38px)!important;line-height:1!important;font-weight:900!important;z-index:4!important;text-shadow:0 2px 2px #140321,0 0 7px #e1b0ff!important}
+.chaos-card .inspect-trigger{top:17%!important;right:3%!important}
+@media(max-width:850px){.chaos-card .chaos-cost{font-size:30px!important}.chaos-card .chaos-name{font-size:14px!important}.chaos-card .chaos-type{font-size:12px!important}}

@@ -1,0 +1,9 @@
+
+/* Logo and character identification match the supplied illustrated reference. */
+.hud{gap:10px;padding:6px 16px}.logo{flex:0 1 305px;min-width:130px}.hud-logo-art{display:block;width:100%;max-width:305px;height:55px;object-fit:contain;object-position:left center}.hud-center{display:flex;gap:10px;align-items:center;flex-shrink:0}.hud-portrait{width:61px;height:58px;object-fit:cover;object-position:center top;filter:drop-shadow(0 0 5px #ff64d9)}.hud-identity{display:flex;flex-direction:column;line-height:1.12;min-width:125px}.hud-identity #heroName{font-size:20px;font-weight:700;color:#ffe1ae}.hud-identity small{font-size:12px;color:#f3d4f7;font-family:Cinzel,Georgia,serif;white-space:nowrap}.hud-health{white-space:nowrap}
+/* Tighten the lunar panel; remove large empty margins and excess height. */
+#lunarFate{width:max-content!important;max-width:min(410px,90vw)!important;min-width:0!important;padding:7px 14px!important;line-height:1.08!important;display:flex!important;flex-direction:column!important;align-items:center!important;gap:1px!important}
+#lunarFate .lunar-phase-title{font-size:clamp(18px,2.1vw,27px)!important;line-height:1.1!important;white-space:nowrap}
+#lunarFate .lunar-phase-sub{font-size:11px!important;line-height:1.18!important;margin-top:2px!important;text-align:center}
+.lunar-shift-recipient{font:900 clamp(18px,3vw,32px)/1.25 Cinzel,Georgia,serif;letter-spacing:.09em;color:#ffdc82;text-shadow:0 0 13px #f6a6ff,0 0 23px #d44aff;margin:12px 0 8px}
+@media(max-width:750px){.hud{padding:5px 8px;gap:5px;flex-wrap:wrap;height:auto;min-height:72px}.logo{flex:1 1 145px}.hud-logo-art{height:42px}.hud-center{gap:5px}.hud-portrait{height:39px;width:37px}.hud-identity{min-width:0}.hud-identity #heroName{font-size:14px}.hud-identity small{font-size:9px}.hud-health{font-size:12px}.floor{font-size:11px}.floor small{font-size:8px}.top-actions{gap:3px}.iconbtn{padding:5px 7px}}

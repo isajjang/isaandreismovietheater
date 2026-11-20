@@ -1,0 +1,24 @@
+
+.actor.player{height:62%!important;width:34%!important;bottom:12%!important;left:5%!important;overflow:visible!important}
+.isa-rig{position:relative;height:100%;width:100%;transform-origin:59% 92%;animation:isa-breathe 3.7s ease-in-out infinite;will-change:transform}
+.isa-body{position:absolute;inset:0;transform-origin:60% 66%;animation:isa-shoulders 3.7s ease-in-out infinite}
+.isa-body img{display:block;width:100%;height:100%!important;object-fit:contain;filter:drop-shadow(0 0 12px #db49ff88) drop-shadow(0 8px 3px #070114aa)}
+.isa-hair-motion,.isa-cloak-motion{position:absolute;inset:0;background-image:var(--isa-art);background-size:100% 100%;background-position:center;pointer-events:none}
+.isa-hair-motion{clip-path:polygon(7% 17%,23% 11%,38% 6%,52% 6%,68% 13%,72% 24%,57% 38%,37% 45%,17% 48%,6% 42%);transform-origin:58% 30%;animation:isa-hair 3.7s ease-in-out infinite}
+.isa-cloak-motion{clip-path:polygon(0 41%,35% 38%,53% 48%,59% 74%,48% 94%,25% 97%,0 83%);transform-origin:54% 50%;animation:isa-cloak 4.8s ease-in-out infinite}
+.isa-magic-orb{position:absolute;left:77%;top:12%;width:22%;aspect-ratio:1;border:2px solid #ffb6fa;border-radius:50%;box-shadow:0 0 17px #fa5cff,inset 0 0 17px #ef75ff;animation:isa-orb 2.4s ease-in-out infinite;pointer-events:none}
+.isa-magic-orb:before,.isa-magic-orb:after{content:'';position:absolute;inset:-14%;border:2px dashed #fa8bff;border-radius:50%;animation:isa-spin 8s linear infinite}
+.isa-magic-orb:after{inset:18%;border:3px solid #fff0ff;animation-duration:5s;animation-direction:reverse}
+.isa-magic-orb i{position:absolute;left:50%;top:50%;width:7px;height:7px;background:#fff;border-radius:50%;box-shadow:0 0 12px 5px #e657ff;animation:isa-spark 1.7s ease-in-out infinite}
+.isa-magic-orb i:nth-child(2){left:0;top:15%;animation-delay:.5s}.isa-magic-orb i:nth-child(3){left:85%;top:70%;animation-delay:1s}
+.isa-bones{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:0;filter:drop-shadow(0 0 3px #00dfff)}
+.show-isa-rig .isa-bones{opacity:.95}
+@keyframes isa-breathe{0%,100%{transform:translateY(0) rotate(-.7deg) scaleY(1)}50%{transform:translateY(-5px) rotate(.8deg) scaleY(1.012)}}
+@keyframes isa-shoulders{0%,100%{transform:rotate(-.6deg)}50%{transform:rotate(1.1deg) translateY(-2px)}}
+@keyframes isa-hair{0%,100%{transform:rotate(-1.5deg) translateX(-2px)}50%{transform:rotate(2.5deg) translateX(5px) translateY(-2px)}}
+@keyframes isa-cloak{0%,100%{transform:rotate(-1deg) skewY(-1deg)}50%{transform:rotate(2deg) skewY(1.5deg) translateX(-5px)}}
+@keyframes isa-orb{0%,100%{transform:scale(.88) translateY(2px);filter:brightness(1)}50%{transform:scale(1.1) translateY(-5px);filter:brightness(1.6)}}
+@keyframes isa-spin{to{transform:rotate(360deg)}}@keyframes isa-spark{50%{transform:scale(1.8);opacity:.4}}
+@media(max-width:850px){.actor.player{width:40%!important;left:0!important;height:52%!important}}
+@media(prefers-reduced-motion:reduce){.isa-rig,.isa-body,.isa-hair-motion,.isa-cloak-motion,.isa-magic-orb,.isa-magic-orb:before,.isa-magic-orb:after{animation:none!important}}
+.isa-rig.rei-mode .isa-hair-motion,.isa-rig.rei-mode .isa-cloak-motion,.isa-rig.rei-mode .isa-magic-orb{display:none}

@@ -1,0 +1,39 @@
+/* Full-scene pixel shop: geometry uses the same 1672 × 941 coordinate system
+   as every approved illustration. No portrait crops and no rebuilt card grid. */
+.md-mopsy-overlay{position:fixed;inset:0;z-index:965000;display:flex;flex-direction:column;align-items:stretch;background:#070314;color:#fff4d2;overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y;font-family:Georgia,serif}
+.md-mopsy-overlay[hidden]{display:none!important}
+.md-mopsy-toolbar{display:flex;align-items:center;justify-content:center;gap:8px;min-height:48px;flex-wrap:wrap;padding:5px max(8px,env(safe-area-inset-right)) 5px max(8px,env(safe-area-inset-left));box-sizing:border-box;background:linear-gradient(#211035,#0d061c);border-bottom:1px solid #78532c;flex:0 0 auto}
+.md-mopsy-mode{font-size:13px;color:#e9ca86;white-space:nowrap;margin-right:auto}
+.md-mopsy-toolbar .md-mopsy-control,.md-mopsy-toolbar select,.md-mopsy-test-section .md-mopsy-control,#mdMopsyLaunchTest{min-height:36px;padding:7px 12px;border:1px solid #c5a365;border-radius:5px;background:linear-gradient(#4a1f5c,#1a0b2c);box-shadow:inset 0 0 0 2px #1c0c2b;color:#fff1c1;font:600 13px Georgia,serif;cursor:pointer}
+.md-mopsy-toolbar select{background:#1e0d30;max-width:190px}
+.md-mopsy-toolbar .md-mopsy-control:hover,.md-mopsy-test-section .md-mopsy-control:hover,#mdMopsyLaunchTest:hover{border-color:#fff2ae;filter:brightness(1.17)}
+.md-mopsy-canvas{display:flex;align-items:center;justify-content:center;flex:1 0 auto;min-height:0;width:100%;background:#070314}
+.md-mopsy-stage{position:relative;width:min(100vw,calc((100dvh - var(--mopsy-toolbar-height,49px)) * 1672 / 941));max-width:100%;aspect-ratio:1672/941;flex:none;container-type:inline-size;isolation:isolate;overflow:visible}
+.md-mopsy-full-scene{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:contain;user-select:none;pointer-events:none;max-width:none;image-rendering:auto}
+.md-mopsy-dialogue{position:absolute;z-index:2;display:flex;align-items:center;justify-content:center;box-sizing:border-box;padding:0 1.2%;white-space:pre-line;text-align:center;font-family:"Trebuchet MS",Arial,sans-serif;font-weight:600;font-size:1.62cqw;line-height:1.14;background:#130a22;color:#fff1fe;clip-path:polygon(9% 0,91% 0,100% 15%,100% 82%,86% 100%,12% 100%,0 81%,0 20%);text-shadow:0 1px #05000d;overflow:hidden}
+.md-mopsy-product-name{position:absolute;z-index:2;display:flex;justify-content:center;align-items:center;box-sizing:border-box;padding:0 .3%;font-family:Georgia,serif;font-size:1.83cqw;font-weight:700;line-height:.96;text-align:center;color:#fff29a;background:linear-gradient(120deg,#020f1b,#060a20);pointer-events:none;text-shadow:0 1px #071217;overflow:hidden}
+.md-mopsy-product-description{position:absolute;z-index:2;display:flex;align-items:center;box-sizing:border-box;padding:0 .2%;font-family:"Trebuchet MS",Arial,sans-serif;font-weight:500;font-size:1.31cqw;line-height:1.06;white-space:pre-line;text-align:left;color:#f8f2ff;background:linear-gradient(120deg,#020f1b,#060a20);pointer-events:none;overflow:hidden}
+.md-mopsy-price{position:absolute;z-index:3;display:flex;align-items:center;justify-content:center;font-family:Arial,sans-serif;font-size:2.05cqw;font-weight:700;line-height:1;color:white;background:#070c1c;pointer-events:none}
+.md-mopsy-balance{position:absolute;z-index:3;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#030b1b;line-height:1;color:#fff;font-family:Arial,sans-serif;pointer-events:none}
+.md-mopsy-balance strong{font-size:3cqw;font-weight:700;line-height:.95}.md-mopsy-balance small{font-size:.78cqw;color:#f8d781;margin-top:.15cqw}
+.md-mopsy-inspect,.md-mopsy-buy,.md-mopsy-leave{position:absolute;appearance:none;border:0;background:transparent;border-radius:0;color:transparent;box-sizing:border-box;margin:0;padding:0;cursor:pointer;touch-action:manipulation}
+.md-mopsy-inspect{z-index:1;clip-path:polygon(4% 0,96% 0,100% 6%,100% 94%,96% 100%,4% 100%,0 94%,0 6%)}
+.md-mopsy-inspect:focus-visible{outline:4px solid #f2dbff;outline-offset:-5px;box-shadow:inset 0 0 22px #d3a7ff80}
+.md-mopsy-buy{z-index:4;border-radius:8px;clip-path:polygon(12% 0,88% 0,100% 25%,100% 74%,88% 100%,12% 100%,0 74%,0 25%)}
+.md-mopsy-buy::before{content:"";position:absolute;inset:0;background:transparent;pointer-events:none}
+.md-mopsy-buy-label{position:absolute;left:13%;right:13%;top:17%;bottom:18%;display:flex;align-items:center;justify-content:center;background:linear-gradient(#0b6838,#004123);color:#fff8d4;font:bold 1.75cqw/1 Georgia,serif;text-shadow:1px 1px #103914}
+.md-mopsy-buy:hover::before,.md-mopsy-buy:focus-visible::before{background:#fff29936;box-shadow:inset 0 0 0 3px #ffffd8}
+.md-mopsy-buy:focus-visible{outline:4px solid #fff8a7;outline-offset:0;filter:drop-shadow(0 0 6px #fff2ab)}
+.md-mopsy-buy[data-sold="true"] .md-mopsy-buy-label{background:linear-gradient(#263c38,#152824);color:#e6d9b4;font-size:1.5cqw}
+.md-mopsy-buy[data-affordable="false"]:not([data-sold="true"]) .md-mopsy-buy-label{color:#f4d0c9;background:linear-gradient(#234a34,#122c22)}
+.md-mopsy-leave{z-index:4;clip-path:polygon(11% 0,89% 0,100% 50%,89% 100%,11% 100%,0 50%)}
+.md-mopsy-leave-label{position:absolute;left:19%;right:19%;top:23%;bottom:23%;display:flex;align-items:center;justify-content:center;background:linear-gradient(#075e5c,#08494d);color:#fff7d7;font:bold 2.35cqw/1 Georgia,serif;white-space:nowrap;text-shadow:1px 1px #143b3f}
+.md-mopsy-leave[data-departing="true"] .md-mopsy-leave-label{font-size:1.85cqw}
+.md-mopsy-leave:hover,.md-mopsy-leave:focus-visible{outline:3px solid #fff1ab;outline-offset:-8px;box-shadow:inset 0 0 20px #ffdc7e66}
+#mdMopsyLaunchTest{position:absolute;right:max(16px,env(safe-area-inset-right));bottom:max(64px,env(safe-area-inset-bottom));z-index:2;box-shadow:0 0 18px #0009}
+.md-mopsy-test-section{padding-top:14px;border-top:1px solid #8b5b9c;margin-top:18px}.md-mopsy-test-section p{font-size:14px}
+body.md-mopsy-open{overflow:hidden}
+@media(max-width:1050px){.md-mopsy-toolbar{gap:5px;min-height:43px}.md-mopsy-mode{display:none}.md-mopsy-toolbar .md-mopsy-control,.md-mopsy-toolbar select{font-size:11px;padding:5px 8px;min-height:32px}}
+@media(hover:none) and (pointer:coarse){.md-mopsy-buy{overflow:visible;clip-path:none}.md-mopsy-buy::after{content:"";position:absolute;left:0;top:50%;width:100%;height:max(100%,44px);transform:translateY(-50%);background:transparent}}
+@media(orientation:portrait){.md-mopsy-canvas{flex:1 0 auto;align-items:center}.md-mopsy-stage{width:100vw}.md-mopsy-toolbar{padding-top:max(6px,env(safe-area-inset-top));gap:6px}.md-mopsy-toolbar .md-mopsy-control{min-height:40px}.md-mopsy-toolbar select{min-height:40px}.md-mopsy-dialogue{font-size:1.6cqw}}
+@media(prefers-reduced-motion:reduce){.md-mopsy-overlay *{transition:none!important;animation:none!important}}

@@ -1,0 +1,14 @@
+
+#lunarFate{max-width:650px!important;padding:14px 20px!important;border:2px solid #e6ae62!important;background:linear-gradient(110deg,#170c30f5,#34124df2,#170c30f5)!important;box-shadow:0 0 22px #b958f888,inset 0 0 20px #ad65f633!important}
+.lunar-phase-title{font-family:Georgia,'Times New Roman',serif;font-size:clamp(23px,3vw,35px);font-weight:900;letter-spacing:.045em;line-height:1.25;color:#ffe5a1;text-shadow:0 2px 0 #8b3a61,0 0 9px #ffbd68,0 0 19px #c056ff}
+.lunar-phase-sub{font:700 13px Georgia,serif;letter-spacing:.055em;color:#f1d4ff;margin-top:5px}
+#lunarShiftOverlay{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;pointer-events:none;opacity:0;visibility:hidden;background:radial-gradient(ellipse,#552179c9 0%,#190829e8 58%,#090313e9 100%);transition:opacity .18s,visibility .18s}
+#lunarShiftOverlay.lunar-show{opacity:1;visibility:visible;animation:lunarSkyFlash 2.8s ease-out both}
+.lunar-shift-content{text-align:center;padding:30px 16px;max-width:94vw;filter:drop-shadow(0 0 22px #e28cff)}
+.lunar-shift-moon{font-size:clamp(75px,13vw,150px);line-height:1.2;filter:drop-shadow(0 0 26px #ecb8ff)}
+.lunar-shift-heading{font:900 clamp(33px,6.5vw,85px)/1.08 Georgia,'Times New Roman',serif;letter-spacing:.035em;color:#ffe3a0;-webkit-text-stroke:1px #ad518c;text-shadow:0 3px 0 #692047,0 0 12px #ffb85f,0 0 32px #e78aff,0 0 65px #b342f5}
+.lunar-shift-event{font:700 clamp(15px,2.2vw,24px)/1.4 Georgia,serif;color:#fff0fc;text-shadow:0 0 14px #b860f8;margin-top:20px}
+.lunar-show .lunar-shift-content{animation:lunarTitleImpact 2.8s ease-out both}
+@keyframes lunarSkyFlash{0%{opacity:0}8%{opacity:1;background-color:#e5a9ff55}16%{background-color:transparent}25%,80%{opacity:1}100%{opacity:0}}
+@keyframes lunarTitleImpact{0%{transform:scale(1.8);opacity:0}12%{transform:scale(.92);opacity:1}21%{transform:scale(1.06)}30%,78%{transform:scale(1);opacity:1}100%{transform:scale(1.04);opacity:0}}
+@media(prefers-reduced-motion:reduce){#lunarShiftOverlay.lunar-show,.lunar-show .lunar-shift-content{animation:none!important;opacity:1}#lunarShiftOverlay{transition:none}}

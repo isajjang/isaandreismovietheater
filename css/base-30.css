@@ -1,0 +1,12 @@
+
+#enemyActor .wolf-health-ui{background:transparent!important;box-shadow:none!important;border:0!important;padding:0!important;margin-bottom:-3%!important;max-width:185px!important}
+#enemyActor .wolf-health-title{font-size:clamp(8px,.82vw,12px)!important;letter-spacing:.3px!important;text-shadow:0 2px 4px #090018,0 0 8px #130524!important}
+#enemyActor .wolf-health-track{background:rgba(62,11,37,.3)!important;border:1px solid #e8ad67!important;box-shadow:0 0 7px #c53b75aa!important}
+#enemyActor .wolf-health-ui span{text-shadow:0 1px 3px #090018,0 0 5px #090018!important}
+#moonMusicPanel{position:fixed;z-index:200000;right:12px;bottom:12px;display:flex;align-items:center;gap:8px;padding:6px 9px;border:1px solid #dbb16c;border-radius:30px;background:#1a0a2eea;color:#ffe5a9;box-shadow:0 0 14px #a448b788;font:12px Georgia,serif}
+#moonMusicToggle{display:flex;align-items:center;gap:5px;border:0;background:transparent;color:inherit;cursor:pointer;font:inherit}
+#moonMusicToggle img{width:28px;height:28px;object-fit:contain}
+#moonMusicPanel input[type=range]{width:65px;accent-color:#d66bea}
+#moonMusicPanel label{cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+#moonMusicPanel input[type=file]{display:none}
+@media(max-width:600px){#moonMusicPanel{right:6px;bottom:5px;padding:3px 5px;gap:4px}#moonMusicPanel input[type=range]{width:42px}}

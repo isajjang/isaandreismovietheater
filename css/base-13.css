@@ -1,0 +1,11 @@
+
+.cards .card.tidal-card{filter:drop-shadow(0 4px 8px #001b35);color:#e8faff!important}
+.tidal-card .chaos-art{top:20%!important;left:12%!important;width:76%!important;height:28.8%!important;border-radius:6px;box-shadow:0 0 9px #00bfff66!important}
+.tidal-card .chaos-name{top:10.6%!important;left:22%!important;width:68%!important;height:8%!important;color:#fff9e5!important}
+.tidal-card .chaos-type{top:53.3%!important;color:#a8e9ff!important}
+.tidal-card .chaos-desc{top:64.5%!important;left:13%!important;width:74%!important;height:24%!important;color:#f2fbff!important}
+.tidal-card .chaos-cost{top:.6%!important;left:.8%!important;width:22%!important;height:16%!important;background:radial-gradient(ellipse,#006ec1 0%,#003577 64%,#001443 100%)!important;color:white!important;text-shadow:0 1px 3px #00142e,0 0 7px #72e8ff!important;filter:drop-shadow(0 0 3px #4ddaff)!important}
+.tidal-card .inspect-trigger{background:#03234d!important;color:#d8f8ff!important;border-color:#45c8ff!important}
+.tidal-card.chaos-title-medium .chaos-name{font-size:clamp(9px,.93vw,13px)!important}
+.tidal-card.chaos-title-long .chaos-name{font-size:clamp(8px,.77vw,11px)!important}
+@media(max-width:850px){.tidal-card.chaos-title-medium .chaos-name{font-size:12px!important}.tidal-card.chaos-title-long .chaos-name{font-size:10px!important}}

@@ -1,0 +1,14 @@
+
+#enemyActor.seraphine-encounter{isolation:isolate;overflow:visible!important}
+#enemyActor.seraphine-encounter>img{object-fit:contain!important;filter:drop-shadow(0 0 13px #25000d) drop-shadow(0 0 18px #f41b48a0)!important;position:relative;z-index:2}
+#enemyActor.seraphine-encounter::before{content:"";position:absolute;inset:5% 7% 4%;z-index:0;pointer-events:none;background:radial-gradient(ellipse at 52% 45%,#42000b9c 0%,#18000875 48%,transparent 74%);filter:blur(12px)}
+#enemyActor .seraphine-blood{display:none;position:absolute;inset:0;z-index:4;pointer-events:none;overflow:visible}
+#enemyActor.seraphine-encounter .seraphine-blood{display:block}
+#enemyActor .blood-drip{position:absolute;top:31%;left:24%;width:6px;height:15px;border-radius:55% 55% 65% 65%;background:linear-gradient(100deg,#ffb3b3,#c80022 48%,#55000b);box-shadow:0 0 8px #ff073e;opacity:0;animation:seraphineDrip 2.1s linear infinite}
+#enemyActor .blood-drip:nth-child(2){left:29%;top:36%;animation-delay:.45s;animation-duration:2.4s}
+#enemyActor .blood-drip:nth-child(3){left:76%;top:38%;animation-delay:.8s;animation-duration:1.8s}
+#enemyActor .blood-drip:nth-child(4){left:81%;top:43%;animation-delay:1.2s;animation-duration:2.6s}
+#enemyActor .blood-drip:nth-child(5){left:20%;top:28%;animation-delay:1.6s;animation-duration:2.3s}
+#enemyActor .blood-drip:nth-child(6){left:73%;top:33%;animation-delay:.2s;animation-duration:2s}
+@keyframes seraphineDrip{0%{opacity:0;transform:translateY(0) scale(.6)}12%{opacity:1}68%{opacity:.95}100%{opacity:0;transform:translateY(92px) scale(.35)}}
+@media(prefers-reduced-motion:reduce){#enemyActor .blood-drip{animation:none!important;opacity:.55}}

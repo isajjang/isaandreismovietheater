@@ -1,0 +1,17 @@
+
+#moonTestOpen{position:fixed;z-index:950002;left:12px;bottom:12px;border:1px solid #e7b96e;border-radius:30px;padding:9px 14px;background:linear-gradient(130deg,#421663,#18072f);color:#ffe8bb;font:600 13px Georgia,serif;box-shadow:0 0 17px #9f4ef9a8;cursor:pointer}
+#moonTestExit{position:fixed;z-index:950002;left:12px;bottom:58px;border:1px solid #f1ba70;border-radius:25px;padding:8px 12px;background:#290c39;color:#ffe6b7;font:600 13px Georgia,serif;cursor:pointer}
+#moonTestMenu{position:fixed;z-index:960000;inset:0;background:#080415ed;display:flex;align-items:center;justify-content:center;padding:16px;backdrop-filter:blur(10px)}
+#moonTestMenu.hidden{display:none!important}
+#moonTestPanel{width:min(780px,96vw);max-height:92vh;overflow:auto;background:linear-gradient(140deg,#2b104b,#120821);border:2px solid #d9a763;border-radius:18px;box-shadow:0 0 50px #b04fe755;padding:22px;color:#ffe9c6;font-family:Georgia,serif}
+#moonTestPanel h2{margin:0 0 8px;color:#ffda94;font-size:28px}
+#moonTestPanel p{color:#d9c6ed;line-height:1.5}
+#moonTestPanel button{cursor:pointer;font:inherit;color:#ffe4bd;border:1px solid #ad74c3;border-radius:10px;background:#391a52;padding:12px}
+#moonTestPanel button:hover{background:#69347c;border-color:#ffe2a0}
+#moonTestPanel button.selected{background:#7541a2;border-color:#ffe0a0;box-shadow:0 0 10px #c77bff}
+#moonTestCharacters{display:flex;gap:10px;margin:15px 0}
+#moonTestGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px}
+#moonTestGrid button{text-align:left;display:flex;flex-direction:column;gap:5px}
+#moonTestGrid small{font:12px system-ui;color:#cbb9dc}
+#moonTestPanel .testTop{display:flex;justify-content:space-between;align-items:center;gap:8px}
+@media(max-width:600px){#moonTestPanel{padding:12px}#moonTestPanel h2{font-size:23px}#moonTestGrid{grid-template-columns:repeat(2,minmax(0,1fr))}#moonTestGrid button{padding:9px}}

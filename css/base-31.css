@@ -1,0 +1,5 @@
+
+#moonlightSongControls{position:fixed;z-index:200000;right:12px;bottom:12px;display:flex;align-items:center;gap:9px;padding:8px 12px;border:1px solid #dbb16c;border-radius:30px;background:rgba(22,7,43,.95);color:#ffe5a9;box-shadow:0 0 14px #a448b788;font:13px Georgia,serif}
+#moonlightSongToggle{border:0;background:transparent;color:inherit;cursor:pointer;font:inherit;white-space:nowrap}
+#moonlightSongVolume{width:76px;accent-color:#d66bea}
+@media(max-width:600px){#moonlightSongControls{right:5px;bottom:5px;padding:5px 7px;gap:5px}#moonlightSongVolume{width:45px}}

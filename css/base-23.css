@@ -1,0 +1,19 @@
+
+/* Map: compact illustrated meter in the upper-right, never centered over routes. */
+#rogueMap #mapEconomy.lunar-graphic-wrap{
+ position:absolute!important;top:74px!important;right:12px!important;left:auto!important;
+ transform:none!important;width:clamp(225px,29vw,340px)!important;max-width:calc(100% - 24px)!important;
+ z-index:8!important;pointer-events:none!important;margin:0!important;
+}
+#rogueMap .lunar-graphic{width:100%!important}
+#rogueMap .lunar-coin-live{font-size:clamp(10px,1.05vw,15px)!important}
+#rogueMap .lunar-corruption-live{font-size:clamp(9px,.92vw,13px)!important}
+/* Character and grimoire selection: no currency or corruption counters. */
+body:has(#startOverlay:not(.hidden)) #lunarRunHud{display:none!important}
+/* Map uses its own illustrated counter, not the floating battle counter. */
+body:has(#rogueMap.visible) #lunarRunHud{display:none!important}
+@media(max-width:650px){
+ #rogueMap #mapEconomy.lunar-graphic-wrap{top:83px!important;right:5px!important;width:min(225px,49vw)!important}
+ #rogueMap .lunar-coin-live{font-size:10px!important}
+ #rogueMap .lunar-corruption-live{font-size:9px!important}
+}

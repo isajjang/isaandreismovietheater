@@ -1,0 +1,29 @@
+
+/* User-requested bare bottom UI: no imported illustrations or ornamental layers. */
+.lower{background:#0e091c!important;background-image:none!important;border:0!important;box-shadow:none!important;outline:0!important}
+.lower *:before,.lower *:after{content:none!important;display:none!important}
+.energy,.turnbtn,.pile,.pile-art,.card,.card .cost,.card .art,.card strong,.card em,.card .desc,.energyzone,.turnzone{background-image:none!important;box-shadow:none!important;filter:none!important;outline:none!important}
+.energy{width:auto!important;height:auto!important;min-width:90px!important;border:0!important;border-radius:0!important;background:transparent!important;color:#fff!important;font:700 25px Inter,sans-serif!important;display:flex!important;flex-direction:column!important;gap:4px!important}
+.energy small{font:11px Inter,sans-serif!important;color:#c4b5d4!important}
+.pile{border:1px solid #635477!important;border-radius:4px!important;background:#171026!important;padding:8px!important;width:85px!important;min-height:40px!important;color:#fff!important}
+.pile-art{display:none!important}.pile span{font-size:12px!important;position:static!important;margin:0!important;background:none!important;border:0!important;padding:0!important}.pile span b{font-size:15px!important;border:0!important;background:none!important;box-shadow:none!important;min-width:0!important;height:auto!important;display:inline!important;color:#fff!important}
+.pile-deck:before,.pile-discard:before{display:none!important}
+.pile-deck{font-size:0!important}.pile-deck:after{content:none!important}
+.pile-deck span:before{content:'Deck: '!important;display:inline!important;font-size:12px!important}
+.pile-discard span:before{content:'Discard: '!important;display:inline!important;font-size:12px!important}
+.turnbtn{width:100%!important;height:auto!important;min-height:45px!important;background:#2b1b42!important;border:1px solid #7b668e!important;border-radius:5px!important;color:#fff!important;font:600 16px Inter,sans-serif!important;text-shadow:none!important;transform:none!important;padding:12px!important}
+.turnbtn:hover{background:#3b2755!important;transform:none!important}
+.card{height:220px!important;background:#21152f!important;border:1px solid #554166!important;border-radius:5px!important;padding:12px!important;color:#fff!important;transform:none!important}
+.card:not(:disabled):hover{transform:translateY(-6px)!important;border-color:#b88bdc!important}
+.card .art{display:none!important}.card .cost{position:static!important;transform:none!important;width:28px!important;height:28px!important;border:1px solid #7e639c!important;border-radius:4px!important;background:#34214c!important;margin-bottom:12px!important;display:grid!important;place-items:center!important}
+.card .cost span{transform:none!important;font:700 16px Inter,sans-serif!important}
+.card strong{font:700 15px Inter,sans-serif!important;color:#fff!important;text-shadow:none!important;white-space:normal!important}
+.card em{color:#a995bb!important;font-size:11px!important}.card .desc{font:12px/1.5 Inter,sans-serif!important;color:#eee5f6!important;text-shadow:none!important}
+.hint{color:#a995bb!important}
+/* Remove ornamental health-bar additions only; retain readable health and block values. */
+.unitbar,.unitbar .track,.unitbar .name,.unitbar .fill,.unitbar .shield-status{background-image:none!important;outline:0!important;filter:none!important}
+.unitbar:before,.unitbar:after,.unitbar .track:before,.unitbar .track:after,.unitbar .name:before,.unitbar .name:after{content:none!important;display:none!important}
+.unitbar .track{border:1px solid #97748c!important;border-radius:3px!important;box-shadow:none!important;background:#1b0b23!important;height:20px!important}
+.unitbar .name{color:#fff!important;text-shadow:0 1px 2px #000!important}
+.unitbar .fill{background:#c42965!important;box-shadow:none!important}
+@media(max-width:850px){.card{height:190px!important}.energy{min-width:70px!important;font-size:19px!important}.pile{width:78px!important}}

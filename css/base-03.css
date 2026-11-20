@@ -1,0 +1,10 @@
+
+/* Static art: no pseudo-skeletal movement or duplicated body layers. */
+.actor.player{width:33%;left:5%;height:62%;bottom:11%;}
+.actor.player .isa-portrait{display:block;position:relative;width:100%;height:100%;max-height:100%;max-width:100%;object-fit:contain;object-position:center bottom;animation:none!important;transform:none!important;filter:drop-shadow(0 9px 7px #06020b) drop-shadow(0 0 15px #d94ef866)}
+.card .art{overflow:hidden;background:#1c0a38;}
+.card .art img{width:100%;height:100%;object-fit:cover;display:block;image-rendering:auto}
+.card{border-color:#ffcc86;box-shadow:inset 0 0 0 2px #ad57c5,0 0 13px #df56ed77,0 9px 20px #070012}
+.card:before{content:'✧';position:absolute;right:8px;top:4px;color:#ffd994;text-shadow:0 0 7px #e66bff}
+.energy{box-shadow:0 0 22px #e461ff,inset 0 0 20px #ed94ff;border-color:#ffd694}
+@media(max-width:850px){.actor.player{width:40%;left:0;height:55%}}

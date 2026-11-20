@@ -1,0 +1,13 @@
+
+#mapEvent{z-index:99999!important;background:rgba(6,2,22,.86)!important;backdrop-filter:blur(8px)}
+#mapEvent .map-event-card{width:min(900px,94vw)!important;max-width:900px!important;display:grid!important;grid-template-columns:minmax(200px,38%) 1fr;gap:0!important;padding:0!important;overflow:hidden;border:2px solid #d6a35b!important;border-radius:20px!important;background:linear-gradient(140deg,#190a32,#30113c 70%,#170b2d)!important;box-shadow:0 0 50px #a342d077,0 18px 70px #000b!important}
+#mapEvent .map-event-art{width:100%;height:100%;min-height:390px;max-height:560px;object-fit:cover;display:block;align-self:stretch}
+#mapEvent .map-event-art[hidden]{display:none!important}
+#mapEvent .map-event-copy{padding:clamp(16px,3vw,30px);display:flex;flex-direction:column;justify-content:center;gap:12px}
+#mapEvent #mapEventTitle{color:#ffe2a3!important;font-size:clamp(21px,2.6vw,33px)!important;text-shadow:0 0 12px #b45df0}
+#mapEvent #mapEventText{color:#f3dfff!important;line-height:1.55;font-size:clamp(14px,1.3vw,17px)}
+#mapEvent #mapEventChoices{display:flex!important;flex-direction:column;gap:11px}
+#mapEvent #mapEventChoices button{width:100%;text-align:left!important;padding:14px 17px!important;border:1px solid #ae7bca!important;border-radius:11px!important;color:#fff2dc!important;background:linear-gradient(100deg,#482360,#25143c)!important;box-shadow:inset 0 0 12px #b04b8b22!important;line-height:1.4;transition:transform .16s,box-shadow .16s,border-color .16s}
+#mapEvent #mapEventChoices button:hover{transform:translateX(3px);border-color:#ffd582!important;box-shadow:0 0 18px #b968e077!important}
+#mapEvent .map-event-card:has(.map-event-art[hidden]){display:block!important;width:min(550px,94vw)!important}
+@media(max-width:650px){#mapEvent .map-event-card{display:flex!important;flex-direction:column!important;max-height:90dvh;overflow-y:auto!important}#mapEvent .map-event-art{height:210px!important;min-height:210px!important;max-height:210px!important;object-position:center 40%}#mapEvent .map-event-copy{padding:15px!important}#mapEvent #mapEventChoices button{padding:11px!important}}

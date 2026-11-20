@@ -1,0 +1,9 @@
+
+.ranger-card{color:#e8fff5!important;filter:drop-shadow(0 4px 8px #003e36)}
+.ranger-card .chaos-art{top:20%!important;left:12%!important;width:76%!important;height:29%!important;box-shadow:0 0 10px #00d9c966!important}
+.ranger-card .chaos-name{top:10.7%!important;left:22%!important;width:68%!important;height:8%!important;color:#fff9df!important}
+.ranger-card .chaos-type{top:53.3%!important;color:#a8ffec!important}
+.ranger-card .chaos-desc{top:64.5%!important;left:13%!important;width:74%!important;height:24%!important}
+.ranger-card .chaos-cost{font-size:clamp(24px,2.5vw,35px)!important;color:#fff!important;text-shadow:0 2px 3px #001c24,0 0 8px #00ffee!important}
+.ranger-card.chaos-title-medium .chaos-name{font-size:clamp(10px,.91vw,13px)!important}
+.ranger-card.chaos-title-long .chaos-name{font-size:clamp(8px,.77vw,11px)!important}

@@ -1,0 +1,5 @@
+
+/* Scale only lengthy Chaos card names, preserving the same title banner. */
+.chaos-card.chaos-title-medium .chaos-name{font-size:clamp(9px,.93vw,13px)!important;letter-spacing:-.045em!important}
+.chaos-card.chaos-title-long .chaos-name{font-size:clamp(8px,.77vw,11px)!important;letter-spacing:-.055em!important}
+@media(max-width:850px){.chaos-card.chaos-title-medium .chaos-name{font-size:12px!important}.chaos-card.chaos-title-long .chaos-name{font-size:10px!important}}

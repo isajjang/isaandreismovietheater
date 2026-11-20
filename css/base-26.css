@@ -1,0 +1,12 @@
+
+#rogueMap .map-frame{background:#100625!important;isolation:isolate}
+#rogueMap .map-scroll{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;scrollbar-color:#a46ee0 #1d0a36;scrollbar-width:thin;z-index:1}
+#rogueMap .map-scroll-inner{position:relative;height:1940px;width:100%;background:linear-gradient(180deg,#12052442,#16062a44),url("../assets/base/12f4492cceb80d3d5d254ea6.webp") center center/100% 100% no-repeat}
+#rogueMap #mapSvg{position:absolute;inset:0;width:100%;height:100%;z-index:2}
+#rogueMap .map-head{position:absolute;top:0;left:0;right:0;z-index:5;background:linear-gradient(#110524f0,#11052400);padding:9px 0 15px}
+#rogueMap .map-legend{z-index:5;pointer-events:none}
+#rogueMap .merchant-node .asset-icon{filter:drop-shadow(0 0 13px #ffcb64) sepia(.22) hue-rotate(325deg)}
+#rogueMap .merchant-node.available .asset-halo{stroke:#ffdc73!important;stroke-width:6!important}
+#rogueMap .map-event{z-index:10}
+#rogueMap .map-economy{z-index:7}
+#rogueMap .map-scroll-inner::after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,#07031933,transparent 15%,transparent 85%,#07031933)}

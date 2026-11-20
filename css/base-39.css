@@ -1,0 +1,29 @@
+
+/* Mobile-only: leave the desktop presentation untouched. */
+@media (hover:none) and (pointer:coarse), (max-width:850px) {
+  html,body { overscroll-behavior-y:auto; -webkit-text-size-adjust:100%; }
+  #startOverlay, #resultOverlay { overflow-x:hidden!important; overflow-y:auto!important; overscroll-behavior:contain; -webkit-overflow-scrolling:touch; touch-action:pan-y; display:block!important; text-align:center; }
+  #startOverlay.hidden,#resultOverlay.hidden {display:none!important}
+  #startOverlay .modal, #resultOverlay .modal { position:relative; margin: max(12px,env(safe-area-inset-top)) auto max(30px,env(safe-area-inset-bottom)); width:min(680px,100%); max-height:none!important; height:auto!important; overflow:visible!important; padding:clamp(14px,3vw,26px)!important; }
+  #startOverlay .deck-picker,#startOverlay .deck-options,#startOverlay .choices,#startOverlay .choice {touch-action:pan-y}
+  #startOverlay .choices {flex-wrap:wrap!important; gap:12px!important; padding-bottom:20px}
+  #startOverlay .choice {min-width:min(180px,44%); flex:1 1 160px}
+  #startOverlay .choice img {max-width:100%;object-fit:contain}
+  #rogueMap {padding:clamp(4px,1vw,10px)!important; overflow:hidden; }
+  #rogueMap .map-frame {width:100%!important;max-width:1050px;height:calc(100dvh - 12px)!important;max-height:none!important;overflow:hidden!important;}
+  #rogueMap .map-scroll {position:absolute!important;inset:0!important;overflow:auto!important;overflow-x:auto!important;overflow-y:auto!important;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y;overscroll-behavior:contain;z-index:1;}
+  #rogueMap .map-scroll-inner {width:1000px!important;min-width:1000px!important;height:1940px!important;min-height:1940px!important;max-width:none!important;flex-shrink:0;}
+  #rogueMap #mapSvg {width:1000px!important;height:1940px!important;touch-action:pan-x pan-y;user-select:none;}
+  #rogueMap #mapSvg .map-node {touch-action:manipulation;}
+  #rogueMap .map-head {pointer-events:none!important;}
+  #rogueMap .map-legend {pointer-events:none!important;}
+  #rogueMap .map-economy {pointer-events:none!important;}
+  #rogueMap .map-head h2 {font-size:clamp(17px,3vw,25px)!important;}
+  #rogueMap .map-head p {font-size:clamp(10px,2vw,13px)!important;}
+}
+@media (orientation:landscape) and (max-height:550px) and (pointer:coarse) {
+  #startOverlay .modal {max-width:850px!important;}
+  #startOverlay .choices {display:flex!important;flex-wrap:nowrap!important;}
+  #startOverlay .choice img {height:95px!important;}
+  #rogueMap .map-frame {height:calc(100dvh - 8px)!important;}
+}

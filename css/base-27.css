@@ -1,0 +1,9 @@
+
+#enemyActor:has(.wolf-pack-art[style*="flex"]){overflow:visible!important}
+.wolf-pack-art{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:center;gap:0;z-index:4;pointer-events:none}
+.wolf-unit{border:0;background:transparent;position:relative;cursor:pointer;padding:0;pointer-events:auto;width:34%;height:100%;filter:drop-shadow(0 0 8px #5c239b)}
+.wolf-unit img{width:100%;height:92%;object-fit:contain;object-position:bottom}
+.wolf-unit:nth-child(2){transform:scale(1.18);z-index:2}
+.wolf-unit.selected img{filter:drop-shadow(0 0 10px #ffce72)}
+.wolf-unit.defeated{opacity:.12;filter:grayscale(1);pointer-events:none}
+.wolf-unit span{position:absolute;bottom:1%;left:15%;right:15%;color:#ffe7ae;background:#160b2bdd;border:1px solid #e2ad60;border-radius:12px;font-size:clamp(10px,1.2vw,15px);font-weight:bold}

@@ -1,0 +1,14 @@
+
+/* The illustrated artwork is embedded; only the numbers and fill are HTML. */
+#mapEconomy.lunar-graphic-wrap{display:block!important;width:min(650px,95vw)!important;max-width:95vw!important;padding:0!important;background:transparent!important;border:0!important;box-shadow:none!important;overflow:visible!important}
+.lunar-graphic{position:relative;width:100%;aspect-ratio:2172/724;filter:drop-shadow(0 4px 12px #0c0018);transition:filter .3s}
+.lunar-graphic-art{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;pointer-events:none}
+.lunar-coin-live,.lunar-corruption-live{position:absolute;z-index:2;display:flex;align-items:center;justify-content:center;color:#ffe8c5;font-family:Georgia,serif;font-weight:900;text-shadow:0 0 8px #e62876,0 2px 2px #08000c}
+.lunar-coin-live{left:15.5%;top:38%;width:11.5%;height:15%;background:#1b0920;border-radius:8px;font-size:clamp(13px,2vw,24px)}
+.lunar-corruption-live{left:78.5%;top:24%;width:13%;height:14%;background:#180718;border-radius:7px;font-size:clamp(10px,1.6vw,20px);white-space:nowrap}
+.lunar-gauge-live{position:absolute;z-index:2;left:46.8%;top:43%;width:44.7%;height:8.4%;border-radius:3px;overflow:hidden;transform:skewX(-6deg)}
+.lunar-gauge-live #corruptFill{height:100%;width:0%;background:linear-gradient(90deg,#9c177d,#ff2258,#ff9c62)!important;box-shadow:0 0 13px #ff175d;transition:width .45s ease}
+.lunar-graphic[data-danger="high"]{filter:drop-shadow(0 0 12px #e02b69)}
+.lunar-graphic[data-danger="critical"]{animation:lunarGraphicMenace .8s ease-in-out infinite alternate}
+@keyframes lunarGraphicMenace{to{filter:drop-shadow(0 0 23px #ff2359) brightness(1.15)}}
+@media(max-width:650px){#mapEconomy.lunar-graphic-wrap{width:min(470px,96vw)!important}.lunar-coin-live{font-size:13px}.lunar-corruption-live{font-size:11px}}

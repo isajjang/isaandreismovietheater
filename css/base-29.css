@@ -1,0 +1,53 @@
+
+/* Three medium wolves stay together inside the right-side enemy zone. */
+#enemyActor:has(.wolf-pack-art[style*="flex"]){
+  width:clamp(330px,37vw,600px)!important;
+  max-width:45vw!important;
+  height:clamp(230px,35vh,390px)!important;
+  left:auto!important;
+  right:2.5%!important;
+  transform:none!important;
+  overflow:visible!important;
+}
+#enemyActor .wolf-pack-art[style*="flex"]{
+  position:absolute!important;
+  inset:0!important;
+  left:0!important;
+  right:0!important;
+  width:100%!important;
+  height:100%!important;
+  justify-content:center!important;
+  align-items:flex-end!important;
+  gap:0!important;
+  overflow:visible!important;
+}
+#enemyActor .wolf-unit{
+  width:33.333%!important;
+  height:100%!important;
+  min-width:0!important;
+  flex:0 0 33.333%!important;
+  transform:none!important;
+}
+#enemyActor .wolf-unit:nth-child(2){transform:scale(1.05)!important;transform-origin:bottom center!important}
+#enemyActor .wolf-unit img{
+  width:115%!important;
+  max-width:115%!important;
+  height:76%!important;
+  object-fit:contain!important;
+  object-position:center bottom!important;
+}
+#enemyActor .wolf-unit .wolf-health-ui{
+  width:95%!important;
+  max-width:175px!important;
+  margin-top:0!important;
+  margin-bottom:0!important;
+  padding:3px 4px!important;
+}
+#enemyActor .wolf-health-title{font-size:clamp(9px,.75vw,12px)!important}
+#enemyActor .wolf-health-track{height:8px!important}
+#enemyActor .wolf-health-ui span{font-size:clamp(9px,.8vw,12px)!important}
+@media(max-width:850px){
+ #enemyActor:has(.wolf-pack-art[style*="flex"]){width:46vw!important;max-width:46vw!important;right:1%!important;left:auto!important;transform:none!important;height:31vh!important}
+ #enemyActor .wolf-unit img{width:115%!important;height:75%!important}
+ #enemyActor .wolf-unit .wolf-health-ui{padding:2px!important}
+}

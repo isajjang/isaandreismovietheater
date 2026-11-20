@@ -1,0 +1,16 @@
+
+/* Large three-enemy formation, individually targetable and independently tracked. */
+#enemyActor:has(.wolf-pack-art[style*="flex"]){width:min(70vw,1000px)!important;max-width:none!important;overflow:visible!important;transform:translateX(-15%)!important}
+.wolf-pack-art{width:145%!important;left:-23%!important;right:auto!important;overflow:visible!important;align-items:flex-end!important;justify-content:center!important;gap:0!important}
+.wolf-unit{width:36%!important;min-width:0!important;height:115%!important;flex-shrink:0!important;display:flex!important;flex-direction:column;justify-content:flex-end;align-items:center;overflow:visible!important;transition:filter .15s ease,opacity .15s ease}
+.wolf-unit img{height:86%!important;width:145%!important;max-width:none!important;object-fit:contain!important;object-position:center bottom!important;pointer-events:none}
+.wolf-unit:nth-child(2){transform:scale(1.09)!important;z-index:3!important}
+.wolf-unit:nth-child(1),.wolf-unit:nth-child(3){z-index:2!important}
+.wolf-unit.selected img{filter:drop-shadow(0 0 13px #ffdf7e) drop-shadow(0 0 5px #9c5bff)!important}
+.wolf-unit .wolf-health-ui{width:90%;max-width:210px;position:relative;z-index:6;margin-top:-2%;margin-bottom:-7%;padding:4px 8px 5px;border:2px solid #efb762;border-radius:7px;background:linear-gradient(180deg,#1b0c2f,#11081c);box-shadow:0 0 12px #bc5cf066,0 3px 10px #000b;text-align:center;color:#fff0cc}
+.wolf-health-title{font-family:Georgia,serif;font-size:clamp(10px,1vw,14px);font-weight:900;letter-spacing:1px;color:#ffdc95}
+.wolf-health-track{height:10px;border:1px solid #f1bd70;border-radius:3px;background:#270919;overflow:hidden;margin:3px 0 1px;box-shadow:inset 0 1px 4px #000}
+.wolf-health-fill{height:100%;background:linear-gradient(180deg,#ff8ca2,#d72d5d 50%,#85133b);box-shadow:0 0 7px #fa476d;transition:width .25s}
+.wolf-unit .wolf-health-ui span{position:static!important;display:block!important;border:0!important;background:transparent!important;font-size:clamp(10px,1vw,14px)!important;color:#fff3df!important}
+.hide-pack-health{visibility:hidden!important;opacity:0!important}
+@media(max-width:850px){#enemyActor:has(.wolf-pack-art[style*="flex"]){width:85vw!important;transform:translateX(-15%)!important}.wolf-pack-art{width:135%!important;left:-18%!important}.wolf-unit{width:35%!important}.wolf-unit .wolf-health-ui{padding:2px 4px}.wolf-health-track{height:7px}}

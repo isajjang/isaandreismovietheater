@@ -1,0 +1,20 @@
+
+/* More legible center-screen combat feedback, lifted away from the character art. */
+.combatlog{top:15%!important;max-width:min(78%,760px)!important;width:max-content;min-width:220px;font:900 clamp(19px,2.35vw,31px)/1.24 Cinzel,Georgia,serif!important;letter-spacing:.025em;color:#ffe3a0!important;text-shadow:0 2px 2px #17001d,0 0 8px #000,0 0 18px #c346b5,0 0 26px #000!important;filter:drop-shadow(0 1px 3px #08000f)}
+.damage{font:900 clamp(42px,5vw,68px)/1 Cinzel,Georgia,serif!important;text-shadow:0 2px 3px #210015,0 0 12px #f64acc,0 0 22px #000!important}
+#intent{display:flex!important;flex-direction:column;align-items:center;gap:4px;line-height:1.18!important;white-space:normal!important;text-align:center!important}
+#intent .intent-action{display:block}
+#intent .intent-phase{display:block;color:#ffd08b;font-weight:900;letter-spacing:.12em;font-size:.87em;text-shadow:0 0 12px #ff8a39,0 0 18px #af39dc}
+/* Red aura is anchored to the boss, not the entire UI. */
+#enemyActor{isolation:isolate}
+#enemyActor::before,#enemyActor::after{content:"";position:absolute;pointer-events:none;opacity:0;z-index:-1;inset:-5% -12% -4%;border-radius:46% 46% 35% 35%;transition:opacity .55s ease}
+.arena.boss-enraged #enemyActor::before,.arena.boss-final #enemyActor::before{opacity:1;background:radial-gradient(ellipse at 50% 60%,#f42a3c75 0%,#f40a2670 35%,#ff451e3a 53%,transparent 72%);box-shadow:0 0 32px 13px #fa172d8a,0 0 76px 27px #c500286b,inset 0 0 35px #ff371c9c;animation:archmageEmbers 1.4s ease-in-out infinite alternate}
+.arena.boss-enraged #enemyActor::after,.arena.boss-final #enemyActor::after{opacity:.85;inset:-15% -9% -6%;background:radial-gradient(ellipse at 27% 85%,#ff5e2988 0%,transparent 38%),radial-gradient(ellipse at 70% 78%,#ff223e90 0%,transparent 46%),linear-gradient(0deg,#ed00175c,transparent 66%);filter:blur(10px);animation:archmageFlames 1.15s ease-in-out infinite alternate}
+.arena.boss-final #enemyActor::before{background:radial-gradient(ellipse at 50% 60%,#fff1a8b0 0%,#ff422fc0 22%,#ff0019a6 47%,transparent 75%);box-shadow:0 0 50px 22px #ff1b22dd,0 0 110px 50px #f9002b99,0 0 170px 55px #f2002566;animation-duration:.65s}
+.arena.boss-final #enemyActor::after{opacity:1;filter:blur(7px) brightness(1.8);animation-duration:.55s}
+.arena.boss-enraged .archmage-art{filter:drop-shadow(0 0 18px #f5172d) drop-shadow(0 0 35px #9e061a)!important}
+.arena.boss-final .archmage-art{filter:drop-shadow(0 0 26px #ff3b32) drop-shadow(0 0 52px #ff0819) brightness(1.15)!important}
+@keyframes archmageEmbers{from{transform:scale(.95);filter:brightness(.85)}to{transform:scale(1.08);filter:brightness(1.4)}}
+@keyframes archmageFlames{from{transform:translateY(8px) scaleX(.92)}to{transform:translateY(-16px) scaleX(1.09)}}
+@media(prefers-reduced-motion:reduce){.arena #enemyActor::before,.arena #enemyActor::after{animation:none!important}}
+@media(max-width:650px){.combatlog{top:12%!important;max-width:88%!important;min-width:0;font-size:18px!important}#intent .intent-phase{font-size:.82em}}

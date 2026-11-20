@@ -1,0 +1,696 @@
+
+/* Universal reward UI. Everything is scoped to protect the battle/map layouts. */
+#mdRewardOverlay {
+  --md-gold: #f5cd8a;
+  --md-ivory: #fff3db;
+  --md-muted: #d9c6e3;
+  --md-violet: #3b1457;
+  position: fixed;
+  inset: 0;
+  z-index: 970000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: max(12px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right)) max(12px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left));
+  background: rgba(7, 3, 17, .8);
+  backdrop-filter: blur(5px);
+  color: var(--md-ivory);
+  font-family: Inter, system-ui, sans-serif;
+  overscroll-behavior: contain;
+  overflow: hidden;
+}
+#mdRewardOverlay[hidden], #mdRewardOverlay.hidden { display: none !important; }
+#mdRewardOverlay *, #mdRewardOverlay *::before, #mdRewardOverlay *::after { box-sizing: border-box; }
+#mdRewardOverlay .md-reward-dialog {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  width: min(1360px, 100%);
+  height: min(800px, calc(100dvh - 24px));
+  max-height: 100%;
+  min-width: 0;
+  min-height: 0;
+  border: 2px solid #d8a34f;
+  border-radius: 22px;
+  background: radial-gradient(ellipse at 50% 0, #49235d8a, transparent 55%), linear-gradient(145deg, #1c0a2ffb, #11071efb 65%, #261134fa);
+  box-shadow: inset 0 0 0 2px #fff1c235, inset 0 0 0 5px #6d442b80, 0 22px 90px #000c, 0 0 32px #c16eff1c;
+  overflow: hidden;
+}
+#mdRewardOverlay .md-reward-dialog::before,
+#mdRewardOverlay .md-reward-dialog::after {
+  content: '◆';
+  position: absolute;
+  z-index: 3;
+  color: #f5ce88;
+  font-size: 16px;
+  line-height: 1;
+  pointer-events: none;
+  text-shadow: 0 0 6px #a748d8;
+}
+#mdRewardOverlay .md-reward-dialog::before { top: 9px; left: 11px; }
+#mdRewardOverlay .md-reward-dialog::after { bottom: 9px; right: 11px; }
+#mdRewardOverlay .md-frame-skin { position: absolute; z-index: -1; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+#mdRewardOverlay .md-reward-header {
+  position: relative;
+  flex: 0 0 auto;
+  min-width: 0;
+  padding: 18px 190px 13px;
+  text-align: center;
+  border-bottom: 1px solid #d5a36332;
+  background: linear-gradient(180deg, #2e103c55, #190a2f33);
+}
+#mdRewardOverlay .md-reward-crest {
+  display: block;
+  width: 104px;
+  height: 43px;
+  margin: -6px auto 1px;
+  object-fit: contain;
+}
+#mdRewardOverlay .md-reward-eyebrow {
+  display: block;
+  margin: 0 0 5px;
+  color: #d9bce5;
+  font: 600 10px/1.3 Inter, sans-serif;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+#mdRewardOverlay .md-reward-title {
+  margin: 0;
+  color: #ffe6ad;
+  font: 700 clamp(24px, 3.1vw, 38px)/1.1 Cinzel, Georgia, serif;
+  letter-spacing: .025em;
+  text-shadow: 0 2px 3px #08020d, 0 0 14px #d688382b;
+  overflow-wrap: anywhere;
+}
+#mdRewardOverlay .md-reward-subtitle {
+  margin: 7px 0 0;
+  color: #efdef6;
+  font: 14px/1.45 Inter, sans-serif;
+}
+#mdRewardOverlay .md-reward-coins {
+  position: absolute;
+  right: 19px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: grid;
+  gap: 3px;
+  min-width: 146px;
+  padding: 11px 14px;
+  border: 1px solid #b88a52;
+  border-radius: 13px;
+  background: linear-gradient(145deg, #261136, #150b24);
+  box-shadow: inset 0 0 0 2px #f4ce8910;
+  color: #f8d78f;
+  font: 700 15px/1.25 Georgia, serif;
+  text-align: center;
+}
+#mdRewardOverlay .md-reward-coins small { display: block; color: #d5c3db; font: 11px/1.3 Inter, sans-serif; }
+#mdRewardOverlay .md-reward-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  min-width: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
+  scrollbar-width: thin;
+  scrollbar-color: #aa7fbd #160923;
+  padding: 22px;
+  scroll-padding: 16px;
+}
+#mdRewardOverlay .md-reward-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 18px;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+#mdRewardOverlay .md-reward-grid[data-count="1"] { grid-template-columns: minmax(0, 440px); justify-content: center; }
+#mdRewardOverlay .md-reward-grid[data-count="2"] { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 880px; }
+#mdRewardOverlay .md-reward-grid[data-count="4"] { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+#mdRewardOverlay .md-reward-grid[data-count="5"],
+#mdRewardOverlay .md-reward-grid[data-count="6"] { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+#mdRewardOverlay .md-reward-card {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  min-width: 0;
+  min-height: 335px;
+  padding: 19px 17px 15px;
+  border: 0;
+  border-radius: 21px;
+  background: linear-gradient(145deg, #29113e, #170922);
+  color: var(--md-ivory);
+  box-shadow: 0 6px 18px #05020c77;
+  text-align: center;
+  cursor: pointer;
+  transition: box-shadow .16s ease, transform .16s ease;
+}
+#mdRewardOverlay .md-reward-card:hover { transform: translateY(-2px); }
+#mdRewardOverlay .md-reward-card:focus-visible { outline: 3px solid #fff2bd; outline-offset: 3px; }
+#mdRewardOverlay .md-reward-card.is-selected,
+#mdRewardOverlay .md-reward-card[aria-checked="true"],
+#mdRewardOverlay .md-reward-card[aria-selected="true"] { box-shadow: 0 0 0 2px #f4cf82, 0 0 20px #f6b75350; }
+#mdRewardOverlay .md-panel-skin {
+  position: absolute;
+  z-index: -1;
+  inset: -2px;
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  pointer-events: none;
+}
+#mdRewardOverlay .md-panel-selected { display: none; inset: -10px -8px -17px; width: calc(100% + 16px); height: calc(100% + 27px); }
+#mdRewardOverlay .md-reward-card.is-selected .md-panel-selected,
+#mdRewardOverlay .md-reward-card[aria-checked="true"] .md-panel-selected,
+#mdRewardOverlay .md-reward-card[aria-selected="true"] .md-panel-selected { display: block; }
+#mdRewardOverlay .md-reward-card.is-selected .md-panel-normal,
+#mdRewardOverlay .md-reward-card[aria-checked="true"] .md-panel-normal,
+#mdRewardOverlay .md-reward-card[aria-selected="true"] .md-panel-normal { opacity: 0; }
+#mdRewardOverlay .md-reward-badge {
+  position: relative;
+  isolation: isolate;
+  align-self: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 28px;
+  min-width: 112px;
+  max-width: calc(100% - 20px);
+  padding: 5px 23px;
+  margin: 0 auto 10px;
+  color: #fff2d7;
+  font: 700 10px/1.3 Inter, sans-serif;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  text-shadow: 0 1px 2px #150823;
+}
+#mdRewardOverlay .md-reward-badge.common,
+#mdRewardOverlay .md-reward-badge[data-rarity="common"],
+#mdRewardOverlay .md-reward-badge.legendary,
+#mdRewardOverlay .md-reward-badge[data-rarity="legendary"] { color: #36152a; text-shadow: none; }
+#mdRewardOverlay .md-badge-skin { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; pointer-events: none; }
+#mdRewardOverlay .md-reward-card h3,
+#mdRewardOverlay .md-reward-card .md-reward-card-title {
+  margin: 0 0 7px;
+  min-width: 0;
+  color: #ffe8b8;
+  font: 700 clamp(18px, 1.8vw, 25px)/1.15 Cinzel, Georgia, serif;
+  overflow-wrap: anywhere;
+}
+#mdRewardOverlay .md-reward-art {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 142px;
+  min-height: 90px;
+  margin: 4px auto 10px;
+  overflow: hidden;
+  border-radius: 13px;
+  background: radial-gradient(ellipse at 50% 75%, #993cbb24, transparent 68%);
+}
+#mdRewardOverlay .md-reward-art img,
+#mdRewardOverlay .md-reward-art > svg { display: block; max-width: 100%; width: 100%; height: 100%; object-fit: contain; }
+#mdRewardOverlay .md-reward-art img { filter: drop-shadow(0 6px 9px #07000b77); }
+#mdRewardOverlay .md-reward-art .md-relic-art { width: 94%; mask-image: radial-gradient(ellipse at center, #000 60%, #000 76%, transparent 100%); }
+#mdRewardOverlay .md-reward-art .md-art-symbol { color: #f2c97d; font: 70px/1 Georgia, serif; text-shadow: 0 0 18px #bc45db77; }
+#mdRewardOverlay .md-reward-card .md-icon-button { position: absolute; z-index: 4; top: 67px; right: 10px; width: 40px; height: 40px; min-width: 40px; min-height: 40px; }
+#mdRewardOverlay .md-reward-art .md-icon-button { top: 4px; right: 2px; }
+#mdRewardOverlay .md-reward-description,
+#mdRewardOverlay .md-reward-card > p { margin: 0 0 14px; color: #f8e9f9; font: 14px/1.5 Inter, sans-serif; overflow-wrap: anywhere; }
+#mdRewardOverlay .md-reward-card .md-ui-button { width: 100%; margin-top: auto; min-width: 0; }
+#mdRewardOverlay .md-reward-note,
+#mdRewardOverlay .md-reward-card small { color: #ceb6dc; font: 12px/1.4 Inter, sans-serif; }
+#mdRewardOverlay .md-reward-notice {
+  max-width: 1000px;
+  margin: 0 auto 18px;
+  padding: 12px 16px;
+  border: 1px solid #b17cbd4d;
+  border-left: 3px solid #d8b36e;
+  border-radius: 10px;
+  background: #2e143e88;
+  color: #f1e0f6;
+  font: 14px/1.55 Inter, sans-serif;
+}
+#mdRewardOverlay .md-reward-notice.warning { border-left-color: #ec7f9f; background: #3d102c66; }
+#mdRewardOverlay .md-reward-footer {
+  position: relative;
+  z-index: 5;
+  flex: 0 0 auto;
+  min-width: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px 16px;
+  padding: 12px 24px 16px;
+  border-top: 1px solid #d5a36344;
+  background: linear-gradient(180deg, #1c0b2ef2, #14091ffb);
+  box-shadow: 0 -12px 20px #09020f38;
+}
+#mdRewardOverlay .md-reward-status { flex: 1 0 100%; min-width: 0; margin: 0; text-align: center; color: #e7d3ec; font: 13px/1.35 Inter, sans-serif; }
+#mdRewardOverlay .md-reward-actions { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 10px; min-width: 0; }
+#mdRewardOverlay .md-reward-footer .md-ui-button.primary { min-width: 250px; }
+#mdRewardOverlay .md-reward-footer .md-ui-button.secondary { min-width: 185px; }
+#mdRewardOverlay .md-ui-button {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 53px;
+  min-width: 140px;
+  max-width: 100%;
+  padding: 12px 30px 12px 45px;
+  border: 0;
+  outline: 0;
+  border-radius: 17px;
+  background: transparent;
+  color: #fff2d7;
+  font: 700 15px/1.2 Cinzel, Georgia, serif;
+  text-align: center;
+  letter-spacing: .025em;
+  text-shadow: 0 2px 3px #150621;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform .1s ease, filter .1s ease;
+}
+#mdRewardOverlay .md-ui-button.secondary { padding-left: 27px; padding-right: 27px; color: #f2e0f3; font-size: 13px; }
+#mdRewardOverlay .md-button-label { position: relative; z-index: 2; overflow-wrap: anywhere; }
+#mdRewardOverlay .md-button-skin { position: absolute; z-index: -1; inset: -1px; width: calc(100% + 2px); height: calc(100% + 2px); pointer-events: none; }
+#mdRewardOverlay .md-skin-focus,
+#mdRewardOverlay .md-skin-pressed,
+#mdRewardOverlay .md-skin-disabled { display: none; }
+#mdRewardOverlay .md-ui-button:not(:disabled):hover { filter: brightness(1.08); }
+#mdRewardOverlay .md-ui-button.primary:not(:disabled):hover .md-skin-normal,
+#mdRewardOverlay .md-ui-button.primary:not(:disabled):focus-visible .md-skin-normal { display: none; }
+#mdRewardOverlay .md-ui-button.primary:not(:disabled):hover .md-skin-focus,
+#mdRewardOverlay .md-ui-button.primary:not(:disabled):focus-visible .md-skin-focus { display: block; }
+#mdRewardOverlay .md-ui-button:focus-visible { outline: 2px solid #fff3c3; outline-offset: 3px; }
+#mdRewardOverlay .md-ui-button:not(:disabled):active { transform: translateY(1px); }
+#mdRewardOverlay .md-ui-button:not(:disabled):active .md-skin-normal,
+#mdRewardOverlay .md-ui-button:not(:disabled):active .md-skin-focus { display: none; }
+#mdRewardOverlay .md-ui-button:not(:disabled):active .md-skin-pressed { display: block; }
+#mdRewardOverlay .md-ui-button:disabled { color: #e0cfde; cursor: not-allowed; text-shadow: none; }
+#mdRewardOverlay .md-ui-button.primary:disabled .md-skin-normal { display: none; }
+#mdRewardOverlay .md-ui-button.primary:disabled .md-skin-disabled { display: block; }
+#mdRewardOverlay .md-ui-button.secondary:disabled { opacity: .6; filter: saturate(.3); }
+#mdRewardOverlay .md-icon-button {
+  position: relative;
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  border-radius: 50%;
+  color: #fff0bd;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+#mdRewardOverlay .md-icon-skin { display: block; width: 100%; height: 100%; pointer-events: none; }
+#mdRewardOverlay .md-icon-button:hover { filter: brightness(1.15); }
+#mdRewardOverlay .md-icon-button:active { transform: translateY(1px); filter: brightness(.88); }
+#mdRewardOverlay .md-icon-button:focus-visible { outline: 2px solid #fff1b6; outline-offset: 2px; }
+#mdRewardOverlay .md-icon-button:disabled { opacity: .45; cursor: not-allowed; }
+#mdRewardOverlay .md-art-sprite { overflow: hidden; pointer-events: none; }
+#mdRewardOverlay .md-compare-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px; max-width: 1000px; margin: 0 auto; align-items: stretch; }
+#mdRewardOverlay .md-spell-panel {
+  position: relative;
+  min-width: 0;
+  padding: 20px;
+  border: 1px solid #b38a64;
+  border-radius: 16px;
+  background: radial-gradient(ellipse at 50% 0, #50266355, transparent 60%), #1a0a2c;
+  box-shadow: inset 0 0 0 3px #b2865b10;
+}
+#mdRewardOverlay .md-spell-panel.after,
+#mdRewardOverlay .md-spell-panel.is-upgraded { border-color: #efca81; box-shadow: inset 0 0 0 2px #f7c97b15, 0 0 17px #b653d520; }
+#mdRewardOverlay .md-spell-panel .md-spell-label { display: block; margin: 0 0 12px; color: #d6b6e6; font: 700 11px/1.25 Inter, sans-serif; letter-spacing: .13em; text-transform: uppercase; }
+#mdRewardOverlay .md-spell-panel.after .md-spell-label,
+#mdRewardOverlay .md-spell-panel.is-upgraded .md-spell-label { color: #f4d391; }
+#mdRewardOverlay .md-spell-panel h3 { margin: 0 0 9px; color: #ffe6b0; font: 700 24px/1.2 Cinzel, Georgia, serif; overflow-wrap: anywhere; }
+#mdRewardOverlay .md-spell-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; margin-bottom: 14px; color: #ddc4e9; font: 12px/1.4 Inter, sans-serif; }
+#mdRewardOverlay .md-spell-meta span { padding: 4px 8px; border: 1px solid #9c73b344; border-radius: 6px; background: #401b5233; }
+#mdRewardOverlay .md-spell-effect { margin: 0; color: #fff0fa; font: 15px/1.65 Inter, sans-serif; white-space: pre-line; overflow-wrap: anywhere; }
+#mdRewardOverlay .md-spell-changes { margin: 16px 0 0; padding: 12px 14px; border-left: 3px solid #e7c173; border-radius: 7px; background: #5a2f613d; color: #ffe6b7; font: 14px/1.55 Inter, sans-serif; white-space: pre-line; }
+#mdRewardOverlay .md-spell-rules { margin: 15px 0 0; color: #d8c4e2; font: 13px/1.55 Inter, sans-serif; }
+#mdRewardOverlay .md-spell-rules summary { cursor: pointer; color: #ebce9b; padding: 6px 0; }
+#mdRewardOverlay .md-spell-rules p { margin: 8px 0 0; white-space: pre-line; }
+#mdRewardOverlay .md-card-picker { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 10px; max-width: 1000px; margin: 0 auto 18px; padding: 12px; border: 1px solid #8d689e66; border-radius: 11px; background: #150a25; }
+#mdRewardOverlay .md-card-picker label { color: #edd4f3; font: 600 13px/1.4 Inter, sans-serif; }
+#mdRewardOverlay .md-card-picker select,
+#mdRewardOverlay select.md-card-picker-select { min-height: 44px; max-width: 100%; min-width: 0; flex: 1 1 240px; padding: 10px 35px 10px 12px; border: 1px solid #d0a475; border-radius: 8px; background: #2b153e; color: #fff1dc; font: 14px/1.4 Inter, sans-serif; }
+#mdRewardOverlay .md-card-picker select:focus-visible { outline: 2px solid #f1d18b; outline-offset: 2px; }
+#mdRewardOverlay .md-reward-empty { padding: 40px 20px; max-width: 700px; margin: auto; text-align: center; color: #e6ccec; font: 16px/1.6 Inter, sans-serif; }
+body.md-rewards-open #inspectBackdrop { z-index: 970010; }
+@media (max-width: 1100px) {
+  #mdRewardOverlay .md-reward-grid[data-count="4"] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  #mdRewardOverlay .md-reward-grid[data-count="5"],
+  #mdRewardOverlay .md-reward-grid[data-count="6"] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  #mdRewardOverlay .md-reward-header { padding: 15px 170px 12px; }
+  #mdRewardOverlay .md-reward-coins { right: 16px; min-width: 136px; padding: 9px 12px; font-size: 14px; }
+  #mdRewardOverlay .md-reward-body { padding: 18px; }
+  #mdRewardOverlay .md-reward-grid { gap: 16px; }
+}
+@media (max-width: 760px) {
+  #mdRewardOverlay .md-reward-header { padding: 13px 155px 12px 14px; text-align: left; }
+  #mdRewardOverlay .md-reward-crest { display: none; }
+  #mdRewardOverlay .md-reward-title { font-size: 25px; }
+  #mdRewardOverlay .md-reward-subtitle { font-size: 12px; }
+  #mdRewardOverlay .md-reward-coins { right: 12px; min-width: 127px; font-size: 13px; }
+  #mdRewardOverlay .md-reward-body { padding: 15px; }
+  #mdRewardOverlay .md-reward-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+  #mdRewardOverlay .md-reward-card { min-height: 298px; padding: 17px 14px 14px; }
+  #mdRewardOverlay .md-reward-card h3 { font-size: 21px; }
+  #mdRewardOverlay .md-reward-art { height: 115px; }
+  #mdRewardOverlay .md-reward-description { font-size: 13px; }
+  #mdRewardOverlay .md-reward-footer { padding: 9px 15px 11px; gap: 6px 10px; }
+  #mdRewardOverlay .md-ui-button { min-height: 49px; font-size: 13px; padding-left: 36px; padding-right: 21px; }
+  #mdRewardOverlay .md-reward-footer .md-ui-button.primary { min-width: 210px; }
+  #mdRewardOverlay .md-reward-footer .md-ui-button.secondary { min-width: 150px; }
+  #mdRewardOverlay .md-compare-grid { gap: 13px; }
+  #mdRewardOverlay .md-spell-panel { padding: 15px; }
+  #mdRewardOverlay .md-spell-panel h3 { font-size: 21px; }
+  #mdRewardOverlay .md-spell-effect { font-size: 14px; }
+}
+@media (max-width: 540px) {
+  #mdRewardOverlay { padding: max(7px, env(safe-area-inset-top)) max(7px, env(safe-area-inset-right)) max(7px, env(safe-area-inset-bottom)) max(7px, env(safe-area-inset-left)); }
+  #mdRewardOverlay .md-reward-dialog { height: calc(100dvh - 14px); border-radius: 16px; }
+  #mdRewardOverlay .md-reward-header { padding: 14px 14px 12px; text-align: center; }
+  #mdRewardOverlay .md-reward-title { font-size: 24px; }
+  #mdRewardOverlay .md-reward-coins { position: static; transform: none; display: inline-flex; align-items: center; justify-content: center; gap: 9px; width: auto; min-width: 0; margin-top: 9px; padding: 6px 11px; border-radius: 9px; font-size: 12px; }
+  #mdRewardOverlay .md-reward-coins small { font-size: 10px; }
+  #mdRewardOverlay .md-reward-body { padding: 14px 16px; }
+  #mdRewardOverlay .md-reward-grid,
+  #mdRewardOverlay .md-reward-grid[data-count],
+  #mdRewardOverlay .md-compare-grid { grid-template-columns: minmax(0, 1fr); max-width: 430px; gap: 18px; }
+  #mdRewardOverlay .md-reward-card { min-height: 300px; }
+  #mdRewardOverlay .md-reward-card h3 { font-size: 24px; }
+  #mdRewardOverlay .md-reward-art { height: 132px; }
+  #mdRewardOverlay .md-reward-description { font-size: 14px; }
+  #mdRewardOverlay .md-reward-footer .md-ui-button.primary { min-width: 0; flex: 1 1 180px; }
+  #mdRewardOverlay .md-reward-footer .md-ui-button.secondary { min-width: 0; flex: 1 1 125px; }
+  #mdRewardOverlay .md-reward-actions { width: 100%; flex-wrap: nowrap; }
+  #mdRewardOverlay .md-reward-footer { gap: 6px 8px; padding: 9px 12px 12px; }
+  #mdRewardOverlay .md-reward-footer .md-ui-button { font-size: 12px; padding-left: 30px; padding-right: 17px; }
+  #mdRewardOverlay .md-reward-footer .md-ui-button.secondary { padding-left: 18px; padding-right: 18px; }
+  #mdRewardOverlay .md-card-picker { justify-content: stretch; gap: 6px; padding: 10px; }
+  #mdRewardOverlay .md-card-picker label { width: 100%; }
+}
+@media (max-height: 600px) and (min-width: 541px) {
+  #mdRewardOverlay { padding-top: max(6px, env(safe-area-inset-top)); padding-bottom: max(6px, env(safe-area-inset-bottom)); }
+  #mdRewardOverlay .md-reward-dialog { height: calc(100dvh - 12px); border-radius: 16px; }
+  #mdRewardOverlay .md-reward-header { padding-top: 10px; padding-bottom: 9px; }
+  #mdRewardOverlay .md-reward-crest { display: none; }
+  #mdRewardOverlay .md-reward-title { font-size: 24px; }
+  #mdRewardOverlay .md-reward-eyebrow { font-size: 9px; margin-bottom: 3px; }
+  #mdRewardOverlay .md-reward-subtitle { margin-top: 4px; font-size: 12px; }
+  #mdRewardOverlay .md-reward-body { padding-top: 13px; padding-bottom: 16px; }
+  #mdRewardOverlay .md-reward-card { min-height: 275px; }
+  #mdRewardOverlay .md-reward-art { height: 94px; margin: 3px auto 6px; }
+  #mdRewardOverlay .md-reward-footer { padding-top: 6px; padding-bottom: 8px; }
+  #mdRewardOverlay .md-reward-status { font-size: 11px; }
+  #mdRewardOverlay .md-ui-button { min-height: 46px; }
+  #mdRewardOverlay .md-reward-notice { padding: 9px 12px; margin-bottom: 12px; font-size: 13px; }
+  #mdRewardOverlay .md-card-picker { padding: 8px 10px; margin-bottom: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #mdRewardOverlay *, #mdRewardOverlay *::before, #mdRewardOverlay *::after { transition: none !important; animation: none !important; }
+}
+/* Keep long live labels out of the crescent engraved into the primary skin.
+   Grid fractions follow each button's own width, unlike percentage padding. */
+#mdRewardOverlay .md-ui-button.primary {
+  display: inline-grid;
+  grid-template-columns: 27% minmax(0, 1fr) 8%;
+  padding: 11px 0;
+}
+#mdRewardOverlay .md-ui-button.primary .md-button-label { grid-column: 2; min-width: 0; }
+#mdRewardOverlay .md-reward-header:has(.md-reward-coins[hidden]) {
+  padding-left: 24px;
+  padding-right: 24px;
+  text-align: center;
+}
+
+#mdRewardOverlay .md-reward-coins[hidden] { display: none !important; }
+#mdRewardOverlay .md-reward-card.is-unavailable { opacity: .62; cursor: default; }
+#mdRewardOverlay .md-reward-card.is-unavailable:hover { transform: none; }
+#mdRewardOverlay .md-reward-card > .md-spell-meta { justify-content: center; margin: 0 0 3px; }
+#mdRewardOverlay .md-reward-detail { max-width: 640px; margin: 0 auto; }
+#mdRewardOverlay .md-reward-detail > .md-reward-art { height: 230px; max-width: 360px; }
+#mdRewardOverlay .md-reward-body > .md-spell-panel { max-width: 560px; margin: 0 auto; }
+#mdRewardOverlay .md-upgrade-layout { display: grid; grid-template-columns: minmax(190px, 250px) minmax(0, 1fr); gap: 18px; align-items: start; }
+#mdRewardOverlay .md-upgrade-layout .md-card-picker { display: flex; flex-direction: column; flex-wrap: nowrap; align-items: stretch; justify-content: flex-start; width: 100%; max-height: 520px; overflow-y: auto; overscroll-behavior: contain; touch-action: pan-y; margin: 0; }
+#mdRewardOverlay .md-card-picker .md-ui-button { width: 100%; flex: 0 0 auto; min-height: 68px; padding: 11px 16px; text-transform: none; }
+#mdRewardOverlay .md-card-picker .md-ui-button[aria-pressed="true"] { outline: 2px solid #f5cf83; outline-offset: 1px; }
+#mdRewardOverlay .md-picker-meta, #mdRewardOverlay .md-picker-reason { display: block; margin-top: 4px; font: 10px/1.35 Inter, system-ui, sans-serif; color: #e5d0ec; }
+#mdRewardOverlay .md-picker-reason { color: #d7bacd; }
+#mdRewardOverlay .md-upgrade-preview { min-width: 0; }
+#mdRewardOverlay .md-spell-panel .md-reward-art { max-width: 230px; height: 132px; }
+#mdRewardOverlay .md-spell-panel .md-spell-meta { margin-bottom: 6px; }
+#mdRewardOverlay .md-spell-panel .md-reward-note { margin-top: 10px; }
+#mdRewardOverlay .md-spell-changes ul { margin: 6px 0 0; padding-left: 20px; white-space: normal; }
+#mdRewardOverlay .md-spell-changes li + li { margin-top: 4px; }
+#mdRewardOverlay .md-victory-summary { width: min(840px,100%); margin: auto; text-align: center; }
+#mdRewardOverlay .md-victory-summary > .md-reward-art { max-width: 240px; height: 190px; }
+#mdRewardOverlay .md-victory-summary h3 { margin: 10px 0 22px; color: #ffe4ac; font: 700 27px/1.25 Cinzel, Georgia, serif; }
+#mdRewardOverlay .md-victory-stats { display: grid; grid-template-columns: repeat(auto-fit,minmax(170px,1fr)); gap: 14px; }
+#mdRewardOverlay .md-victory-stats .md-reward-notice { width: 100%; margin: 0; }
+
+/* Actual loot keeps its rarity color while offered, inspected and confirmed. */
+#mdRewardOverlay .md-rarity-glow[data-rarity="rare"] {
+  --md-rarity-rgb: 220, 230, 244;
+  --md-rarity-color: #e5edf7;
+}
+#mdRewardOverlay .md-rarity-glow[data-rarity="legendary"] {
+  --md-rarity-rgb: 255, 201, 71;
+  --md-rarity-color: #ffd36b;
+}
+#mdRewardOverlay :is(.md-reward-card, .md-spell-panel, .md-reward-detail).md-rarity-glow {
+  position: relative;
+  border-color: var(--md-rarity-color);
+  box-shadow: 0 0 0 1px rgba(var(--md-rarity-rgb), .8), inset 0 0 14px rgba(var(--md-rarity-rgb), .07), 0 0 14px rgba(var(--md-rarity-rgb), .26), 0 0 28px rgba(var(--md-rarity-rgb), .12);
+}
+#mdRewardOverlay :is(.md-reward-card, .md-spell-panel, .md-reward-detail).md-rarity-glow::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow: 0 0 21px rgba(var(--md-rarity-rgb), .36);
+  opacity: .4;
+  animation: md-loot-rarity-glow 3.2s ease-in-out infinite;
+}
+#mdRewardOverlay .md-reward-card.md-rarity-glow:is(.is-selected, [aria-checked="true"], [aria-selected="true"]) {
+  box-shadow: 0 0 0 2px var(--md-rarity-color), inset 0 0 18px rgba(var(--md-rarity-rgb), .1), 0 0 18px rgba(var(--md-rarity-rgb), .48), 0 0 32px rgba(var(--md-rarity-rgb), .19);
+}
+#mdRewardOverlay .md-reward-card.md-rarity-glow:focus-visible { outline-color: var(--md-rarity-color); }
+/* Desaturate only the illustrated frame so selection cannot turn Rare gold. */
+#mdRewardOverlay .md-reward-card[data-rarity="rare"] > .md-panel-skin { filter: grayscale(1) brightness(1.15); }
+#mdRewardOverlay .md-rarity-glow[data-rarity="rare"] > :is(h3, .md-spell-label) { color: #eef4ff; }
+#mdRewardOverlay .md-rarity-glow[data-rarity="legendary"] > :is(h3, .md-spell-label) { color: #ffdd8b; }
+#mdRewardOverlay .md-reward-detail.md-rarity-glow { box-sizing: border-box; padding: 20px; border: 1px solid var(--md-rarity-color); border-radius: 18px; }
+#mdRewardOverlay .md-card-picker .md-rarity-glow { box-shadow: 0 0 0 1px rgba(var(--md-rarity-rgb), .7), 0 0 12px rgba(var(--md-rarity-rgb), .22); }
+#mdRewardOverlay .md-card-picker .md-rarity-glow[aria-pressed="true"] { outline-color: var(--md-rarity-color); box-shadow: 0 0 14px rgba(var(--md-rarity-rgb), .42); }
+@keyframes md-loot-rarity-glow { 0%, 100% { opacity: .4; } 50% { opacity: .9; } }
+@media (prefers-reduced-motion: reduce) {
+  #mdRewardOverlay .md-rarity-glow::after { animation: none; opacity: .55; }
+}
+@media(max-width:1000px) {
+  #mdRewardOverlay .md-upgrade-layout { grid-template-columns: minmax(0,1fr); }
+  #mdRewardOverlay .md-upgrade-layout .md-card-picker { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); max-height: 166px; gap: 9px; }
+  #mdRewardOverlay .md-card-picker .md-ui-button { min-height: 62px; }
+}
+@media(max-width:540px) {
+  #mdRewardOverlay .md-upgrade-layout .md-card-picker { grid-template-columns: repeat(2,minmax(0,1fr)); max-height: 180px; }
+  #mdRewardOverlay .md-upgrade-layout .md-card-picker .md-ui-button { font-size: 11px; }
+  #mdRewardOverlay .md-reward-dialog .md-reward-footer .md-ui-button { overflow-wrap: anywhere; }
+}
+@media(max-height:600px) and (min-width:541px) {
+  #mdRewardOverlay .md-upgrade-layout .md-card-picker { max-height: 140px; }
+  #mdRewardOverlay .md-spell-panel .md-reward-art { height: 100px; }
+  #mdRewardOverlay .md-victory-summary > .md-reward-art { height: 110px; }
+}
+
+/* Shared illustrated spell surfaces. Leaves battle hand geometry and scrolling intact. */
+.md-card-artwork {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.md-card-artwork > img,
+.md-card-artwork > svg,
+img.md-card-artwork,
+svg.md-card-artwork {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  pointer-events: none;
+}
+#inspectBackdrop #inspectArtwork {
+  display: block;
+  width: 100%;
+  max-width: 380px;
+  height: clamp(120px, 24dvh, 210px);
+  min-height: 100px;
+  margin: 5px auto 18px;
+  overflow: hidden;
+  border: 1px solid #d6ad74;
+  border-radius: 11px;
+  background: radial-gradient(ellipse at center, #4b246a, #190b2d);
+  box-shadow: inset 0 0 0 2px #e6bc7d1c, 0 8px 24px #07031144;
+}
+#inspectBackdrop #inspectArtwork[hidden] { display: none; }
+#inspectBackdrop #inspectArtwork > img,
+#inspectBackdrop #inspectArtwork > svg { display: block; width: 100%; height: 100%; object-fit: cover; }
+#inspectBackdrop .inspect-panel { overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
+body:has(#moonDeckModal:not(.hidden)) #inspectBackdrop { z-index: 970010; }
+#moonDeckShell #moonAvailableCards,
+#moonDeckShell #moonSelectedCards { min-width: 0; min-height: 0; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
+#moonAvailableCards .md-editor-card {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 8px;
+  min-width: 0;
+  min-height: 0;
+  padding: 10px;
+  border: 1px solid #bc916a;
+  border-radius: 12px;
+  background: linear-gradient(155deg, #3c1c55, #201132);
+  color: #fff0db;
+  text-align: left;
+  touch-action: manipulation;
+}
+#moonAvailableCards .md-editor-card:hover:not(:disabled) { border-color: #f8d494; box-shadow: inset 0 0 0 1px #f5cc802c; }
+#moonAvailableCards .md-editor-card:focus-visible,
+#moonSelectedCards .md-selected-card:focus-visible { outline: 2px solid #ffe4a5; outline-offset: 2px; }
+#moonAvailableCards .md-editor-card:disabled { opacity: .54; filter: saturate(.6); }
+#moonAvailableCards .md-editor-card-art {
+  display: block;
+  flex: 0 0 auto;
+  width: 100%;
+  height: 104px;
+  overflow: hidden;
+  border: 1px solid #b98bc08c;
+  border-radius: 8px;
+  background: #1a0a2a;
+}
+#moonAvailableCards .md-editor-card-art > img,
+#moonAvailableCards .md-editor-card-art > svg { display: block; width: 100%; height: 100%; object-fit: cover; }
+#moonAvailableCards .md-editor-card-copy { display: block; min-width: 0; }
+#moonAvailableCards .md-editor-card-name { display: block; margin: 0; color: #ffe7ba; font: 700 15px/1.25 Georgia, serif; overflow-wrap: anywhere; }
+#moonAvailableCards .md-editor-card-meta { display: block; margin-top: 5px; color: #d8bce8; font: 11px/1.4 Inter, system-ui, sans-serif; }
+#moonAvailableCards .md-editor-card-effect { display: block; margin-top: 7px; color: #f6e6fc; font: 12px/1.5 Inter, system-ui, sans-serif; overflow-wrap: anywhere; white-space: normal; }
+#moonSelectedCards .md-selected-card {
+  display: grid;
+  grid-template-columns: 58px minmax(0, 1fr) 18px;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+  min-height: 69px;
+  padding: 7px 10px 7px 7px;
+  border: 1px solid #a67caa;
+  border-radius: 10px;
+  background: linear-gradient(110deg, #392047, #261435);
+  text-align: left;
+  touch-action: manipulation;
+}
+#moonSelectedCards .md-selected-card-art {
+  display: block;
+  width: 58px;
+  height: 51px;
+  overflow: hidden;
+  border: 1px solid #c9a07099;
+  border-radius: 6px;
+  background: #160921;
+}
+#moonSelectedCards .md-selected-card-art > img,
+#moonSelectedCards .md-selected-card-art > svg { display: block; width: 100%; height: 100%; object-fit: cover; }
+#moonSelectedCards .md-selected-card-copy { display: block; min-width: 0; color: #ffe9c6; font: 700 13px/1.35 Georgia, serif; overflow-wrap: anywhere; }
+#moonSelectedCards .md-selected-card-copy small { display: block; margin-top: 4px; color: #d8c2e5; font: 11px/1.4 Inter, system-ui, sans-serif; }
+#moonSelectedCards .md-selected-card-remove { color: #e9bfd5; font: 700 18px/1 Inter, system-ui, sans-serif; text-align: center; }
+@media (max-width: 650px) {
+  #moonAvailableCards .md-editor-card-art { height: 96px; }
+  #moonAvailableCards .md-editor-card-name { font-size: 14px; }
+  #moonSelectedCards .md-selected-card { grid-template-columns: 52px minmax(0, 1fr) 18px; gap: 8px; }
+  #moonSelectedCards .md-selected-card-art { width: 52px; height: 48px; }
+}
+@media (orientation: landscape) and (max-height: 550px) {
+  #inspectBackdrop #inspectArtwork { height: 110px; min-height: 90px; margin-bottom: 12px; }
+  #moonAvailableCards .md-editor-card-art { height: 80px; }
+}
+
+/* Use the full painted Blade frame; the live mana jewel covers its printed 0. */
+img.md-card-artwork[data-inset-art="true"] {object-fit:cover!important;transform:scale(1.18);transform-origin:right center;}
+.blade-card .chaos-art {
+  top:19.3%!important; left:14.4%!important; width:71.2%!important; height:24%!important;
+  border-radius:5px; box-shadow:0 0 9px #de42432b!important;
+}
+.blade-card .chaos-name {
+  top:11.6%!important; left:23%!important; width:62%!important; height:6%!important;
+  color:#fff0d1!important;
+}
+.blade-card .chaos-type {top:57%!important; color:#ffd3b2!important; margin:0!important;}
+.blade-card .chaos-desc {top:66%!important; left:17%!important; width:66%!important; height:22%!important; color:#fff2e5!important;}
+.blade-card .chaos-cost {
+  top:3%!important; left:6.3%!important; width:11.3%!important; height:11.5%!important;
+  background:radial-gradient(ellipse,#c81638,#7b061e 70%,#500418)!important;
+  border-radius:50%; clip-path:none!important; filter:none!important;
+  font-size:clamp(19px,2vw,29px)!important; text-shadow:0 2px 2px #21010b!important;
+}
+.blade-card .inspect-trigger {background:#4a091c!important; border-color:#eaa765!important; color:#ffebca!important;}
+.cards .card.chaos-card .chaos-name {background:transparent!important; border:0!important; padding:0!important;}
+.cards .card.chaos-card .chaos-art {display:block!important;}
+.cards .card.chaos-card[data-rarity="rare"] .chaos-art {box-shadow:0 0 0 1px #e1e9f7,0 0 12px #c8d6ee88!important;}
+.cards .card.chaos-card[data-rarity="legendary"] .chaos-art {box-shadow:0 0 0 1px #ffdb84,0 0 15px #ffd563aa!important;}
+#pileInfo > div {max-height:90dvh; overflow:auto; overscroll-behavior:contain; -webkit-overflow-scrolling:touch;}
+#pileItems {display:grid; gap:8px; margin:14px 0; text-align:left;}
+.md-pile-card {display:grid;grid-template-columns:62px minmax(0,1fr);gap:10px;align-items:center;padding:8px;border:1px solid #a67ba5;border-radius:8px;background:#321c45;color:#fff0dc;text-align:left;}
+.md-pile-card:focus-visible {outline:2px solid #ffe3a2;outline-offset:2px;}
+.md-pile-card-art {display:block;width:62px;height:62px;border-radius:6px;overflow:hidden;}
+.md-pile-card-copy {display:block;min-width:0;font:12px/1.45 Inter,system-ui,sans-serif;}
+.md-pile-card-copy strong {display:block;color:#ffe3b4;font:700 14px/1.3 Georgia,serif;}
+.md-pile-card-copy small {display:block;color:#d3b7e6;margin:3px 0;}
+.md-pile-card-copy > span {display:block;}
+@media(max-width:850px) {.blade-card .chaos-cost {font-size:25px!important;}}
+
+/* The route's intrinsic canvas preserves round emblems at every screen width. */
+#rogueMap #mapSvg {
+  width: 1000px;
+  height: 1940px;
+  left: 50%;
+  right: auto;
+  top: 0;
+  bottom: auto;
+  transform: translateX(-50%);
+}
+#rogueMap .map-node .map-hit-target { pointer-events: all; }
+#rogueMap .map-node .asset-icon,
+#rogueMap .map-node .asset-icon * { pointer-events: none; }
+#rogueMap .map-node .asset-halo { fill: none; opacity: 0; pointer-events: none; }
+#rogueMap .merchant-node.available .asset-halo { stroke-width: 2 !important; }
+#rogueMap .map-node:focus-visible .asset-halo { opacity: 1; stroke: #fff5d4; stroke-width: 2; }
+#rogueMap .boss-node:focus-visible .asset-icon { animation: none; filter: drop-shadow(0 0 3px #fff) drop-shadow(0 0 10px #ffe7a1); }
+

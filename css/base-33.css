@@ -1,0 +1,5 @@
+
+#enemyActor.weeping-encounter>img{object-fit:contain!important;object-position:center bottom!important;max-height:100%!important;filter:drop-shadow(0 0 17px rgba(225,174,249,.75)) drop-shadow(0 0 35px rgba(181,160,191,.45));animation:weepingFloat 4.8s ease-in-out infinite alternate;}
+#enemyActor.weeping-encounter:after{content:'✧  ✦  ✧';position:absolute;top:5%;right:8%;color:#e8c6ff;text-shadow:0 0 10px #fff,0 0 22px #b862ff;animation:weepingShimmer 3.4s ease-in-out infinite;pointer-events:none;z-index:8}
+@keyframes weepingFloat{from{transform:translateY(3px);opacity:.89}to{transform:translateY(-12px);opacity:1}}
+@keyframes weepingShimmer{0%,100%{opacity:.25;transform:translateY(0)}50%{opacity:1;transform:translateY(-9px)}}

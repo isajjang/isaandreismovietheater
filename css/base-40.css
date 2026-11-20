@@ -1,0 +1,44 @@
+
+/* A self-contained scrolling viewport for character selection on mobile.
+   Scroll the panel itself instead of relying on the document/overlay. */
+@media (pointer:coarse), (max-width:850px) {
+  html,body {overflow-x:hidden!important;}
+  #startOverlay:not(.hidden) {
+    position:fixed!important;
+    inset:0!important;
+    height:100vh!important;
+    height:100dvh!important;
+    width:100vw!important;
+    max-height:100dvh!important;
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:center!important;
+    justify-content:flex-start!important;
+    padding:8px 8px max(8px,env(safe-area-inset-bottom))!important;
+    overflow:hidden!important;
+    touch-action:auto!important;
+    z-index:100!important;
+  }
+  #startOverlay:not(.hidden) > .modal {
+    display:block!important;
+    flex:1 1 auto!important;
+    min-height:0!important;
+    height:auto!important;
+    max-height:100%!important;
+    width:min(680px,100%)!important;
+    margin:0 auto!important;
+    padding:18px 16px 115px!important;
+    overflow-x:hidden!important;
+    overflow-y:scroll!important;
+    -webkit-overflow-scrolling:touch!important;
+    overscroll-behavior-y:contain!important;
+    touch-action:pan-y!important;
+    scrollbar-width:thin;
+  }
+  #startOverlay .deck-picker,#startOverlay .deck-options,
+  #startOverlay .choices,#startOverlay .choice,#startOverlay .choice img {
+    touch-action:pan-y!important;
+  }
+  #startOverlay .choices {padding-bottom:35px!important;}
+  #startOverlay .choice {min-height:125px;}
+}
