@@ -5823,8 +5823,10 @@ const minibossAtRow=new Map(miniBossRows.map((r,i)=>[r,miniBossCycle[i%miniBossC
 // moving between branches NEVER repeats a named character in the same act.
 // Five distinct mini-bosses + seven unique named fights = twelve named fights.
 const candidateRows=shuffle(Array.from({length:depths},(_,i)=>i).filter(r=>!miniBossRows.includes(r)));
+// Never place an Inn or Merchant in entrance/initial reachable offers.
+const mdSupportEligibleRows=candidateRows.filter(r=>r>=2);
 const starRows=candidateRows.slice(0,Math.min(namedTargetCount,namedPool.length));
-const safeRows=candidateRows.slice(starRows.length,starRows.length+3);
+const safeRows=mdSupportEligibleRows.filter(r=>!starRows.includes(r)).slice(0,3);
 const chosenStars=shuffle(namedPool).slice(0,starRows.length);
 const starAtRow=new Map(starRows.map((r,i)=>[r,chosenStars[i]]));
 for(let c=0;c<lanes;c++){
@@ -5860,7 +5862,7 @@ route.forEach((rowType,r)=>{
  });
  previousXs=xs;
  const nodes=xs.map((x,c)=>{
-   const type=boss?'skull':laneTypes[c][r];
+   const type=boss?'skull':((r<=1&&['inn','merchant','shop'].includes(laneTypes[c][r]))?'fodder':laneTypes[c][r]);
    const enemyKind=boss?mdSelectedFinalBoss:laneEnemies[c][r];
    return {id:r+'-'+c,row:r,x,y:2864-r*130,type,
      enemyKind,
@@ -8403,7 +8405,7 @@ window.MDRunPersistence={
       { src: 'assets/music/Moon, Come Closer.mp3', title: 'Moon, Come Closer' }
     ],
     deck: { src: 'assets/music/player-two.mp3', title: 'Player Two' },
-    shop: { src: 'assets/music/mopsy-shop.mp3', title: "Mopsy's Shop" },
+    shop: { src: 'assets/music/Alchemy Bottle Chimes.mp3', title: "Alchemy Bottle Chimes" },
     chef: { src: 'assets/music/Elaborate, Ray.mp3', title: 'Elaborate, Ray' },
     ty: { src: 'assets/music/boss.mp3', title: 'Ty With the Paper Bag' },
     boss: { src: 'assets/music/Moonlight in the Shadows.mp3', title: 'Moonlight in the Shadows' }
@@ -13907,7 +13909,7 @@ function mdMalthornePhaseUpdate(){
  state.bossPhase++;
  state.enemyMax=[175,200,225][state.bossPhase-1];
  state.enemyHP=state.enemyMax;
- state.enemyBlock=0;state.bossAction=0;if(state.enemyType==='celestine')state.mdCelestineLockedIntent=null;
+ state.enemyBlock=0;state.bossAction=0;
  // Preserve Hunt and debuffs across transformations; never carry damage into the next bar.
  state.mdAttacksPlayed=state.mdAttacksPlayed||0;
  log('⚔ MALTHORNE TRANSFORMS · '+['THE HUNTER','THE RAVAGER','THE APEX DEVIL'][state.bossPhase-1]+' · '+state.enemyMax+' HP!');
@@ -14206,7 +14208,6 @@ body:has(#moonLaunch.hidden) #mdChapterOneTestButton{display:none!important}
 #mscPet{bottom:2%!important;height:47%!important;z-index:5!important;background:transparent!important}
 #mscChoices{bottom:38%!important;z-index:12!important}
 @media(max-width:720px){#mscDialogueWrap{bottom:.3%!important;height:43%!important}#mscSpeaker{font-size:clamp(10px,2.6vw,16px)!important;top:19%!important}#mscText{font-size:clamp(13px,3.2vw,18px)!important;top:28%!important;bottom:9%!important;left:7%!important;right:7%!important}#mscDialogueWrap.msc-narration #mscText{top:15%!important;bottom:10%!important}#mscLeft,#mscRight{height:66%!important;bottom:1%!important;max-width:57%!important}#mscPet{height:40%!important;bottom:1%!important}#mscChoices{bottom:44%!important}}
-
 /* Continuity-repair: single final positioning rule, based on decorative artwork geometry. */
 #mscDialogueWrap{left:2.4%!important;width:95.2%!important;bottom:0.15%!important;height:29.5%!important;z-index:10!important}
 #mscSpeaker{left:9.9%!important;top:13.1%!important;width:26.5%!important;transform:translateY(-50%)!important;display:flex!important;align-items:center!important;justify-content:center!important;height:12%!important;line-height:1!important;font-family:'Cinzel',Georgia,serif!important;font-size:clamp(12px,1.16vw,19px)!important;white-space:nowrap!important}
@@ -14223,7 +14224,7 @@ body:has(#moonLaunch.hidden) #mdChapterOneTestButton{display:none!important}
 <div id="mscDialogueWrap"><img id="mscDialogueFrame" alt=""/><div id="mscSpeaker"></div><div id="mscText"></div><button id="mscContinue" type="button" aria-label="Continue dialogue or reveal full sentence"></button></div>
 <div id="mscChoices" role="group" aria-label="Choose a response"></div>
 <div id="mscEnd"><h2 id="mscEndTitle"></h2><p id="mscEndText"></p><button id="mscEndAgain" type="button">RESTART CHAPTER ONE</button><button id="mscEndMenu" type="button">RETURN TO MAIN MENU</button></div>
-</div></section><script src="assets/scripts/chapter-one.js"></script><!-- Ty dedicated battle testing: launches the production encounter, without replacing boss logic. -->
+</div></section><script src="assets/scripts/md-story-bundle.js"></script><!-- Ty dedicated battle testing: launches the production encounter, without replacing boss logic. -->
 <style id="md-ty-dedicated-test-style">
 #mdTyQuickTest{position:fixed;left:12px;bottom:56px;z-index:1100;padding:9px 15px;background:linear-gradient(130deg,#51236f,#2b103e);color:#fff1c6;border:2px solid #e4b960;border-radius:10px;font:700 13px Georgia,serif;box-shadow:0 3px 14px #0a0515a8;cursor:pointer}
 #mdTyQuickTest:hover,#mdTyTestPanel button:hover{filter:brightness(1.2)}
@@ -14290,4 +14291,35 @@ body:has(#moonLaunch.hidden) #mdChapterOneTestButton{display:none!important}
 /* Show the whole head/hair silhouette instead of clipping the taller bombed-bandit pose. */
 #mscRight[alt^="BANDIT"],#mscLeft[alt^="BANDIT"]{height:74%!important;max-width:40%!important;object-fit:contain!important;object-position:bottom center!important;}
 </style>
+<style id="md-nov24-mobile-nav">
+#mdRotateNotice{display:none;position:fixed;inset:0;z-index:2147483600;background:repeating-linear-gradient(0deg,#180b34 0 8px,#1e0d42 8px 16px);color:#ffe6ab;align-items:center;justify-content:center;text-align:center;padding:24px;font-family:Georgia,serif;image-rendering:pixelated}
+#mdRotateNotice .md-rotate-panel{border:5px solid #dbad66;outline:5px solid #3b1b60;box-shadow:10px 10px 0 #080413;background:#271343;padding:26px;max-width:340px;}
+#mdRotateNotice .md-rotate-phone{font-size:64px;line-height:1.4;display:block;transform:rotate(90deg)}
+#mdRotateNotice strong{display:block;font-size:24px;margin:8px 0;letter-spacing:1px;text-shadow:3px 3px #11051a}
+#mdRotateNotice p{font-size:14px;line-height:1.5}
+@media(orientation:portrait) and (pointer:coarse){body:has(#mscOverlay.msc-active) #mdRotateNotice{display:flex}}
+#mdBackCharacter,#mdBackDungeon{position:absolute;z-index:40;top:12px;left:12px;background:linear-gradient(180deg,#53327b,#24103c);border:2px solid #d8b16a;border-radius:7px;box-shadow:0 3px 0 #10051d;color:#ffedbd;padding:9px 16px;font:700 14px Georgia,serif;cursor:pointer;touch-action:manipulation}
+#mdBackCharacter:focus-visible,#mdBackDungeon:focus-visible{outline:3px solid white;outline-offset:3px}
+#startOverlay{position:fixed}
+@media(max-width:850px){#mdBackCharacter,#mdBackDungeon{font-size:12px;min-height:42px;padding:8px 12px;top:8px;left:8px}#mscContinue{touch-action:manipulation}#mscChoices .mscChoice{min-height:44px;touch-action:manipulation}#mscStage{max-height:100dvh}#mscText{overflow-wrap:break-word}}
+@media(orientation:landscape) and (pointer:coarse) and (max-height:500px){#mscDialogueWrap{height:40%!important}#mscSpeaker{font-size:clamp(11px,2.4vh,16px)!important}#mscText{font-size:clamp(12px,3vh,18px)!important;line-height:1.3!important}#mscTitle{font-size:12px}#mscExit,#mscRestart,#mscSkip{padding:6px 9px}}
+</style>
+<div id="mdRotateNotice" role="status" aria-live="polite"><div class="md-rotate-panel"><span class="md-rotate-phone" aria-hidden="true">▣</span><strong>Please turn your phone</strong><p>Turn your phone sideways to continue Chapter One.</p></div></div>
+<script id="md-nov24-navigation">
+(()=>{'use strict';
+const make=(id,label,onClick)=>{if(document.getElementById(id))return;const b=document.createElement('button');b.id=id;b.type='button';b.textContent=label;b.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();onClick();});return b;};
+const char=document.getElementById('startOverlay');
+if(char){char.appendChild(make('mdBackCharacter','❮ BACK',()=>{
+if(window.MDAutosave?.returnToTitle){window.MDAutosave.returnToTitle();return;}
+char.classList.add('hidden');document.getElementById('moonLaunch')?.classList.remove('hidden');
+}));}
+const installMap=()=>{const map=document.getElementById('rogueMap');if(!map||document.getElementById('mdBackDungeon'))return;const frame=map.querySelector('.map-frame');if(!frame)return;
+frame.appendChild(make('mdBackDungeon','❮ BACK',()=>{
+// Leaving the visible map retains the run. Autosave handles checkpoint and restoration.
+if(window.MDAutosave?.returnToTitle){window.MDAutosave.returnToTitle();return;}
+window.alert('Return to title is unavailable until the save manager is ready.');
+}));};
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',installMap,{once:true});else installMap();
+})();
+</script>
 </body></html>
