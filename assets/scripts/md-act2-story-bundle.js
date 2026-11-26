@@ -340,11 +340,18 @@ function retryChapter(){const ch=chapterForScene(game.battle?.scene||game.scene)
 function ending(){game.finished=true;game.scene='END';game.line=0;game.active=true;showEnding();save();}
 function showEnding(){show();$('md2Speaker').textContent='ACT II COMPLETE';$('md2Title').textContent='THE ROAD OF BROKEN PROMISES';$('md2Dialogue').textContent='Alkenore is safe for now. Sarovar, the Land of the Dead, still lies far ahead. Your decisions determine the beginning of Act III: '+(get('act3_opening')||'with_rei')+'.';$('md2Portrait').hidden=true;$('md2Buttons').replaceChildren();addButton('Return to Main Menu',()=>exit(),true);}
 function exit(){md2SuspendChapterOne();hide();document.getElementById('moonLaunch')?.classList.remove('hidden');document.getElementById('moonTestMenu')?.classList.remove('hidden');document.getElementById('startOverlay')?.classList.remove('hidden');}
-function start(opts){if(!window.MDStoryProfile?.get?.()?.character)return window.MDStoryProfile?.select?.(()=>start(opts));md2SuspendChapterOne();md2TestMode=!!opts?.test;if(md2TestMode){game={act1:{ending:'E1',route:'A',flags:{},coins:24,supplies:1},scene:'II-01',line:0,flags:{},choices:{},completed:[],checkpoint:{},active:true,finished:false,battle:null,loot:[]};window.MDStoryProfile?.syncActI?.(game.act1);save();enter('II-01');return;}if(opts?.act1){game={act1:opts.act1,scene:'II-01',line:0,flags:{},choices:{},completed:[],checkpoint:{},active:true,finished:false,battle:null,loot:[]};save();}else{
+function start(opts){if(!window.MDStoryProfile?.get?.()?.character)return window.MDStoryProfile?.select?.(()=>start(opts));md2SuspendChapterOne();md2TestMode=!!opts?.test;if(md2TestMode){game={act1:{ending:'E1',route:'A',flags:{},coins:24,supplies:1},scene:'II-01',line:0,flags:{},choices:{},completed:[],checkpoint:{},active:true,finished:false,battle:null,loot:[]};window.MDStoryProfile?.syncActI?.(game.act1);save();enter('II-01');return;}if(opts?.act1){if(opts.act1.ending==='E6'){alert('This was the defeat ending. Replay Chapter One for a surviving ending.');return;}game={act1:opts.act1,scene:'II-01',line:0,flags:{},choices:{},completed:[],checkpoint:{},active:true,finished:false,battle:null,loot:[]};save();}else{
   let stored;try{stored=JSON.parse(localStorage.getItem(SAVE_KEY));}catch(_){stored=null;}
   if(stored)game={...game,...stored,active:true,battle:null,pendingChoice:null};else{
-    let prior;try{prior=JSON.parse(localStorage.getItem('MoonlightDuel.ActOne.latest'));}catch(_){prior=null;}
-    if(!prior||prior.ending==='E6'){alert('Finish a surviving Chapter One ending before starting Act II.');return;}
+    // The two builds share code but not browser storage. Prefer the current
+    // chapter's completion, then persistent and session-backed records.
+    let prior=window.MDActOneCompletion||window.MoonStoryChapter?.getCompletion?.()||null;
+    if(!prior){try{prior=JSON.parse(localStorage.getItem('MoonlightDuel.ActOne.latest')||'null');}catch(_){}}
+    if(!prior){try{prior=JSON.parse(sessionStorage.getItem('MoonlightDuel.ActOne.latest')||'null');}catch(_){}}
+    if(!prior||!prior.ending||prior.ending==='E6'){
+      alert('Act II cannot find a surviving Chapter One ending in this browser. Finish any non-defeat ending on this GitHub page, then select CONTINUE TO ACT II on its ending screen. Standalone progress is stored separately from GitHub progress. TEST ACT II works without saved progress.');
+      return;
+    }
     game={act1:prior,scene:'II-01',line:0,flags:{},choices:{},completed:[],checkpoint:{},active:true,finished:false,battle:null,loot:[]};
   }
  }
@@ -358,7 +365,7 @@ function install(){if($('mdAct2Overlay'))return;const root=document.createElemen
  window.MDStoryProfile?.installInventory?.(root);
  
  const old=$('moonLaunchStory')||$('moonLaunch');if(old?.parentElement){const btn=document.createElement('button');btn.id='md2Launch';btn.type='button';btn.className=old.className;btn.textContent='✦ ACT II · THE ROAD OF BROKEN PROMISES';btn.onclick=()=>start();old.parentElement.appendChild(btn);const t=document.createElement('button');t.id='md2TestLaunch';t.type='button';t.className=old.className;t.textContent='⚗ TEST ACT II';t.title='Launch Act II with isolated test progress';t.onclick=()=>start({test:true});old.parentElement.appendChild(t);}
- window.MoonAct2Story={start,exit,resume:start,getState:()=>clone(data()),getScene:()=>game.scene,retryChapter,sceneCount:52,decisionCount:11};
+ window.MoonAct2Story={start,exit,resume:start,getState:()=>clone(data()),getScene:()=>game.scene,retryChapter,sceneCount:52,decisionCount:11,hasAct1Completion:()=>{let s=window.MDActOneCompletion||window.MoonStoryChapter?.getCompletion?.();if(!s)try{s=JSON.parse(localStorage.getItem('MoonlightDuel.ActOne.latest')||'null')}catch(_){}return !!(s&&s.ending&&s.ending!=='E6')}};
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',install,{once:true});else install();
 })();

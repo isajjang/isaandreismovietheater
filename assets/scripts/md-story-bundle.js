@@ -79,7 +79,7 @@ function goto(key){if(!active)return;const node=sceneData[key];if(!node){console
  if(key==='A20'){warehouseEncounter={origin:'D06',after:'A23',flags:{warehouse_smugglers_defeated:true,operation_stopped:true},pending:false};}
  current=node;pages=node.lines||[];pageIndex=0;queueGoto=null;pendingFlags=null;pendingEnding=false;elements.choices.classList.remove('msc-open');setBackground(node.bg);
  if(node.kind==='scene'){queueGoto=node.to||null;pendingFlags=node.flags||{};}
- if(node.kind==='ending'){pendingEnding=true;pendingFlags=node.flags||{};}
+ if(node.kind==='ending'){pendingEnding=true;pendingFlags=node.flags||{};if(node.id!=='E6')mdRecordActOneCompletion(node);}
  if(!pages.length){showPage();}else showPage();updateHud();}
 function optionAllowed(opt){if(current?.id==='D20'&&opt.label.startsWith('Carefully examine'))return !!(flags.ward_understood||flags.shrine_examined);if(!sceneIsAllowed(opt.requires))return false;
  if(opt.label.includes('tested stable')&&!flags.stable_potion)return false;
@@ -144,14 +144,22 @@ function launchWarehouseEncounter(){
    if(opened===false){job.pending=false;elements.text.textContent='The warehouse battle could not start. Click to retry.';typingDone=true;}
  }catch(error){console.error('Act I warehouse combat launch failed',error);job.pending=false;elements.text.textContent='The warehouse battle could not start. Click to retry.';typingDone=true;}
 }
+function mdRecordActOneCompletion(node){
+ if(!node||node.kind!=='ending'||node.id==='E6')return null;
+ const snapshot={ending:node.id,route:selectedRoute||flags.route||'',flags:{...flags},coins,supplies,completed:true,completedAt:Date.now()};
+ window.MDActOneCompletion=snapshot;
+ try{localStorage.setItem('MoonlightDuel.ActOne.latest',JSON.stringify(snapshot));}catch(error){console.warn('Act I completion could not be saved to localStorage',error);}
+ try{sessionStorage.setItem('MoonlightDuel.ActOne.latest',JSON.stringify(snapshot));}catch(_){}
+ try{window.MDStoryProfile?.syncActI?.(snapshot);}catch(_){}
+ return snapshot;
+}
 function showEnding(){const node=current;if(!node||node.kind!=='ending')return;
  const labels={E1:'HEROES OF BELLHAVEN',E1B:'HEROES OF BELLHAVEN',E2:'THE HAMHAM SPECIAL',E3:'A NARROW ESCAPE',E4:'HIGHWAY ROBBERY',E4B:'HIGHWAY ROBBERY',E5:'THE MOON’S WARNING',E6:'FAMOUS LAST WORDS'};
  $('mscEndTitle').textContent=(node.id==='E6'?'GAME OVER · ':'CHAPTER ONE · ')+(labels[node.id]||node.title);
  $('mscEndText').textContent=node.id==='E6'?'An unstable potion was deliberately unsealed despite clear warnings. Your adventure starts again from Bellhaven.':'The road to Sarovar continues. Your choices have shaped what the party learned, saved, and lost.';
  elements.end.classList.add('msc-show');
  if(node.id!=='E6'){
-  const snapshot={ending:node.id,route:selectedRoute||flags.route||'',flags:{...flags},coins,supplies};
-  try{localStorage.setItem('MoonlightDuel.ActOne.latest',JSON.stringify(snapshot));}catch(_){ }
+  const snapshot=mdRecordActOneCompletion(node);
   let next=document.getElementById('mscActTwoContinue');
   if(!next){next=document.createElement('button');next.id='mscActTwoContinue';next.type='button';next.textContent='CONTINUE TO ACT II';next.className='primary';elements.end.appendChild(next);}
   next.hidden=false;
@@ -165,5 +173,5 @@ $('mscExit').addEventListener('click',e=>{e.stopPropagation();close();});$('mscR
 $('mscContinue').addEventListener('click',e=>{e.stopPropagation();advance();});elements.stage.addEventListener('click',e=>{if(!active||e.target.closest('button')||elements.choices.classList.contains('msc-open'))return;advance();});elements.overlay.addEventListener('click',e=>{if(e.target===elements.overlay&&active)advance();});
 document.addEventListener('keydown',e=>{if(!active)return;if(e.key==='Escape'){close();return;}if((e.key==='Enter'||e.key===' ')&&e.target.tagName!=='BUTTON'){e.preventDefault();advance();}});
 window.MoonActOnePortraits=portraits;
-window.MoonStoryChapter={start,exit:close,openFromPrologue:start,chapterChoices:21,endingCount:6,getState:()=>({...flags}),getScene:()=>current?.id,sceneCount:Object.keys(sceneData).length};
+window.MoonStoryChapter={start,exit:close,openFromPrologue:start,chapterChoices:21,endingCount:6,getState:()=>({...flags}),getScene:()=>current?.id,getCompletion:()=>window.MDActOneCompletion||null,sceneCount:Object.keys(sceneData).length};
 })();
