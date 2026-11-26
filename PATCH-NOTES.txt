@@ -1,0 +1,13 @@
+MOONLIGHT DUEL v2.7 SECOND PASS
+Replace game.html in your repository root. Merge the included assets/ files into the existing assets folder.
+Do NOT replace index.html; it hosts the separate main website.
+
+Patch:
+- 4 randomly selected loading screens, no immediate repeat, 1.9 seconds, after an encounter is completed.
+- Isa blush/confused white hat/hair matte cleanup.
+- Hollow Lantern Traveler frightened/sad portrait variants.
+- Rei emotion-change portrait shake and Hollow Lantern expanded investigation from v2.6 standalone.
+- Static Unknown Smuggler: no inherited floating animation.
+- Enemy-targeted debuffs with player buffs still use card drag-and-drop.
+- Story dialogue developer-note removal preserved.
+The existing cards, bosses, music and other repo assets are not replaced.

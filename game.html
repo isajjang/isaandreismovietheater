@@ -2778,7 +2778,158 @@ html.md-act-two .arena .floor-tiles,html.md-act-two .arena .sigil {display:none!
 #md-ty-bubble.md-ty-hand-reaction::after{content:"";position:absolute;right:14%;bottom:-26px;border-style:solid;border-width:25px 13px 0 4px;border-color:#100c1c transparent transparent transparent;transform:rotate(-21deg)}
 #md-ty-bubble.md-ty-hand-reaction::before{content:"";position:absolute;right:calc(14% + 2px);bottom:-18px;border-style:solid;border-width:21px 10px 0 3px;border-color:#fff7e6 transparent transparent transparent;transform:rotate(-21deg);z-index:1}
 @media(max-width:650px){#md-ty-bubble.md-ty-hand-reaction{left:64%;top:11%;max-width:67%;font-size:clamp(12px,3vw,17px)}}
-</style><style id="md-test-damage-inspector-style">#md-dmg-inspector{position:fixed;right:10px;top:75px;width:min(370px,calc(100vw - 20px));max-height:54vh;z-index:180;background:rgba(18,8,36,.94);border:1px solid #edbd75;border-radius:10px;color:#fff0e2;box-shadow:0 7px 30px #05020a99;font:12px/1.4 system-ui,sans-serif;pointer-events:auto}#md-dmg-inspector[hidden]{display:none!important}#md-dmg-inspector header{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px;background:#321449;border-bottom:1px solid #81558b}#md-dmg-inspector button{font:11px system-ui;background:#503065;border:1px solid #dfaf7c;color:#fff0df;border-radius:6px;padding:5px}#md-dmg-inspector .md-dmg-events{overflow-y:auto;max-height:calc(54vh - 46px);padding:8px}#md-dmg-inspector .md-dmg-event{margin-bottom:8px;background:#250f38;border:1px solid #75528b;border-radius:6px;padding:7px;overflow-wrap:anywhere}#md-dmg-inspector .md-dmg-event b{color:#ffd08d}#md-dmg-inspector .md-dmg-event small{display:block;margin-top:4px;color:#d4b9eb}#md-dmg-inspector .md-dmg-empty{color:#e8cceb;padding:12px}@media(max-width:600px){#md-dmg-inspector{top:55px;width:min(310px,85vw);max-height:40vh}#md-dmg-inspector .md-dmg-events{max-height:calc(40vh - 45px)}}</style></head><body><div class="game"><header class="hud"><div class="logo"><img class="hud-logo-art" alt="Moonlight Duel" src="2f22d1b4265cbbd5751c3ed5.png"></div><div class="hud-center"><img class="hud-portrait" id="hudPortrait" alt="Isa portrait" src="9faa605c076e5dac214565a5.png"><div class="hud-identity"><span class="hudstat" id="heroName">Isa</span><small id="heroTitle">The Mooncaller</small></div><span class="hudstat hud-health">❤️ <b id="topHP">82/82</b></span></div><div class="floor">The Sunken Basilica<small>ACT I · MOONLIT RUINS</small></div><div class="top-actions"><button class="iconbtn" id="helpBtn" title="How to play">?</button><button class="iconbtn" id="restartBtn" title="Restart">↻</button></div></header><section class="arena" id="arena"><div class="status-row" id="statusRow"></div><div id="mdChefTurnCounter" role="status" aria-live="polite" aria-label="Chef encounter turn count" hidden><div class="chef-counter-kicker">☾ CHEF'S ESCAPE ☽</div><div class="chef-counter-number" id="mdChefTurnNumber">TURN 1 / 5</div><div class="chef-counter-pips" id="mdChefTurnPips"><i class="used"></i><i></i><i></i><i></i><i></i></div><div class="chef-counter-foot" id="mdChefTurnFoot">4 turns until escape</div></div><div class="stars"></div><div class="art-moon-haze"></div><div class="petals" id="petals"></div><div class="intent" id="intent">☠ Preparing a spell</div><div class="combatlog" id="combatlog"></div><div class="actor player" id="playerActor"><img alt="Isa or Rei standing on the battlefield" class="isa-portrait" id="heroSprite"/></div><div class="actor enemy" id="enemyActor"><img alt="Shadow Archmage" class="archmage-art" src="204110a13624aec8588cd73a.webp"/></div><div class="unitbar p"><div class="name" id="playerLabel">ISA · THE MOONCALLER</div><div class="track"><div class="fill" id="playerFill"></div><span id="playerHP">82/82</span></div><div class="name shield-status" id="playerBlock">✧ 0 Block</div></div><div class="unitbar e"><div class="name" id="enemyLabel">SHADOW ARCHMAGE</div><div class="track"><div class="fill" id="enemyFill"></div><span id="enemyHP">114/114</span></div><div class="name shield-status" id="enemyBlock">✧ 0 Block</div></div><div class="toast" id="toast"></div><div class="battle-ornament ornament-left">✦ ☽ ✦</div><div class="battle-ornament ornament-right">✦ ☾ ✦</div></section><section class="lower"><div class="energyzone"><div class="energy"><span id="energy">3/3</span><small>ENERGY</small></div><button aria-label="Draw pile" class="pile pile-deck" title="Draw pile" type="button"><div class="pile-art"></div><span><b id="deckCount">0</b></span></button></div><div class="hand-area"><div class="cards" id="hand"></div></div><div class="turnzone"><button class="turnbtn" id="endTurn">☾ End Turn</button><div class="hint">Tap a card to play · ⓘ to inspect<br/>End turn discards your hand · Draw 5 next turn</div></div><button aria-label="Discard pile" class="pile pile-discard" title="Discard pile" type="button"><div class="pile-art"></div><span><b id="discardCount">0</b></span></button></section></div>
+</style><style id="md-test-damage-inspector-style">#md-dmg-inspector{position:fixed;right:10px;top:75px;width:min(370px,calc(100vw - 20px));max-height:54vh;z-index:180;background:rgba(18,8,36,.94);border:1px solid #edbd75;border-radius:10px;color:#fff0e2;box-shadow:0 7px 30px #05020a99;font:12px/1.4 system-ui,sans-serif;pointer-events:auto}#md-dmg-inspector[hidden]{display:none!important}#md-dmg-inspector header{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px;background:#321449;border-bottom:1px solid #81558b}#md-dmg-inspector button{font:11px system-ui;background:#503065;border:1px solid #dfaf7c;color:#fff0df;border-radius:6px;padding:5px}#md-dmg-inspector .md-dmg-events{overflow-y:auto;max-height:calc(54vh - 46px);padding:8px}#md-dmg-inspector .md-dmg-event{margin-bottom:8px;background:#250f38;border:1px solid #75528b;border-radius:6px;padding:7px;overflow-wrap:anywhere}#md-dmg-inspector .md-dmg-event b{color:#ffd08d}#md-dmg-inspector .md-dmg-event small{display:block;margin-top:4px;color:#d4b9eb}#md-dmg-inspector .md-dmg-empty{color:#e8cceb;padding:12px}@media(max-width:600px){#md-dmg-inspector{top:55px;width:min(310px,85vw);max-height:40vh}#md-dmg-inspector .md-dmg-events{max-height:calc(40vh - 45px)}}</style><style id="md-act2-patch-styles">
+.md-fodder-facing-left #enemyActor img.archmage-art,.md-fodder-facing-left #enemyActor .wolf-pack-art img,.md-fodder-facing-left #enemyActor .wolf-pack-art{transform:scaleX(-1)!important}
+.md-act2-combat #corruption,.md-act2-combat .corruption-counter,.md-act2-combat [data-corruption-widget]{display:none!important}
+#md-a2-counter{position:absolute;z-index:35;top:7%;left:10%;max-width:340px;padding:8px 11px;border:2px solid #eac481;border-radius:9px;color:#fff1d1;background:#230a38ed;font:600 12px/1.5 system-ui;pointer-events:auto}
+#md-a2-counter:hover{max-width:460px}
+.md-a2-fallen{display:block;max-width:min(420px,95%);max-height:36vh;object-fit:contain;margin:10px auto}
+#mdAct2Overlay[hidden]{display:none!important}
+#mdAct2Overlay{position:fixed;inset:0;z-index:2147483640;background:#0c0616e8;align-items:center;justify-content:center;padding:clamp(4px,1.5vw,16px);box-sizing:border-box}
+#mdAct2Overlay.md2-visible{display:flex}
+#mdAct2Overlay .md2Panel{position:relative;width:min(1280px,100%);height:min(94dvh,760px);overflow:hidden;border:3px solid #f2c477;border-radius:13px;background:#180d29;box-shadow:0 15px 60px #000b}
+#md2Background{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;image-rendering:auto}
+#mdAct2Overlay .md2Shade{position:absolute;inset:0;background:linear-gradient(to bottom,#170b2f88 0%,transparent 35%,#11071ac9 75%,#11071afb 100%)}
+#mdAct2Overlay .md2Top{position:relative;display:flex;align-items:center;gap:12px;padding:12px 14px;background:#18082bc7;color:#ffdc96;font:700 clamp(14px,2vw,22px)/1.3 Georgia,serif;z-index:2}
+#md2Title{flex:1}#md2Progress{font:500 12px/1.3 system-ui;color:#e8d6f2}#md2Exit{border:1px solid #d7ae76;background:#331449;color:white;border-radius:6px;padding:6px 12px;cursor:pointer}
+#mdAct2Overlay .md2Bottom{position:absolute;bottom:0;left:0;right:0;display:flex;align-items:flex-end;z-index:3;min-height:42%;max-height:76%}
+#md2Portrait{width:clamp(100px,24%,255px);height:min(55dvh,520px);object-fit:contain;object-position:bottom;flex:none;mix-blend-mode:multiply;filter:drop-shadow(0 0 7px #160824)}
+#md2Portrait[hidden]{display:none}
+#mdAct2Overlay .md2Text{flex:1;min-width:0;max-height:65dvh;overflow:auto;background:#1e0d36ed;border:2px solid #dfab70;border-radius:13px;padding:clamp(12px,2vw,23px);color:#fff3e9;box-shadow:0 2px 30px #0008;margin:0 8px 8px 0}
+#md2Speaker{font:700 clamp(16px,2vw,22px) Georgia,serif;color:#f6c57c;margin-bottom:12px;text-transform:uppercase}
+#md2Dialogue{font:500 clamp(15px,1.6vw,22px)/1.5 Georgia,serif;white-space:pre-wrap;min-height:75px}
+#mdAct2Overlay .md2Actions{display:flex;justify-content:flex-end;gap:10px;align-items:center;flex-wrap:wrap;margin-top:16px}
+#md2Buttons{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end}
+#mdAct2Overlay button.md2Button,#md2Back{border:1px solid #dcae72;background:#421865;color:#fff4df;cursor:pointer;border-radius:8px;padding:10px 16px;font:700 13px Georgia,serif;min-height:41px}
+#mdAct2Overlay button.md2Primary{background:linear-gradient(#643184,#351349)}
+#mdAct2Overlay button:disabled{opacity:.5;cursor:not-allowed}
+@media(max-width:670px){#mdAct2Overlay .md2Panel{height:96dvh}#md2Portrait{width:27%;height:47dvh}#mdAct2Overlay .md2Text{margin:0 3px 4px 0;padding:10px}#md2Dialogue{font-size:15px}#md2Buttons{flex-direction:column;width:100%}#md2Buttons button{width:100%}#md2Progress{display:none}}
+</style><style id="md2-exclusive-screen-ownership">
+body.md-story-act2 #mscOverlay,
+body.md-act2-combat #mscOverlay,
+body.md-story-act2 #mdStoryIntro,
+body.md-act2-combat #mdStoryIntro {display:none!important;pointer-events:none!important}
+body.md-act2-combat #moonLaunch,
+body.md-act2-combat #moonTestMenu,
+body.md-act2-combat #startOverlay {display:none!important;pointer-events:none!important}
+</style><style id="md-act2-v16-fullscreen-direct-combat">
+/* v1.6: Act II is an uninterrupted full-viewport storyboard, never a popup. */
+#mdAct2Overlay{position:fixed!important;inset:0!important;padding:0!important;display:none;z-index:2147483640!important;background:#10071e!important;align-items:stretch!important;justify-content:stretch!important;overflow:hidden!important}
+#mdAct2Overlay.md2-visible:not([hidden]){display:flex!important}
+#mdAct2Overlay .md2Panel{width:100vw!important;max-width:none!important;height:100dvh!important;max-height:none!important;min-height:100dvh!important;border:0!important;border-radius:0!important;box-shadow:none!important;overflow:hidden!important}
+#mdAct2Overlay .md2Top{position:absolute!important;left:0;right:0;top:0;z-index:5;min-height:44px;padding:8px clamp(12px,2vw,35px)!important;background:linear-gradient(#190925da,#19092566)!important}
+#mdAct2Overlay #md2Background{image-rendering:auto;object-fit:cover!important}
+#mdAct2Overlay .md2Bottom{left:0!important;right:0!important;bottom:0!important;padding:0 clamp(8px,2vw,35px) clamp(8px,2vh,22px)!important;box-sizing:border-box;max-height:74vh;min-height:0;gap:clamp(6px,1.2vw,20px)}
+#mdAct2Overlay #md2Portrait{width:clamp(145px,21vw,350px);height:min(59vh,620px);max-width:28%;object-position:center bottom;mix-blend-mode:normal;filter:drop-shadow(0 5px 15px #080312dd)}
+#mdAct2Overlay .md2Text{margin:0!important;max-height:66vh;min-height:150px;border-radius:13px;padding:clamp(12px,1.9vw,30px)!important;background:linear-gradient(125deg,#1b0b34f5,#2d1145f5)!important}
+#mdAct2Overlay #md2Dialogue{min-height:58px}
+@media(max-width:670px){#mdAct2Overlay .md2Panel{height:100dvh!important}#mdAct2Overlay .md2Bottom{padding:0 5px 7px!important;align-items:flex-end}#mdAct2Overlay #md2Portrait{width:25%;max-width:25%;height:44dvh}#mdAct2Overlay .md2Text{min-height:150px;max-height:74dvh;padding:10px!important}}
+/* Story battles are the original drag-and-drop arena, NOT a Tower map. */
+body.md-act2-combat #rogueMap,body.md-act2-combat #rogueMap.visible{display:none!important;visibility:hidden!important;pointer-events:none!important}
+body.md-act2-combat #mdAct2Overlay{display:none!important;pointer-events:none!important}
+body.md-act2-combat #mscOverlay,body.md-act2-combat #moonLaunch,body.md-act2-combat #moonTestMenu,body.md-act2-combat #mdStoryIntro{display:none!important}
+</style>
+<style id="md-act2-v17-matching-chapter-one">
+/* Production chapter-one visual novel layout for ACT II. Does not affect battles. */
+#mdAct2Overlay .md2Panel{isolation:isolate;background:#130b23!important}
+#mdAct2Overlay #md2Background{z-index:0}
+#mdAct2Overlay .md2Shade{z-index:1;pointer-events:none;background:linear-gradient(90deg,#0d061b20,transparent 37%,transparent 63%,#0d061b20)!important}
+#mdAct2Overlay .md2Top{z-index:12!important;background:transparent!important;pointer-events:none}
+#mdAct2Overlay #md2Title{font:700 clamp(12px,1.3vw,22px) Georgia,serif!important;background:#190827d9;border:1px solid #d6a763;padding:5px 13px;border-radius:7px;flex:0 1 auto}
+#mdAct2Overlay #md2Progress{margin-left:auto;background:#18082bc7;padding:7px;border-radius:5px}
+#mdAct2Overlay #md2Exit{pointer-events:auto}
+#mdAct2Overlay .md2Person{position:absolute;z-index:3;bottom:10%;height:78%;max-width:44%;width:auto;object-fit:contain;object-position:center bottom;filter:drop-shadow(0 10px 14px #140720b9);pointer-events:none}
+#mdAct2Overlay .md2Person[hidden]{display:none!important}
+#mdAct2Overlay #md2Left{left:0}
+#mdAct2Overlay #md2Right{right:0}
+#mdAct2Overlay #md2Pet{left:50%;transform:translateX(-50%);height:36%;bottom:21%;z-index:4}
+#mdAct2Overlay .md2Bottom{position:absolute!important;z-index:10!important;inset:auto 0 0 0!important;display:block!important;padding:0!important;min-height:0!important;max-height:none!important;height:37%!important;pointer-events:none}
+#mdAct2Overlay #md2Portrait{display:none!important}
+#mdAct2Overlay .md2Text{position:absolute!important;left:2.4%!important;bottom:.35%!important;width:95.2%!important;height:100%!important;max-height:none!important;min-height:0!important;box-sizing:border-box!important;margin:0!important;border:0!important;border-radius:0!important;padding:0!important;overflow:visible!important;background:transparent!important;box-shadow:none!important;pointer-events:none}
+#mdAct2Overlay #md2DialogueFrame{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;pointer-events:none}
+#mdAct2Overlay #md2Speaker{position:absolute;left:10.4%;top:11%;width:26%;margin:0;padding:0;text-align:center;color:#ffe6a0;font:700 clamp(12px,1.45vw,23px) Georgia,serif;background:transparent;z-index:2}
+#mdAct2Overlay #md2Dialogue{position:absolute;top:30%;left:8%;right:8%;bottom:13%;min-height:0;display:flex;align-items:center;justify-content:center;text-align:center;color:#fbe5ad;text-shadow:1px 2px 2px #0b0510;font:500 clamp(15px,1.48vw,23px)/1.2 Georgia,serif;overflow:auto;white-space:pre-wrap;z-index:2}
+#mdAct2Overlay .md2Actions{position:absolute;bottom:9%;right:6.5%;margin:0!important;z-index:5;pointer-events:auto}
+#mdAct2Overlay #md2Buttons{gap:6px}
+#mdAct2Overlay button.md2Button,#mdAct2Overlay #md2Back{min-height:32px;padding:5px 12px;font-size:clamp(11px,.92vw,14px);background:linear-gradient(#59216e,#321046);border:1px solid #dba76d}
+#mdAct2Overlay .md2Panel.md2-has-choices .md2Actions{bottom:105%;right:3%;width:min(69%,950px);max-height:55vh;display:flex;align-items:flex-end;flex-direction:column;gap:5px;background:#17071ea8;border-radius:8px;padding:7px;overflow:auto}
+#mdAct2Overlay .md2Panel.md2-has-choices #md2Buttons{width:100%;display:flex;flex-direction:column;align-items:stretch}
+#mdAct2Overlay .md2Panel.md2-has-choices #md2Buttons button{font:600 clamp(12px,1.15vw,18px)/1.25 Georgia,serif;text-align:left;padding:9px 14px}
+#mdAct2Overlay .md2Panel.md2-has-choices #md2Back{align-self:end}
+@media(max-width:720px){#mdAct2Overlay .md2Person{height:62%;bottom:16%;max-width:55%}#mdAct2Overlay #md2Pet{height:27%;bottom:30%}#mdAct2Overlay .md2Bottom{height:39%!important}#mdAct2Overlay #md2Speaker{font-size:12px}#mdAct2Overlay #md2Dialogue{font-size:clamp(12px,3.4vw,17px);left:7%;right:7%;top:30%;bottom:19%}#mdAct2Overlay .md2Actions{bottom:7%;right:6%}#mdAct2Overlay .md2Panel.md2-has-choices .md2Actions{right:3%;width:91%;bottom:106%;max-height:46vh}}
+</style>
+
+<style id="md-act2-v18-portrait-motion">
+/* Match Chapter One character slide entrances, reaction jolts, and clean sprite silhouettes. */
+#mdAct2Overlay .md2Person{opacity:0;transition:transform .35s cubic-bezier(.18,.86,.38,1),opacity .23s;will-change:transform,opacity;}
+#mdAct2Overlay #md2Left{transform:translateX(-105%);}
+#mdAct2Overlay #md2Right{transform:translateX(105%);}
+#mdAct2Overlay #md2Left.md2-on,#mdAct2Overlay #md2Right.md2-on{transform:translateX(0);opacity:1;}
+#mdAct2Overlay #md2Pet{transform:translate(-50%,100%);}
+#mdAct2Overlay #md2Pet.md2-on{transform:translate(-50%,0);opacity:1;}
+#mdAct2Overlay .md2Person.md2-jolt{animation:md2PortraitJolt .26s linear;}
+@keyframes md2PortraitJolt{0%,100%{margin-left:0}30%{margin-left:-5px}60%{margin-left:5px}}
+@media(prefers-reduced-motion:reduce){#mdAct2Overlay .md2Person{transition:none!important;}#mdAct2Overlay .md2Person.md2-jolt{animation:none!important;}}
+</style>
+
+<style id="md-v20-act2-frame-fix">
+#mdAct2Overlay .md2Bottom{z-index:15!important;visibility:visible!important}
+#mdAct2Overlay .md2Text{display:block!important;visibility:visible!important;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;pointer-events:auto!important}
+#mdAct2Overlay #md2DialogueFrame{display:block!important;visibility:visible!important;opacity:1!important;position:absolute!important;inset:0!important;width:100%!important;height:100%!important;z-index:1!important;pointer-events:none!important}
+#mdAct2Overlay #md2Speaker{z-index:3!important}
+#mdAct2Overlay #md2Dialogue{z-index:3!important}
+#mdAct2Overlay .md2Actions{z-index:5!important}
+</style>
+<style id="md-act2-loot-v23">
+/* Act II loot is a composed reward screen, not an unstyled list of buttons. */
+#mdRewardOverlay[data-stage="loot"] .md-a2-loot-dialog{width:min(1120px,96vw);height:min(770px,94dvh);max-height:94dvh;display:flex;flex-direction:column;background:radial-gradient(ellipse at 50% 4%,#42225a,#190d2b 64%,#11071e);border:2px solid #e5b969;box-shadow:0 18px 75px #000a,0 0 38px #a05cc04a;border-radius:20px;overflow:hidden}
+#mdRewardOverlay[data-stage="loot"] .md-a2-loot-dialog .md-reward-header{flex:0 0 auto;padding:12px 18px 8px;min-height:0;border-bottom:1px solid #ad7a5770}
+#mdRewardOverlay[data-stage="loot"] .md-a2-loot-dialog .md-reward-title{font:700 clamp(24px,3vw,37px)/1.15 Georgia,serif;letter-spacing:.04em;color:#ffe6a9;margin:0}
+#mdRewardOverlay[data-stage="loot"] .md-a2-loot-dialog .md-reward-subtitle{font:14px Georgia,serif;margin:3px 0;color:#d9bbdf}
+#mdRewardOverlay[data-stage="loot"] .md-a2-loot-dialog .md-reward-body{flex:1 1 auto;min-height:0;overflow-y:auto;padding:12px 20px 16px}
+#mdRewardOverlay[data-stage="loot"] .md-a2-loot-dialog .md-reward-footer{flex:0 0 auto;min-height:0;padding:6px 17px 10px;background:transparent}
+.md-a2-loot-layout{display:grid;grid-template-columns:minmax(190px,29%) minmax(0,1fr);gap:22px;align-items:start;max-width:1050px;margin:auto;color:#f7e8d8;font-family:Georgia,serif}
+.md-a2-loot-summary{display:flex;flex-direction:column;align-items:center;text-align:center;gap:7px;padding:12px 12px 17px;border:1px solid #a575bd6b;border-radius:15px;background:linear-gradient(160deg,#361b52aa,#170b2caa)}
+.md-a2-loot-portrait{display:flex;align-items:center;justify-content:center;height:175px;width:100%;border-radius:11px;background:radial-gradient(ellipse at 50% 60%,#714d9b50,transparent 68%);overflow:hidden}
+.md-a2-loot-portrait img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 7px 12px #0007)}
+.md-a2-loot-label{font:700 10px/1.5 system-ui,sans-serif;letter-spacing:.19em;color:#dfbb84}
+.md-a2-loot-summary>strong{font:700 clamp(14px,1.45vw,19px)/1.15 Georgia,serif;color:#ffe5b8}
+.md-a2-loot-prizes{width:100%;display:grid;gap:9px;margin-top:10px;text-align:left}
+.md-a2-loot-prizes>div{display:flex;align-items:center;gap:10px;border-radius:9px;padding:10px;background:#11091fc0;border:1px solid #b88a6570}
+.md-a2-loot-prizes>div>span{font:26px Georgia,serif;color:#ffdb80;min-width:28px;text-align:center}
+.md-a2-loot-prizes b{font:700 14px Georgia,serif;color:#ffdf9c;display:block}.md-a2-loot-prizes small{font:11px/1.35 system-ui,sans-serif;color:#d6c0de;display:block;margin-top:3px}
+.md-a2-loot-offers{text-align:center;min-width:0}
+.md-a2-loot-head h3{font:700 23px Georgia,serif;color:#ffe7b1;margin:2px 0 6px}.md-a2-loot-head p{font:13px/1.35 Georgia,serif;color:#dec7ec;max-width:570px;margin:0 auto 15px}
+#mdRewardOverlay .md-a2-loot-dialog .md-story-loot-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:0;align-items:stretch}
+#mdRewardOverlay .md-a2-loot-dialog button.md-a2-spell-choice{position:relative;box-sizing:border-box;max-width:none;width:100%;height:auto;min-height:270px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:0;padding:9px 10px 11px;border:2px solid #c79766;border-radius:12px;background:linear-gradient(150deg,#4a2658,#29163f 55%,#1a0d30);color:#ffebc7;box-shadow:inset 0 0 0 2px #70436a,0 6px 17px #0008;white-space:normal;cursor:pointer;transition:transform .15s ease,box-shadow .15s ease}
+#mdRewardOverlay .md-a2-loot-dialog button.md-a2-spell-choice:hover,#mdRewardOverlay .md-a2-loot-dialog button.md-a2-spell-choice:focus-visible{transform:translateY(-5px);border-color:#ffdfa2;box-shadow:0 0 20px #ca81e47e,inset 0 0 0 2px #af76a8;outline:none}
+.md-a2-card-cost{position:absolute;top:7px;left:8px;width:31px;height:31px;display:grid;place-items:center;clip-path:polygon(50% 0,95% 25%,95% 75%,50% 100%,5% 75%,5% 25%);background:linear-gradient(#eaa9fa,#7e31ce);border:0;font:700 17px Georgia,serif;text-shadow:0 1px #380e63}
+.md-a2-card-rarity{font:700 9px system-ui,sans-serif;letter-spacing:.12em;color:#cda2e3;margin:4px 0 9px}
+.md-a2-card-art{width:100%;height:85px;display:grid;place-items:center;overflow:hidden;border:1px solid #9a71ba;border-radius:6px;background:radial-gradient(circle at 50% 40%,#a65ab9,#3f1c63 60%,#200c39);color:#fcd5fd;font:56px Georgia,serif;margin-bottom:10px}
+.md-a2-card-art img{height:100%;width:100%;object-fit:cover}
+.md-a2-spell-choice>strong{font:700 clamp(12px,1.08vw,16px)/1.15 Georgia,serif;color:#ffe3a6;min-height:37px;display:grid;place-items:center;text-align:center}
+.md-a2-card-type{font:700 10px system-ui,sans-serif;letter-spacing:.05em;color:#d4a6eb;margin:4px 0 9px}
+.md-a2-card-effect{font:12px/1.4 Georgia,serif;color:#f6dfed;flex:1}
+.md-a2-card-take{display:block;width:100%;margin-top:11px;border-radius:5px;background:linear-gradient(#86549d,#522766);padding:8px 4px;font:700 11px Georgia,serif;color:#fff4d2;letter-spacing:.04em;border:1px solid #bb916c}
+@media(max-width:720px){.md-a2-loot-layout{grid-template-columns:1fr;gap:9px}.md-a2-loot-summary{display:grid;grid-template-columns:90px 1fr;gap:5px;text-align:left;padding:8px}.md-a2-loot-portrait{grid-row:span 3;height:100px}.md-a2-loot-prizes{grid-column:2;margin-top:0}.md-a2-loot-prizes>div{padding:5px}.md-a2-loot-head h3{font-size:19px}#mdRewardOverlay .md-a2-loot-dialog .md-story-loot-cards{gap:5px}#mdRewardOverlay .md-a2-loot-dialog button.md-a2-spell-choice{min-height:240px;padding:6px 4px}.md-a2-card-art{height:53px}.md-a2-card-cost{width:23px;height:23px;font-size:13px}.md-a2-card-effect{font-size:10px}.md-a2-card-take{font-size:9px}}
+</style>
+<style id="md-v25-prologue-controls">
+#mdStorySkipPrologue{left:3%!important;right:auto!important;top:2%!important;z-index:35!important;pointer-events:auto!important;touch-action:manipulation}
+#mdStoryExit{right:3%!important;left:auto!important;z-index:34!important;pointer-events:auto!important}
+@media(max-width:720px){#mdStorySkipPrologue{left:2%!important;right:auto!important}#mdStoryExit{right:2%!important}}
+</style><style id="md-v25-frame-guarantee">
+#mdAct2Overlay .md2Bottom{position:absolute!important;bottom:0!important;left:0!important;right:0!important;height:37%!important;display:block!important;visibility:visible!important;z-index:22!important;pointer-events:none!important}
+#mdAct2Overlay .md2Text{position:absolute!important;left:2.4%!important;bottom:.35%!important;width:95.2%!important;height:100%!important;display:block!important;visibility:visible!important;overflow:visible!important;opacity:1!important;z-index:2!important;background:transparent!important;border:0!important;box-shadow:none!important;pointer-events:auto!important}
+#mdAct2Overlay #md2DialogueFrame{position:absolute!important;display:block!important;visibility:visible!important;opacity:1!important;inset:0!important;width:100%!important;height:100%!important;object-fit:fill!important;z-index:1!important;pointer-events:none!important}
+#mdAct2Overlay #md2Speaker,#mdAct2Overlay #md2Dialogue{position:absolute;z-index:3!important;visibility:visible!important;opacity:1!important}
+#mdAct2Overlay .md2Actions{z-index:5!important}
+</style><style id="md-v27-smuggler-static">
+body.md-static-story-rogue #enemyActor>img,body.md-static-story-rogue #enemyActor .archmage-art{
+ animation:none!important;transform:none!important;transition:filter .18s ease!important;
+ object-fit:contain!important;object-position:center bottom!important;
+}
+</style>
+</head><body><div class="game"><header class="hud"><div class="logo"><img class="hud-logo-art" alt="Moonlight Duel" src="2f22d1b4265cbbd5751c3ed5.png"></div><div class="hud-center"><img class="hud-portrait" id="hudPortrait" alt="Isa portrait" src="9faa605c076e5dac214565a5.png"><div class="hud-identity"><span class="hudstat" id="heroName">Isa</span><small id="heroTitle">The Mooncaller</small></div><span class="hudstat hud-health">❤️ <b id="topHP">82/82</b></span></div><div class="floor">The Sunken Basilica<small>ACT I · MOONLIT RUINS</small></div><div class="top-actions"><button class="iconbtn" id="helpBtn" title="How to play">?</button><button class="iconbtn" id="restartBtn" title="Restart">↻</button></div></header><section class="arena" id="arena"><div class="status-row" id="statusRow"></div><div id="mdChefTurnCounter" role="status" aria-live="polite" aria-label="Chef encounter turn count" hidden><div class="chef-counter-kicker">☾ CHEF'S ESCAPE ☽</div><div class="chef-counter-number" id="mdChefTurnNumber">TURN 1 / 5</div><div class="chef-counter-pips" id="mdChefTurnPips"><i class="used"></i><i></i><i></i><i></i><i></i></div><div class="chef-counter-foot" id="mdChefTurnFoot">4 turns until escape</div></div><div class="stars"></div><div class="art-moon-haze"></div><div class="petals" id="petals"></div><div class="intent" id="intent">☠ Preparing a spell</div><div class="combatlog" id="combatlog"></div><div class="actor player" id="playerActor"><img alt="Isa or Rei standing on the battlefield" class="isa-portrait" id="heroSprite"/></div><div class="actor enemy" id="enemyActor"><img alt="Shadow Archmage" class="archmage-art" src="204110a13624aec8588cd73a.webp"/></div><div class="unitbar p"><div class="name" id="playerLabel">ISA · THE MOONCALLER</div><div class="track"><div class="fill" id="playerFill"></div><span id="playerHP">82/82</span></div><div class="name shield-status" id="playerBlock">✧ 0 Block</div></div><div class="unitbar e"><div class="name" id="enemyLabel">SHADOW ARCHMAGE</div><div class="track"><div class="fill" id="enemyFill"></div><span id="enemyHP">114/114</span></div><div class="name shield-status" id="enemyBlock">✧ 0 Block</div></div><div class="toast" id="toast"></div><div class="battle-ornament ornament-left">✦ ☽ ✦</div><div class="battle-ornament ornament-right">✦ ☾ ✦</div></section><section class="lower"><div class="energyzone"><div class="energy"><span id="energy">3/3</span><small>ENERGY</small></div><button aria-label="Draw pile" class="pile pile-deck" title="Draw pile" type="button"><div class="pile-art"></div><span><b id="deckCount">0</b></span></button></div><div class="hand-area"><div class="cards" id="hand"></div></div><div class="turnzone"><button class="turnbtn" id="endTurn">☾ End Turn</button><div class="hint">Tap a card to play · ⓘ to inspect<br/>End turn discards your hand · Draw 5 next turn</div></div><button aria-label="Discard pile" class="pile pile-discard" title="Discard pile" type="button"><div class="pile-art"></div><span><b id="discardCount">0</b></span></button></section></div>
 <div class="overlay hidden" id="startOverlay"><div class="modal md-final-selection" role="dialog" aria-label="Select your sorcerer and grimoire">
   <div class="md-final-art" id="mdFinalSelectionArt"><img class="md-final-background" alt="Moonlight Duel: choose your sorcerer and grimoire" src="assets/media/e93124f2e433ddcf.webp" />
   <button class="choice md-art-hit md-hero-hit" data-hero="isa" style="--x:6%;--y:16%;--w:42%;--h:29%" aria-label="ISA — Crystal Gauge, Healing"></button>
@@ -4665,7 +4816,7 @@ function render(){if(!state)return;mdSuuSplitCheck();mdUpdateChefTurnCounter();l
    +((state.mdMirrorWeak||0)>0?' · ✦ '+state.mdMirrorWeak+' Weak':'');
   mdReflection.querySelector('.md-mirror-fill').style.width=(100*state.mdMirrorHP/55)+'%';
  }else if(mdReflection)mdReflection.remove();
- mdTyStatusRender();
+ mdTyStatusRender();if(mdA2Identity())requestAnimationFrame(mdA2Counter);else $('md-a2-counter')?.remove();
  let newBossStatus=document.getElementById('md-new-boss-status');
  if(['celestine','nyxara','mirielle','malthorne'].includes(state.enemyType)){
   if(!newBossStatus){newBossStatus=document.createElement('div');newBossStatus.id='md-new-boss-status';$('arena').appendChild(newBossStatus);}
@@ -4692,7 +4843,7 @@ function render(){if(!state)return;mdSuuSplitCheck();mdUpdateChefTurnCounter();l
   }
   mdCounterChangePulse(newBossStatus,state.enemyType+':'+(state.enemyType==='celestine'?state.mdJudgmentMarks||0:state.enemyType==='malthorne'?(state.mdBloodHunt||0):state.enemyType==='nyxara'?(state.mdWeb||0)+','+(state.mdWebLockPending||0)+','+(state.mdWebLockedIndex??'none'):(state.mdMirrorHP||0)));
  }else if(newBossStatus){newBossStatus.remove();}
- $('playerBlock').textContent='✧ '+state.block+' Block';$('enemyBlock').textContent='✧ '+state.enemyBlock+' Block';$('energy').textContent=state.energy+'/3';const surge=document.getElementById('chaosSurge');if(surge){surge.hidden=!hasChaosMechanic()||!state||state.hp<=0;surge.dataset.stacks=state.instability||0;surge.classList.toggle('instability-ready',!surge.hidden&&(state.instability||0)>=5);surge.dataset.ready=String(!surge.hidden&&(state.instability||0)>=5);window.MDChaosDock?.sync?.();surge.querySelectorAll('button').forEach(b=>b.disabled=(state.instability||0)<5)}$('deckCount').textContent=state.deck.length;$('discardCount').textContent=state.discard.length;$('intent').replaceChildren();const intentAction=document.createElement('span');intentAction.className='intent-action';intentAction.textContent=isHungryChef()?'Star encounter - escapes after 5 turns':'ENEMY INTENT · '+mdDmgIntentLabel(bossIntent());const intentPhase=document.createElement('span');intentPhase.className='intent-phase';intentPhase.textContent=({ty:'STAR BOSS · HUNGER / FEAST',celestine:'MOON MINI-BOSS · JUDGMENT / MANA SUPPRESSION',nyxara:'MOON MINI-BOSS · WEB / HAND LOCK',malthorne:'FINAL BOSS · '+['THE HUNTER','THE RAVAGER','THE APEX DEVIL'][state.bossPhase-1],mirielle:'MOON MINI-BOSS · SHATTERED MIRROR / DUAL TARGET'}[state.enemyType])||(state.enemyType==='aspenor'?'MOON MINI-BOSS · MOONFIRE / BURN / MANA DEVOUR':isSeraphine()?'MOON MINI-BOSS · BLOOD HUNGER / LIFESTEAL':isWolfPack()?(state.packKind&&MD_PACKS[state.packKind]?'LESSER MINIONS APPEAR!\n'+mdPackName().toUpperCase():'STAR ENCOUNTER · THORNBOUND WOLF PACK'):isEclipseMoth()?'STAR ENCOUNTER · LUNAR MAGIC':isWeepingPetal()?'STAR ENCOUNTER · CURSE / WEAKNESS':isKitsune()?'STAR ENCOUNTER · TRICKSTER': 'BOSS '+bossPhaseName());$('intent').append(intentAction);if(!isHungryChef())$('intent').append(intentPhase);const arenaEl=$('arena'),enemyActorEl=$('enemyActor');const miniBossKinds=['celestine','nyxara','mirielle','malthorne'];arenaEl.classList.toggle('mini-boss-ui',miniBossKinds.includes(state.enemyType));for(const kind of miniBossKinds){arenaEl.classList.toggle('md-boss-'+kind,state.enemyType===kind);enemyActorEl.classList.toggle(kind+'-encounter',state.enemyType===kind);}arenaEl.classList.toggle('boss-enraged',!isHungryChef()&&!isKitsune()&&!isWolfPack()&&!isWeepingPetal()&&!isEclipseMoth()&&state.bossPhase===2);arenaEl.classList.toggle('boss-final',!isHungryChef()&&!isKitsune()&&!isWolfPack()&&!isWeepingPetal()&&!isEclipseMoth()&&state.bossPhase===3);$('enemyLabel').textContent=({ty:'TY WITH THE PAPER BAG',celestine:'CELESTINE · BROKEN SERAPH',nyxara:'NYXARA · VELVET WIDOW',mirielle:'MIRIELLE · SHATTERED BALLERINA',malthorne:'MALTHORNE · EMERALD HELLFANG'}[state.enemyType])|| (isHungryChef()?'HUNGRY CHEF':state.enemyType==='aspenor'?'ASPENOR · MOONFIRE DRAGON':isSeraphine()?'LADY SERAPHINE':isWolfPack()?mdPackName().toUpperCase():isEclipseMoth()?'ECLIPSE MOTH':isWeepingPetal()?'WEEPING PETAL':isKitsune()?'AMETHYST KITSUNE':'SHADOW ARCHMAGE');enemyActorEl.classList.toggle('chef-encounter',isHungryChef());enemyActorEl.classList.toggle('kitsune-encounter',isKitsune());enemyActorEl.classList.toggle('weeping-encounter',isWeepingPetal());enemyActorEl.classList.toggle('moth-encounter',isEclipseMoth());enemyActorEl.classList.toggle('seraphine-encounter',isSeraphine());enemyActorEl.classList.toggle('md-suu-triplets',mdIsSuuTriplets());if(arenaEl.classList.contains('mini-boss-ui')){
+ $('playerBlock').textContent='✧ '+state.block+' Block';$('enemyBlock').textContent='✧ '+state.enemyBlock+' Block';$('energy').textContent=state.energy+'/3';const surge=document.getElementById('chaosSurge');if(surge){surge.hidden=!hasChaosMechanic()||!state||state.hp<=0;surge.dataset.stacks=state.instability||0;surge.classList.toggle('instability-ready',!surge.hidden&&(state.instability||0)>=5);surge.dataset.ready=String(!surge.hidden&&(state.instability||0)>=5);window.MDChaosDock?.sync?.();surge.querySelectorAll('button').forEach(b=>b.disabled=(state.instability||0)<5)}$('deckCount').textContent=state.deck.length;$('discardCount').textContent=state.discard.length;$('intent').replaceChildren();const intentAction=document.createElement('span');intentAction.className='intent-action';intentAction.textContent=isHungryChef()?'Star encounter - escapes after 5 turns':'ENEMY INTENT · '+mdDmgIntentLabel(bossIntent());const intentPhase=document.createElement('span');intentPhase.className='intent-phase';intentPhase.textContent=({ty:'STAR BOSS · HUNGER / FEAST',celestine:'MOON MINI-BOSS · JUDGMENT / MANA SUPPRESSION',nyxara:'MOON MINI-BOSS · WEB / HAND LOCK',malthorne:'FINAL BOSS · '+['THE HUNTER','THE RAVAGER','THE APEX DEVIL'][state.bossPhase-1],mirielle:'MOON MINI-BOSS · SHATTERED MIRROR / DUAL TARGET'}[state.enemyType])||(state.enemyType==='aspenor'?'MOON MINI-BOSS · MOONFIRE / BURN / MANA DEVOUR':isSeraphine()?'MOON MINI-BOSS · BLOOD HUNGER / LIFESTEAL':isWolfPack()?(state.packKind&&MD_PACKS[state.packKind]?'LESSER MINIONS APPEAR!\n'+mdPackName().toUpperCase():'STAR ENCOUNTER · THORNBOUND WOLF PACK'):isEclipseMoth()?'STAR ENCOUNTER · LUNAR MAGIC':isWeepingPetal()?'STAR ENCOUNTER · CURSE / WEAKNESS':isKitsune()?'STAR ENCOUNTER · TRICKSTER': 'BOSS '+bossPhaseName());$('intent').append(intentAction);if(!isHungryChef())$('intent').append(intentPhase);const arenaEl=$('arena'),enemyActorEl=$('enemyActor');const miniBossKinds=['celestine','nyxara','mirielle','malthorne'];arenaEl.classList.toggle('mini-boss-ui',miniBossKinds.includes(state.enemyType));for(const kind of miniBossKinds){arenaEl.classList.toggle('md-boss-'+kind,state.enemyType===kind);enemyActorEl.classList.toggle(kind+'-encounter',state.enemyType===kind);}arenaEl.classList.toggle('boss-enraged',!isHungryChef()&&!isKitsune()&&!isWolfPack()&&!isWeepingPetal()&&!isEclipseMoth()&&state.bossPhase===2);arenaEl.classList.toggle('boss-final',!isHungryChef()&&!isKitsune()&&!isWolfPack()&&!isWeepingPetal()&&!isEclipseMoth()&&state.bossPhase===3);$('enemyLabel').textContent=(MD_A2_BOSS[state.enemyType]?.name || ({ty:'TY WITH THE PAPER BAG',celestine:'CELESTINE · BROKEN SERAPH',nyxara:'NYXARA · VELVET WIDOW',mirielle:'MIRIELLE · SHATTERED BALLERINA',malthorne:'MALTHORNE · EMERALD HELLFANG'}[state.enemyType])|| (isHungryChef()?'HUNGRY CHEF':state.enemyType==='aspenor'?'ASPENOR · MOONFIRE DRAGON':isSeraphine()?'LADY SERAPHINE':isWolfPack()?mdPackName().toUpperCase():isEclipseMoth()?'ECLIPSE MOTH':isWeepingPetal()?'WEEPING PETAL':isKitsune()?'AMETHYST KITSUNE':'SHADOW ARCHMAGE'));enemyActorEl.classList.toggle('chef-encounter',isHungryChef());enemyActorEl.classList.toggle('kitsune-encounter',isKitsune());enemyActorEl.classList.toggle('weeping-encounter',isWeepingPetal());enemyActorEl.classList.toggle('moth-encounter',isEclipseMoth());enemyActorEl.classList.toggle('seraphine-encounter',isSeraphine());enemyActorEl.classList.toggle('md-suu-triplets',mdIsSuuTriplets());if(arenaEl.classList.contains('mini-boss-ui')){
   const expectedBoss=state.enemyType;
   requestAnimationFrame(()=>{
    if(!state||state.enemyType!==expectedBoss||!arenaEl.classList.contains('mini-boss-ui'))return;
@@ -4738,7 +4889,15 @@ state.wolves.forEach((hp,i)=>{
  const title=unit.querySelector('.wolf-health-title');if(title.textContent!==name)title.textContent=name;
  unit.querySelector('.wolf-health-fill').style.width=(hp/(state.wolfMaxHP||25)*100)+'%';
  const count=hp+'/'+(state.wolfMaxHP||25);const countEl=unit.querySelector('.wolf-health-ui span');if(countEl.textContent!==count)countEl.textContent=count;
-});}else{enemyPortrait.style.visibility='';if(pack){pack.remove();pack=null;}}if(mdIsTy()||isHungryChef()||isSeraphine()||state.enemyType==='aspenor'||isKitsune()||isWeepingPetal()||isEclipseMoth()||['celestine','nyxara','mirielle','malthorne'].includes(state.enemyType)){
+});}else{enemyPortrait.style.visibility='';if(pack){pack.remove();pack=null;}}if(MD_A2_BOSS[state.enemyType]){
+ const boss=MD_A2_BOSS[state.enemyType];
+ if(enemyPortrait.dataset.monster!==state.enemyType || enemyPortrait.getAttribute('src')!==boss.art){
+  enemyPortrait.dataset.originalSrc=enemyPortrait.dataset.originalSrc||enemyPortrait.src;
+  enemyPortrait.src=boss.art;
+  enemyPortrait.dataset.monster=state.enemyType;
+  enemyPortrait.alt=boss.name;
+ }
+}else if(mdIsTy()||isHungryChef()||isSeraphine()||state.enemyType==='aspenor'||isKitsune()||isWeepingPetal()||isEclipseMoth()||['celestine','nyxara','mirielle','malthorne'].includes(state.enemyType)){
  const kind=mdIsTy()?'ty':['celestine','nyxara','mirielle','malthorne'].includes(state.enemyType)?state.enemyType:isHungryChef()?'chef':state.enemyType==='aspenor'?'aspenor':isSeraphine()?'seraphine':isEclipseMoth()?'moth':isWeepingPetal()?'weeping':'kitsune';
  if(enemyPortrait.dataset.monster!==kind||kind==='malthorne'&&enemyPortrait.dataset.malthornePhase!==String(state.bossPhase)){enemyPortrait.dataset.malthornePhase=kind==='malthorne'?String(state.bossPhase):'';enemyPortrait.dataset.originalSrc=enemyPortrait.dataset.originalSrc||enemyPortrait.src;enemyPortrait.src=kind==='ty'?'assets/media/ty-paper-bag.png':kind==='malthorne'?window.MDMalthorneArt[state.bossPhase-1]:window.MDNewMiniBossArt?.[kind]|| (isHungryChef()?window.MDChefAssets.chef:kind==='aspenor'?window.MDAspenorArt:isSeraphine()?SERAPHINE_ART:isEclipseMoth()?ECLIPSE_MOTH_ART:isWeepingPetal()?WEEPING_PETAL_ART:KITSUNE_ART);enemyPortrait.dataset.monster=kind;enemyPortrait.alt=kind==='malthorne'?'Malthorne, Emerald Hellfang · '+['The Hunter','The Ravager','The Apex Devil'][state.bossPhase-1]:window.MDNewMiniBossArt?.[kind] ? ({celestine:'Celestine, the Broken Seraph',nyxara:'Nyxara, the Velvet Widow',mirielle:'Mirielle, the Shattered Ballerina'}[kind]):isHungryChef()?'Hungry Chef, holding his empty pockets':isSeraphine()?'Lady Seraphine, the Blood Countess':isEclipseMoth()?'Eclipse Moth, terrifying lunar creature':isWeepingPetal()?'Weeping Petal, ghostly cherry blossom spirit':'Amethyst Kitsune, nine-tailed fox spirit';}
  }else if(enemyPortrait.dataset.monster==='ty'||enemyPortrait.dataset.monster==='chef'||enemyPortrait.dataset.monster==='kitsune'||enemyPortrait.dataset.monster==='weeping'||enemyPortrait.dataset.monster==='moth'||enemyPortrait.dataset.monster==='seraphine'||enemyPortrait.dataset.monster==='aspenor'||['celestine','nyxara','mirielle','malthorne'].includes(enemyPortrait.dataset.monster)){enemyPortrait.src=enemyPortrait.dataset.originalSrc;enemyPortrait.dataset.monster='archmage';enemyPortrait.alt='Shadow Archmage';} window.MDFinalBossVisuals?.sync(); const oldPackStatus=$('wolfPackStatus');if(oldPackStatus)oldPackStatus.remove();if(isWolfPack()){const status=document.createElement('span');status.id='wolfPackStatus';status.className='status-chip';status.textContent=(state.packKind&&MD_PACKS[state.packKind]?'✦ '+mdPackName()+' · ':'🐺 ')+state.wolves.filter(h=>h>0).length+(state.packKind?' remaining':' wolves')+(state.bleedTurns?' · 🩸 Bleed '+state.bleedTurns+' turns':'')+(state.bindTurns?' · ⛓ Bind':'');$('statusRow').appendChild(status)}$('endTurn').disabled=busy;$('endTurn').textContent='☾ End Turn';$('statusRow').innerHTML=(isWeepingPetal()&&state.playerVulnerableTurns?'<span class="status-chip">🌸 Vulnerable '+state.playerVulnerableTurns+' turns</span>':'')+(isKitsune()&&state.enemyDodge?'<span class="status-chip">✦ Kitsune Dodge · 1 attack</span>':'')+(state.enemyWeak?'<span class="status-chip">✦ Enemy Weak '+state.enemyWeak+' · ×'+(1+.4*state.enemyWeak).toFixed(1)+'</span>':'')+(state.playerWeak?'<span class="status-chip">✦ Your Weak '+state.playerWeak+' · ×'+(1+.4*state.playerWeak).toFixed(1)+'</span>':'')+(state.mdBurn>0?'<span class="status-chip md-aspenor-burn" title="Burn deals damage at the start of each turn (maximum 8), then loses 2 stacks.">🔥 BURN '+state.mdBurn+'</span>':'')+(state.mdManaDevour>0?'<span class="status-chip">🐉 Mana Devoured · −1 next turn</span>':'')+(chosenDeck==='melee'?'<span class="status-chip" title="Quick Cut builds Combo. Each stack adds 2 to later Quick Cuts; Heavy Blade uses all stacks for +4 each. Resets next turn.">⚔ Combo '+state.combo+' · Heavy Blade bonus +'+(state.combo*4)+'</span>':'');let hand=$('hand');hand.replaceChildren();state.hand.forEach((id,i)=>{let c=CARDS[id],b=document.createElement('div');b.className='card';const webLocked=state.enemyType==='nyxara'&&state.mdWebLockedTurn===state.turn&&state.mdWebLockedIndex===i;b.classList.toggle('md-hand-web-locked',webLocked);b.setAttribute('role','button');b.tabIndex=webLocked?-1:0;b.setAttribute('aria-disabled',String(webLocked||busy||mdCurrentCardCost(c)>state.energy||(String(c.rarity||'').toLowerCase()==='legendary'&&(state.mdLegendaryUsed||[]).includes(id))));b.classList.remove('discard-choice');b.title=c.name+'\n'+cardText(id,c)+'\n\n'+cardRules(id,c)+(webLocked?'\n\nWEB LOCKED: Cannot be played this turn.':'');renderCardFace(b,id,c);if(webLocked){const silkWeb=document.createElement('img');silkWeb.className='md-silk-snare-web';silkWeb.src=window.MD_SILK_SNARE_CARD_OVERLAY;silkWeb.alt='';silkWeb.setAttribute('aria-hidden','true');silkWeb.draggable=false;b.appendChild(silkWeb);const silkTag=document.createElement('span');silkTag.className='md-web-locked-tag';silkTag.textContent='WEB LOCKED';b.appendChild(silkTag);}const currentManaCost=mdCurrentCardCost(c);if(currentManaCost!==c.cost){const adjusted=document.createElement('span');adjusted.className='md-modified-cost';adjusted.textContent=String(currentManaCost);adjusted.title='Modified Mana cost: '+currentManaCost+' (printed '+c.cost+')';adjusted.setAttribute('aria-label',adjusted.title);b.appendChild(adjusted);}b.addEventListener('click',()=>play(i));b.addEventListener('keydown',e=>{if(e.target===b&&(e.key==='Enter'||e.key===' ')){e.preventDefault();play(i)}});const inspect=document.createElement('button');inspect.type='button';inspect.className='inspect-trigger';inspect.textContent='ⓘ';inspect.title='Inspect '+c.name;inspect.setAttribute('aria-label','Inspect '+c.name+' — read card effects and rules');inspect.addEventListener('click',e=>{e.stopPropagation();e.preventDefault();openInspect(id)});b.appendChild(inspect);hand.appendChild(b)})}
@@ -4850,7 +5009,7 @@ function isKitsune(){return !!(state&&state.enemyType==='kitsune')}
 function kitsuneIntent(){const moves=[{kind:'phantom',d:11,label:'✦ Phantom Tail · 11 × 2 + Dodge (1 hit)'},{kind:'bite',d:17,label:'⚔ Moonfang Bite · 17 damage'},{kind:'foxfire',d:14,label:'☄ Violet Foxfire · 14 damage'},{kind:'phantom',d:11,label:'✦ Phantom Tail · 11 × 2 + Dodge (1 hit)'}];return moves[state.bossAction%moves.length]}
 function executeKitsuneIntent(a){if(a.kind==='phantom'){log('PHANTOM TAIL! The Kitsune strikes twice and shimmers into an illusion.');applyIncoming(a.d);if(state.hp>0)applyIncoming(a.d);state.enemyDodge=1;}else{log(a.kind==='bite'?'The Kitsune lunges with a savage bite!':'Violet foxfire erupts!');applyIncoming(a.d)}}
 function bossPhaseName(){return state.bossPhase===1?'PHASE I · CHALLENGER':state.bossPhase===2?'PHASE II · AWAKENING':'PHASE III · FINAL STAND'}
-function bossPhaseUpdate(){if(mdIsTy()){if(!state.mdTyPhillySaid&&state.enemyHP<=state.enemyMax*.80&&state.enemyHP>0){state.mdTyPhillySaid=true;mdTySpeech('Hold on... I just remembered a spot in Philly. Gimme a minute.');}return;}if(state?.enemyType==='malthorne'){mdMalthornePhaseUpdate();return;}if(['celestine','nyxara','mirielle'].includes(state?.enemyType))return;if(isSeraphine()||isEclipseMoth()||isWeepingPetal()||isWolfPack())return;
+function bossPhaseUpdate(){if(mdA2Identity())return mdA2UpdatePhase();if(mdIsTy()){if(!state.mdTyPhillySaid&&state.enemyHP<=state.enemyMax*.80&&state.enemyHP>0){state.mdTyPhillySaid=true;mdTySpeech('Hold on... I just remembered a spot in Philly. Gimme a minute.');}return;}if(state?.enemyType==='malthorne'){mdMalthornePhaseUpdate();return;}if(['celestine','nyxara','mirielle'].includes(state?.enemyType))return;if(isSeraphine()||isEclipseMoth()||isWeepingPetal()||isWolfPack())return;
  if(state.enemyType&&state.enemyType!=='archmage')return;
  const next=state.enemyHP<=state.enemyMax*.35?3:state.enemyHP<=state.enemyMax*.70?2:1;
  if(next>state.bossPhase){state.bossPhase=next;state.bossAction=0;state.bossCharge=0;window.MDFinalBossVisuals?.sync();
@@ -5322,13 +5481,95 @@ function mdNewBossTurn(a){
  log(a.label);
 }
 
-function bossIntent(){if(mdIsTy())return mdTyIntent();if(state.enemyType==='malthorne')return mdMalthorneIntent();if(['celestine','nyxara','mirielle'].includes(state.enemyType))return mdNewBossIntent();if(isHungryChef())return chefIntent();if(isSeraphine())return seraphineIntent();if(isEclipseMoth())return mothIntent();if(isWeepingPetal())return petalIntent();if(isWolfPack())return wolfIntent();
+/* Act II story dungeon combat: shares the original engine, map, cards, intent system, Victory and Loot UI. */
+const MD_A2_BOSS={
+ keeper:{name:'KEEPER OF THE LAST FLAME',hp:180,phase:[.5],art:'assets/boss/act2-keeper-idle.png',fallen:'assets/boss/act2-keeper-fallen.png'},
+ warden:{name:'MOONBOUND WARDEN',hp:240,phase:[.5],art:'assets/boss/act2-warden-idle.png',fallen:'assets/boss/act2-warden-fallen.png'},
+ regulator:{name:'ASTRAL REGULATOR',hp:260,phase:[.66,.33],art:'assets/boss/act2-regulator-idle.png',fallen:'assets/boss/act2-regulator-fallen.png'},
+ revenant:{name:'LUNAR REVENANT',hp:340,phase:[.70,.35],art:'assets/boss/act2-revenant-idle.png',fallen:'assets/boss/act2-revenant-fallen.png'},
+ bellbound:{name:'BELLBOUND PROCESSION',hp:110,phase:[],art:'assets/characters/act2-bellbound-resident.webp',fallen:''},
+ smuggler:{name:'UNKNOWN SMUGGLER',hp:85,phase:[],art:'assets/boss/act2-unknown-smuggler.png',fallen:''},
+ bandit:{name:'BANDIT AMBUSH',hp:85,phase:[],art:'assets/boss/act1-bandit.webp',fallen:''}
+};
+let mdA2StoryDungeon=false,mdA2StoryKind=null,mdA2StoryCallback=null,mdA2SavedAutosave=null;
+function mdA2Identity(){return !!(state&&MD_A2_BOSS[state.enemyType]);}
+function mdA2Move(kind,d=0,label='',extra={}){return {kind,d,label,...extra};}
+function mdA2Intent(){const boss=state.enemyType,phase=state.mdA2Phase||1,i=state.bossAction||0;
+ if(state.mdA2ChargeReady)return mdA2Move('a2Ultimate',state.mdA2ChargeDamage||30,MD_A2_BOSS[boss].name+' · CHARGED STRIKE · '+(state.mdA2ChargeDamage||30)+' damage');
+ if(boss==='keeper'){
+  const pool=phase===1?[
+   mdA2Move('a2Hit',9,'Lantern Lash · 9 damage + 2 Burn',{burn:2}),mdA2Move('a2Double',6,'Hourglass Fracture · 6 damage × 2',{hits:2}),mdA2Move('a2Mana',0,'Stolen Moment · Next turn −1 Mana'),mdA2Move('a2Guard',0,'Eternal Vigil · +12 Block and +2 Strength',{block:12,strength:2})
+  ]:[mdA2Move('a2Hit',16,'Ghostfire Eruption · 16 damage + 3 Burn',{burn:3}),mdA2Move('a2Charge',0,'Clock Strikes Thirteen · Charging 8 damage × 3 next turn',{chargeDamage:24}),mdA2Move('a2Double',8,'Hourglass Fracture · 8 damage × 2',{hits:2}),mdA2Move('a2Mana',0,'Stolen Moment · Next turn −1 Mana')];return pool[i%pool.length];
+ }
+ if(boss==='warden'){
+  const pool=phase===1?[
+   mdA2Move('a2Double',11,'Shattered Claw · 11 damage × 2',{hits:2}),mdA2Move('a2Howl',0,'Lunar Howl · +3 Strength, +2 Weak to player'),mdA2Move('a2Hit',17,'Crystal Fang · 17 damage + 2 Vulnerable',{vulnerable:2}),mdA2Move('a2Hit',24,'Prison Breaker · 24 damage')
+  ]:[mdA2Move('a2Double',8,'Glacial Pounce · 8 damage × 3',{hits:3}),mdA2Move('a2Charge',0,'Moonfall Rampage · Charging 36 damage next turn',{chargeDamage:36}),mdA2Move('a2Hit',24,'Prison Breaker · 24 damage'),mdA2Move('a2Howl',0,'Lunar Howl · +3 Strength, +2 Weak')];return pool[i%pool.length];
+ }
+ if(boss==='regulator'){
+  const pool=phase===1?[mdA2Move('a2Hit',18,'Astral Beam · 18 damage'),mdA2Move('a2Guard',0,'Lunar Shield · +20 Block',{block:20}),mdA2Move('a2Double',7,'Orbital Barrage · 7 damage × 3',{hits:3})]:phase===2?[mdA2Move('a2Hit',25,'Gravity Collapse · 25 damage + 2 Vulnerable',{vulnerable:2}),mdA2Move('a2Mana',0,'Mana Disruption · Next turn −1 Mana'),mdA2Move('a2Guard',0,'Celestial Calibration · 10 Block +2 Strength',{block:10,strength:2}),mdA2Move('a2Double',7,'Orbital Barrage · 7 damage × 3',{hits:3})]:[mdA2Move('a2Hit',18,'Astral Beam · 18 damage'),mdA2Move('a2Guard',0,'Celestial Calibration · 10 Block +2 Strength',{block:10,strength:2}),mdA2Move('a2Charge',0,'Supernova Protocol · Charging 35 damage next turn',{chargeDamage:35})];return pool[i%pool.length];
+ }
+ if(boss==='revenant'){
+  const pool=phase===1?[mdA2Move('a2Double',10,'Corrupted Claw · 10 damage × 2',{hits:2}),mdA2Move('a2Hit',12,'Lunar Infection · 12 damage + 2 Poison',{poison:2}),mdA2Move('a2Debuff',0,'Bellbound Resonance · +2 Weak +2 Vulnerable; +1 Lunar Resonance')]:phase===2?[mdA2Move('a2Double',6,'Moonshard Volley · 6 damage × 4',{hits:4}),mdA2Move('a2Drain',20,'Void Consumption · 20 damage; heal 8 HP',{heal:8}),mdA2Move('a2Debuff',0,'Bellbound Resonance · +2 Weak +2 Vulnerable; +1 Lunar Resonance')]:[mdA2Move('a2Hit',28,'Fractured Moon · 28 damage + 3 Poison',{poison:3}),mdA2Move('a2Debuff',0,'Bellbound Resonance · +2 Weak +2 Vulnerable; +1 Lunar Resonance'),mdA2Move('a2Double',6,'Moonshard Volley · 6 damage × 4',{hits:4})];return pool[i%pool.length];
+ }
+ if(boss==='bandit')return [
+  mdA2Move('a2Hit',9,'Dirty Slash · 9 damage'),
+  mdA2Move('a2Double',5,'Twin Daggers · 5 damage × 2',{hits:2}),
+  mdA2Move('a2Hit',7,'Poisoned Blade · 7 damage + 2 Poison',{poison:2}),
+  mdA2Move('a2Guard',0,'Smoke Bomb · +12 Block',{block:12}),
+  mdA2Move('a2Hit',state.enemyHP<=state.enemyMax*.4?16:9,state.enemyHP<=state.enemyMax*.4?'Desperate Strike · 16 damage':'Dirty Slash · 9 damage')
+ ][i%5];
+ if(boss==='bellbound')return [mdA2Move('a2Hit',7,'Resonance Anchor · 7 damage'),mdA2Move('a2Guard',0,'Bell Construct Guard · +9 Block',{block:9}),mdA2Move('a2Double',6,'Bell Shrapnel · 6 damage × 2',{hits:2})][i%3];
+ return [mdA2Move('a2Hit',10,'Smuggler Strike · 10 damage'),mdA2Move('a2Guard',0,'Smuggler Guard · +8 Block',{block:8}),mdA2Move('a2Double',6,'Twin Daggers · 6 damage × 2',{hits:2})][i%3];
+}
+function mdA2AttackTurn(a){const before=state.hp;const raw=Math.max(0,a.d+(state.bossPower||0));const fury=state.enemyType==='warden'&&state.mdA2Fury>=3?8:0;
+ const hit=(n)=>{if(state.hp>0)applyIncoming(n)};
+ if(a.kind==='a2Hit'||a.kind==='a2Drain'||a.kind==='a2Ultimate')hit(raw+fury);
+ else if(a.kind==='a2Double')for(let h=0;h<(a.hits||2)&&state.hp>0;h++)hit(raw+(h===0?fury:0));
+ else if(a.kind==='a2Howl'){state.bossPower+=3;state.playerWeak=Math.max(0,state.playerWeak||0)+2;}
+ else if(a.kind==='a2Guard'){state.enemyBlock+=(a.block||0);state.bossPower+=(a.strength||0);}
+ else if(a.kind==='a2Mana')state.mdManaDevour=Math.min(2,(state.mdManaDevour||0)+1);
+ else if(a.kind==='a2Debuff'){state.playerWeak=(state.playerWeak||0)+2;state.playerVulnerableTurns=(state.playerVulnerableTurns||0)+2;state.mdA2Resonance=Math.min(3,(state.mdA2Resonance||0)+1);if(state.mdA2Resonance>=3){state.mdA2ChargeReady=true;state.mdA2ChargeDamage=44;}}
+ else if(a.kind==='a2Charge'){state.mdA2ChargeReady=true;state.mdA2ChargeDamage=a.chargeDamage||35;}
+ if(a.kind==='a2Ultimate'){state.mdA2ChargeReady=false;state.mdA2Resonance=0;state.mdA2Overload=0;}
+ if(a.vulnerable)state.playerVulnerableTurns=(state.playerVulnerableTurns||0)+a.vulnerable;
+ if(a.poison)state.playerPoison=(state.playerPoison||0)+a.poison;
+ if(a.burn)state.mdBurn=Math.min(8,(state.mdBurn||0)+a.burn);
+ if(a.heal)state.enemyHP=Math.min(state.enemyMax,state.enemyHP+a.heal);
+ if(fury&&a.d>0)state.mdA2Fury=0;
+ if(state.enemyType==='warden'){
+  if(state.mdA2LastHP!==null&&state.enemyHP>=state.mdA2LastHP)state.mdA2Fury=Math.min(3,state.mdA2Fury+1);
+  else state.mdA2Fury=0;
+ }
+ if(state.enemyType==='regulator'&&state.mdA2Phase===3){
+   const dmg=Math.max(0,(state.mdA2LastHP??state.enemyHP)-state.enemyHP);
+   state.mdA2Overload=Math.max(0,Math.min(3,(state.mdA2Overload||0)+1-(dmg>=20?1:0)));
+   if(state.mdA2Overload>=3&&!state.mdA2ChargeReady){state.mdA2ChargeReady=true;state.mdA2ChargeDamage=35;}
+ }
+ state.mdA2LastHP=state.enemyHP;log(a.label);return {hpLoss:before-state.hp};
+}
+function mdA2UpdatePhase(){if(!mdA2Identity())return;const id=state.enemyType;const h=state.enemyHP/state.enemyMax;
+ const next=!MD_A2_BOSS[id].phase.length?1:id==='regulator'||id==='revenant'?h<=.35?3:h<= (id==='regulator'?.66:.70)?2:1:h<=.50?2:1;
+ if(next>state.mdA2Phase){state.mdA2Phase=next;state.bossAction=0;log(MD_A2_BOSS[id].name+' · PHASE '+next+'!');}
+}
+function mdA2Counter(){if(!mdA2Identity()){$('md-a2-counter')?.remove();return;}let el=$('md-a2-counter');if(!el){el=document.createElement('div');el.id='md-a2-counter';el.setAttribute('role','status');$('arena').appendChild(el);}
+ const kind=state.enemyType,info=MD_A2_BOSS[kind];let explain='Phase '+(state.mdA2Phase||1)+' · '+state.enemyHP+'/'+state.enemyMax+' HP';
+ if(kind==='keeper')explain+=' · Burn '+(state.mdBurn||0)+'/8: direct damage ceil(stacks × 1.5) at turn start; −2 stacks/turn. Temporal Distortion: −1 Mana next turn; expires after application.';
+ if(kind==='warden')explain+=' · Lunar Fury '+(state.mdA2Fury||0)+'/3: +1 when player turn deals no damage, resets on damage. At 3, next attack +8 total.';
+ if(kind==='regulator')explain+=' · Overload '+(state.mdA2Overload||0)+'/3: phase 3 +1 per turn; 20+ damage/turn removes 1; at 3 charges Supernova (35 damage) next turn.';
+ if(kind==='revenant')explain+=' · Lunar Resonance '+(state.mdA2Resonance||0)+'/3: +1 per Bellbound Resonance; at 3 charges 44 damage next turn, resets after attack. No Corruption in Story Mode.';
+ if(kind==='bellbound')explain+=' · Civilians protected. Rescue objective: defeat bell constructs by the end of turn 5 to free the Bellmaker. Current turn '+(state.turn||1)+'/5. Later victory frees some civilians, but not the Bellmaker.';
+ if(state.mdA2ChargeReady)explain+=' · CHARGING '+(state.mdA2ChargeDamage||35)+' DAMAGE next turn — Block and Ward apply.';
+ el.textContent=info.name+' · '+explain;el.title=explain;
+ const actor=$('enemyActor');const img=actor?.querySelector('img.archmage-art')||actor?.querySelector('img');if(img){const src=info.art;if(img.dataset.mdAct2Src!==src){img.dataset.mdAct2Src=src;img.src=src;}img.style.objectFit='contain';}
+}
+function bossIntent(){if(mdA2Identity())return mdA2Intent();if(mdIsTy())return mdTyIntent();if(state.enemyType==='malthorne')return mdMalthorneIntent();if(['celestine','nyxara','mirielle'].includes(state.enemyType))return mdNewBossIntent();if(isHungryChef())return chefIntent();if(isSeraphine())return seraphineIntent();if(isEclipseMoth())return mothIntent();if(isWeepingPetal())return petalIntent();if(isWolfPack())return wolfIntent();
  if(isKitsune())return kitsuneIntent();
  if(state.bossPhase===1){const seq=[{kind:'strike',d:13,label:'⚔ Shadow Strike · 13 damage'},{kind:'ward',b:11,label:'✧ Dark Ward · 11 Block'},{kind:'hex',d:12,w:1,label:'☄ Soulfire · 12 damage + 1 Weak'},{kind:'double',d:8,label:'⚔ Twin Fang · 8 × 2'}];return seq[state.bossAction%seq.length]}
  if(state.bossPhase===2){const seq=[{kind:'double',d:10,label:'⚔ Twin Fang · 10 × 2'},{kind:'sunder',d:15,label:'⛓ Sunder · Halve Block, then 15 damage'},{kind:'ritual',b:9,label:'✧ Dark Ritual · 9 Block, +2 future attack damage'},{kind:'hex',d:17,w:1,label:'☄ Soulfire · 17 damage + 1 Weak'}];return seq[state.bossAction%seq.length]}
  const seq=[{kind:'charge',label:'☾ Eclipse Charging · Ultimate next turn'},{kind:'eclipse',d:28,label:'☄ ECLIPSE · 28 damage (Ward and Block work)'},{kind:'double',d:12,label:'⚔ Final Judgment · 12 × 2'},{kind:'sunder',d:19,label:'⛓ Shattered Guard · Halve Block, then 19 damage'},{kind:'ritual',b:7,label:'✧ Dark Ritual · 7 Block, +2 future attack damage'}];return seq[state.bossAction%seq.length]
 }
-function executeBossIntent(a){if(mdIsTy())return mdTyTurn(a);if(state.enemyType==='malthorne'){mdMalthorneTurn(a);return;}if(['celestine','nyxara','mirielle'].includes(state.enemyType)){mdNewBossTurn(a);return;}if(isHungryChef())return executeChefIntent(a);if(isSeraphine()){seraphineTurn(a);return;}if(isEclipseMoth()){executeMothIntent(a);return;}if(isWeepingPetal()){executePetalIntent(a);return;}if(isWolfPack()){if(mdIsSuuTriplets()){state.wolves.forEach((hp,i)=>{if(hp>0&&state.hp>0)mdSuuAct(i);});return;}wolfTurn();return;}
+function executeBossIntent(a){if(mdA2Identity())return mdA2AttackTurn(a);if(mdIsTy())return mdTyTurn(a);if(state.enemyType==='malthorne'){mdMalthorneTurn(a);return;}if(['celestine','nyxara','mirielle'].includes(state.enemyType)){mdNewBossTurn(a);return;}if(isHungryChef())return executeChefIntent(a);if(isSeraphine()){seraphineTurn(a);return;}if(isEclipseMoth()){executeMothIntent(a);return;}if(isWeepingPetal()){executePetalIntent(a);return;}if(isWolfPack()){if(mdIsSuuTriplets()){state.wolves.forEach((hp,i)=>{if(hp>0&&state.hp>0)mdSuuAct(i);});return;}wolfTurn();return;}
  if(isKitsune()){executeKitsuneIntent(a);return}
  const power=state.bossPower;
  if(a.kind==='ward'){state.enemyBlock+=a.b;log('Archmage gains '+a.b+' Block.');}
@@ -6044,7 +6285,7 @@ function refreshRelicInventory(){
 document.addEventListener('DOMContentLoaded',()=>{document.getElementById('relicPouch')?.addEventListener('click',()=>{const panel=document.getElementById('relicInventory');panel.hidden=!panel.hidden;refreshRelicInventory()});document.getElementById('relicClose')?.addEventListener('click',()=>document.getElementById('relicInventory').hidden=true)});
 function updateEconomy(){refreshRelicInventory();const a=map.querySelector('#lunarCoins'),b=map.querySelector('#corruptNumber'),c=map.querySelector('#corruptFill');if(a)a.textContent=coins;if(b)b.textContent=corruption;if(c){c.style.width=corruption+'%';c.dataset.danger=corruption>=75?'critical':corruption>=50?'high':'low'}const hud=document.getElementById('lunarRunHud');if(hud){hud.querySelector('.hud-coins').textContent=coins;hud.querySelector('.hud-corruption').textContent=corruption;hud.querySelector('.hud-bar-fill').style.width=corruption+'%';hud.dataset.danger=corruption>=75?'critical':corruption>=50?'high':corruption>=25?'rising':'low';map.querySelector('.lunar-graphic').dataset.danger=hud.dataset.danger;}}
 function addCoins(n){coins=Math.max(0,coins+n);updateEconomy()}
-function addCorruption(n,options={}){const before=corruption,hpBefore=state.hp;corruption=Math.max(0,Math.min(100,corruption+n));const catastrophe=corruption===100;if(catastrophe){state.hp=Math.max(0,state.hp-30);corruption=50;if(options.present!==false)popup('☾ LUNAR CATASTROPHE','The moon fractures! You lose 30 HP! Your corruption falls to 50. The eclipse demands its price.',[{label:'Continue',action:()=>{eventBox.classList.remove('open');if(mdEventPreview){mdFinishEventPreview();return;}if(state.hp<=0){eventBox.classList.remove('open');map.classList.remove('visible');originalFinish(false);return;}if(activeNode&&activeNode.type==='chest')complete(activeNode);show()}}]);}updateEconomy();return{before,after:corruption,catastrophe,damage:hpBefore-state.hp};}
+function addCorruption(n,options={}){if(mdA2StoryDungeon)return;const before=corruption,hpBefore=state.hp;corruption=Math.max(0,Math.min(100,corruption+n));const catastrophe=corruption===100;if(catastrophe){state.hp=Math.max(0,state.hp-30);corruption=50;if(options.present!==false)popup('☾ LUNAR CATASTROPHE','The moon fractures! You lose 30 HP! Your corruption falls to 50. The eclipse demands its price.',[{label:'Continue',action:()=>{eventBox.classList.remove('open');if(mdEventPreview){mdFinishEventPreview();return;}if(state.hp<=0){eventBox.classList.remove('open');map.classList.remove('visible');originalFinish(false);return;}if(activeNode&&activeNode.type==='chest')complete(activeNode);show()}}]);}updateEconomy();return{before,after:corruption,catastrophe,damage:hpBefore-state.hp};}
 
  function mdEventPickCard(kind, event, choice, commit, eventArt, returnToEvent){
    let entries=[];
@@ -6153,6 +6394,11 @@ function offerEvent(n,options={}){
    })),e.art);
 }
 function show(){
+  if(document.body.classList.contains('md-act2-combat')){
+    map.classList.remove('visible');
+    eventBox.classList.remove('open');
+    return;
+  }
   updateEconomy();map.classList.add('visible');renderMap();
   const sc=map.querySelector('#mapScroll');
   const next=rows.flat().find(n=>available(n));
@@ -6510,6 +6756,7 @@ function mdShowPage(stage, title, subtitle, session, eyebrow) {
   if (ui.overlay.hidden) mdPreviousFocus = document.activeElement;
   ui.overlay.hidden = false;
   ui.overlay.dataset.stage = stage;
+  ui.dialog.classList.toggle('md-a2-loot-dialog', stage==='loot' && mdA2StoryDungeon);
   ui.title.textContent = title;
   ui.subtitle.textContent = subtitle || '';
   ui.hpIndicator.textContent=state?'💗 '+state.hp+'/'+state.maxHP:'';
@@ -7393,7 +7640,7 @@ function evolveReward(done, back, options = {}) {
   }
 }
 
-function mdShowVictory(node, testMode = false) {
+function mdShowVictory(node, testMode = false) {if(mdA2StoryDungeon){mdA2Victory(node);return;}
   const session = mdMakeSession(node, () => {});
   mdRewardSession = session;
   const transition=!testMode&&mdAct===1&&mdActTransitionPending;
@@ -7537,13 +7784,14 @@ function beginFight(n){window.MoonlightSoundtrack?.leaveTy();mdTyClearUI();if(n.
 const permanentHP=Math.max(45,state.maxHP||45);
 const playerGrowthPercent=(permanentHP-45)/45;
 const enemyMultiplier=1+playerGrowthPercent*0.8;
-const baseHP=n.enemyKind==='ty'?325:n.type==='skull'&&n.enemyKind==='malthorne'?175:n.type==='moon'&&n.enemyKind==='celestine'?195:n.type==='moon'&&n.enemyKind==='nyxara'?185:n.type==='moon'&&n.enemyKind==='mirielle'?185:n.type==='skull'?400:n.type==='moon'&&mai?165:n.type==='moon'&&lamia?175:n.type==='moon'&&moth?160:chef?90:aspenor?190:seraphine?130:wolfPack?(packKind?MD_PACKS[packKind].hp*packCount:75):weeping?70:moth?65:lamia?90:mai?80:suu?100:firstKitsune?80:n.type==='star'?random([65,75,85]):n.type==='moon'?random([130,145]):250;
+const baseHP=MD_A2_BOSS[n.enemyKind]?.hp??(n.enemyKind==='ty'?325:n.type==='skull'&&n.enemyKind==='malthorne'?175:n.type==='moon'&&n.enemyKind==='celestine'?195:n.type==='moon'&&n.enemyKind==='nyxara'?185:n.type==='moon'&&n.enemyKind==='mirielle'?185:n.type==='skull'?400:n.type==='moon'&&mai?165:n.type==='moon'&&lamia?175:n.type==='moon'&&moth?160:chef?90:aspenor?190:seraphine?130:wolfPack?(packKind?MD_PACKS[packKind].hp*packCount:75):weeping?70:moth?65:lamia?90:mai?80:suu?100:firstKitsune?80:n.type==='star'?random([65,75,85]):n.type==='moon'?random([130,145]):250);
 const wolfHP=Math.max(1,Math.round((packKind?MD_PACKS[packKind].hp:25)*enemyMultiplier));
 const hp=n.enemyKind==='ty'?325:n.type==='skull'&&n.enemyKind==='malthorne'?175:wolfPack?wolfHP*packCount:Math.max(1,Math.round(baseHP*enemyMultiplier));
-state.mdRoomNumber=Math.max(1,Math.min(44,(mdAct-1)*22+(Number(n.row)||0)+1));state.mdRoomDamageMultiplier=n.type==='skull'?1:(mdAct===1?0.92:1)*(1+0.60*((mdAct-1)+Math.pow(Math.min(20,Math.max(0,Number(n.row)||0))/20,1.35)));state.mdSoulBoss=n.type==='skull'&&n.enemyKind!=='malthorne';state.mdPrisons=[];state.mdSoulConsumed=[];state.mdPrisonTarget=null;state.mdLastSoulPrisonTurn=-99;state.mdSoulPrisonPending=0;state.mdSoulFeasts=0;state.mdSoulbound=0;state.encounterId=(state.encounterId||0)+1;state.encounterClosed=false;state.chefEscaped=false;state.chefManaPenalty=0;state.chefCoinsStolen=0;state.enemyType=n.enemyKind==='ty'?'ty':n.type==='skull'&&n.enemyKind==='malthorne'?'malthorne':['celestine','nyxara','mirielle'].includes(n.enemyKind)?n.enemyKind:chef?'chef':aspenor?'aspenor':seraphine?'seraphine':wolfPack?'wolfpack':weeping?'weeping':moth?'moth':lamia?'lamia':mai?'mai':suu?'suu':firstKitsune?'kitsune':'archmage';state.lamiaCoilShield=0;state.lamiaCoilReady=false;state.playerPoison=0;state.mdBurn=0;state.mdBurnPower=0;state.mdManaDevour=0;state.mdAspenorLastMove='';
+document.body.classList.toggle('md-fodder-facing-left',n.type==='fodder');
+if(MD_A2_BOSS[n.enemyKind])state.mdRoomDamageMultiplier=1;state.mdRoomNumber=Math.max(1,Math.min(44,(mdAct-1)*22+(Number(n.row)||0)+1));state.mdRoomDamageMultiplier=n.type==='skull'?1:(mdAct===1?0.92:1)*(1+0.60*((mdAct-1)+Math.pow(Math.min(20,Math.max(0,Number(n.row)||0))/20,1.35)));if(MD_A2_BOSS[n.enemyKind])state.mdRoomDamageMultiplier=1;state.mdSoulBoss=n.type==='skull'&&!MD_A2_BOSS[n.enemyKind]&&n.enemyKind!=='malthorne';state.mdPrisons=[];state.mdSoulConsumed=[];state.mdPrisonTarget=null;state.mdLastSoulPrisonTurn=-99;state.mdSoulPrisonPending=0;state.mdSoulFeasts=0;state.mdSoulbound=0;state.encounterId=(state.encounterId||0)+1;state.encounterClosed=false;state.chefEscaped=false;state.chefManaPenalty=0;state.chefCoinsStolen=0;state.enemyType=MD_A2_BOSS[n.enemyKind]?n.enemyKind:n.enemyKind==='ty'?'ty':n.type==='skull'&&n.enemyKind==='malthorne'?'malthorne':['celestine','nyxara','mirielle'].includes(n.enemyKind)?n.enemyKind:chef?'chef':aspenor?'aspenor':seraphine?'seraphine':wolfPack?'wolfpack':weeping?'weeping':moth?'moth':lamia?'lamia':mai?'mai':suu?'suu':firstKitsune?'kitsune':'archmage';state.lamiaCoilShield=0;state.lamiaCoilReady=false;state.playerPoison=0;state.mdBurn=0;state.mdBurnPower=0;state.mdManaDevour=0;state.mdAspenorLastMove='';
  state.mdMirrorHP=0;state.mdMirrorSummoned=false;state.mdMirrorDefeated=false;state.mdMirrorTarget=false;state.mdMirrorPoison=0;state.mdMirrorWeak=0;state.mdWeb=0;state.mdNextCardTax=0;state.mdNextSkillTax=0;
  state.mdJudgmentMarks=0;state.mdJudgmentAnnounced=false;state.mdCelestineAbsolved=false;state.mdCelestineLockedIntent=null;state.mdWebLockPending=0;state.mdWebLockedIndex=null;state.mdWebLockedTurn=null;state.maiAirborne=false;state.maiFlightAction=-1;state.suuAbsorption=0;state.suuAbsorbAction=-1;state.suuAlreadySplit=false;state.suuLocks=[0,0,0];state.suuCharmUntilTurn=0;state.playerVulnerableTurns=0;state.petalLamentDone=false;state.packKind=packKind;state.packStolen=packKind?Array(packCount).fill(0):null;state.packDamageBudget=Math.min(30,Math.max(18,Math.round(18*enemyMultiplier)));state.wolves=wolfPack?Array(packCount).fill(wolfHP):null;state.wolfPoison=wolfPack?Array(packCount).fill(0):null;state.wolfWeak=wolfPack?Array(packCount).fill(0):null;state.wolfMaxHP=wolfHP;state.wolfTarget=0;state.bleedTurns=0;state.bleedDamage=0;state.bindTurns=0;state.enemyDodge=0;
-for(const flag of Object.keys(state)){if(flag.startsWith('exp'))delete state[flag]}mdExpTurnStart();state.enemyMax=hp;state.enemyHP=hp;state.hp=runHP;state.enemyBlock=0;state.block=0;state.energy=3+(bonusManaBattles>0?1:0);state.strength=(state.mapStrength||0)+(romanceBattles>0?2:0);state.ward=false;state.summon=0;state.turn=1;state.enemyPoison=0;state.enemyWeak=0;state.playerWeak=0;state.packPower=0;state.combo=0;state.instability=0;state.surgeBonus=0;state.rangerFocus=0;state.bossPhase=1;state.mdTyHunger=0;state.mdTyFeastDamage=0;state.mdTyFeastInterrupted=false;state.mdTyFeastResolved=false;state.mdTyRevenge=false;state.mdTyTranceUsed=false;state.mdTyFeastSucceeded=false;state.mdTyFoodComaUsed=false;state.mdTyJustReset=false;state.mdTyLastHeavyTurn=-99;state.mdTyLastHeavyKind="";state.mdTyPhillySaid=false;state.mdTyReceiptDone=false;state.mdTyReceiptBonus=false;state.mdTyReviewPending=false;state.mdTyReviewDone=false;state.mdTyHandDone=false;state.mdBloodHunt=0;state.mdBloodHuntTurn=-1;state.mdAttacksPlayed=0;state.bossPower=0;state.bossCharge=0;state.bossAction=0;if(state.enemyType==='mirielle'){state.mdMirrorHP=0;state.mdMirrorSummoned=false;state.mdMirrorTarget=false;state.mdMirrorPoison=0;state.mdMirrorWeak=0;}state.intentIndex=0;state.lunarPhase=0;state.lunarProgress=0;state.lunarLast='';state.lunarMana=0;state.lunarPlayerStrength=0;state.lunarBossStrength=0;state.lunarStrengthTurns=0;state.deck=rand([...state.deck,...state.hand,...state.discard,...(state.mdLegendaryExhausted||[]),...(state.mdNoxiousExhausted||[])]);state.mdNoxiousExhausted=[];state.mdNoxiousUsed=false;state.mdLegendaryExhausted=[];state.mdLegendaryUsed=[];state.hand=[];state.discard=[];draw(6);if((state.eventBonusDrawBattles||0)>0){draw(1);state.eventBonusDrawBattles--;}if((state.eventProtectionBattles||0)>0){state.block+=15;state.eventProtectionBattles--;}lunarStartBattle();busy=false;render();if(state.enemyType==='ty'){window.MoonlightSoundtrack?.enterTy();mdTySpeech("Name's Ty. Y'all know anywhere around here that makes a good cheesesteak?",3000);}if(chef){window.MoonlightSoundtrack?.enterChef();if(typeof chefSpeak==='function'){chefSpeak("Hey man, I know you're on an adventure right now, but can I hold $5 ?");const battle=state,encounter=state.encounterId;chefDialogueTimer=setTimeout(()=>{chefDialogueTimer=null;if(state!==battle||state.encounterId!==encounter||state.chefEscaped)return;const bubble=document.getElementById('chefDialogue');if(bubble)bubble.hidden=true;},7000);}}log(n.enemyKind==='ty'?'STAR ENCOUNTER · TY WITH THE PAPER BAG':chef?'STAR ENCOUNTER · HUNGRY CHEF':n.type==='skull'?(n.enemyKind==='malthorne'?'FINAL BOSS · MALTHORNE · EMERALD HELLFANG':'FINAL BOSS · SHADOW ARCHMAGE'):n.type==='moon'?(n.enemyKind==='celestine'?'MOON MINI-BOSS · CELESTINE · THE BROKEN SERAPH':n.enemyKind==='nyxara'?'MOON MINI-BOSS · NYXARA · THE VELVET WIDOW':n.enemyKind==='mirielle'?'MOON MINI-BOSS · MIRIELLE · THE SHATTERED BALLERINA':aspenor?'MOON MINI-BOSS · ASPENOR · THE MOONFIRE DRAGON':seraphine?'MOON MINI-BOSS · LADY SERAPHINE · THE BLOOD COUNTESS':mai?'MOON MINI-BOSS · MAI, THE FALLEN':lamia?'MOON MINI-BOSS · LAMIA, THE SERPENT SORCERESS':'MOON MINI-BOSS · ECLIPSE MOTH'):(wolfPack?(state.packKind&&MD_PACKS[state.packKind]?'LESSER MINIONS APPEAR!\n'+mdPackName().toUpperCase():'STAR ENCOUNTER · THORNBOUND WOLF PACK · THREE PREDATORS'):weeping?'STAR ENCOUNTER · WEEPING PETAL · THE FORSAKEN BLOSSOM':moth?'STAR ENCOUNTER · ECLIPSE MOTH · LUNAR HORROR':lamia?'STAR ENCOUNTER · LAMIA · SERPENT SORCERESS':mai?'STAR ENCOUNTER · MAI, THE FALLEN':suu?'STAR ENCOUNTER · SUU · GIANT SLIME':firstKitsune?'STAR ENCOUNTER · AMETHYST KITSUNE · TRICKSTER':'SKIRMISH · MOONLIT SHADE'));}
+for(const flag of Object.keys(state)){if(flag.startsWith('exp'))delete state[flag]}mdExpTurnStart();state.mdA2Phase=1;state.mdA2Fury=0;state.mdA2Resonance=0;state.mdA2Overload=0;state.mdA2LastHP=hp;state.mdA2ChargeReady=false;state.mdA2ChargeDamage=0;state.enemyMax=hp;state.enemyHP=hp;state.hp=runHP;state.enemyBlock=0;state.block=0;state.energy=3+(bonusManaBattles>0?1:0);state.strength=(state.mapStrength||0)+(romanceBattles>0?2:0);state.ward=false;state.summon=0;state.turn=1;state.enemyPoison=0;state.enemyWeak=0;state.playerWeak=0;state.packPower=0;state.combo=0;state.instability=0;state.surgeBonus=0;state.rangerFocus=0;state.bossPhase=1;state.mdTyHunger=0;state.mdTyFeastDamage=0;state.mdTyFeastInterrupted=false;state.mdTyFeastResolved=false;state.mdTyRevenge=false;state.mdTyTranceUsed=false;state.mdTyFeastSucceeded=false;state.mdTyFoodComaUsed=false;state.mdTyJustReset=false;state.mdTyLastHeavyTurn=-99;state.mdTyLastHeavyKind="";state.mdTyPhillySaid=false;state.mdTyReceiptDone=false;state.mdTyReceiptBonus=false;state.mdTyReviewPending=false;state.mdTyReviewDone=false;state.mdTyHandDone=false;state.mdBloodHunt=0;state.mdBloodHuntTurn=-1;state.mdAttacksPlayed=0;state.bossPower=0;state.bossCharge=0;state.bossAction=0;if(state.enemyType==='mirielle'){state.mdMirrorHP=0;state.mdMirrorSummoned=false;state.mdMirrorTarget=false;state.mdMirrorPoison=0;state.mdMirrorWeak=0;}state.intentIndex=0;state.lunarPhase=0;state.lunarProgress=0;state.lunarLast='';state.lunarMana=0;state.lunarPlayerStrength=0;state.lunarBossStrength=0;state.lunarStrengthTurns=0;state.deck=rand([...state.deck,...state.hand,...state.discard,...(state.mdLegendaryExhausted||[]),...(state.mdNoxiousExhausted||[])]);state.mdNoxiousExhausted=[];state.mdNoxiousUsed=false;state.mdLegendaryExhausted=[];state.mdLegendaryUsed=[];state.hand=[];state.discard=[];draw(6);if((state.eventBonusDrawBattles||0)>0){draw(1);state.eventBonusDrawBattles--;}if((state.eventProtectionBattles||0)>0){state.block+=15;state.eventProtectionBattles--;}lunarStartBattle();busy=false;render();if(state.enemyType==='ty'){window.MoonlightSoundtrack?.enterTy();mdTySpeech("Name's Ty. Y'all know anywhere around here that makes a good cheesesteak?",3000);}if(chef){window.MoonlightSoundtrack?.enterChef();if(typeof chefSpeak==='function'){chefSpeak("Hey man, I know you're on an adventure right now, but can I hold $5 ?");const battle=state,encounter=state.encounterId;chefDialogueTimer=setTimeout(()=>{chefDialogueTimer=null;if(state!==battle||state.encounterId!==encounter||state.chefEscaped)return;const bubble=document.getElementById('chefDialogue');if(bubble)bubble.hidden=true;},7000);}}log(n.enemyKind==='ty'?'STAR ENCOUNTER · TY WITH THE PAPER BAG':chef?'STAR ENCOUNTER · HUNGRY CHEF':n.type==='skull'?(MD_A2_BOSS[n.enemyKind]?'ACT II STORY BOSS · '+MD_A2_BOSS[n.enemyKind].name:n.enemyKind==='malthorne'?'FINAL BOSS · MALTHORNE · EMERALD HELLFANG':'FINAL BOSS · SHADOW ARCHMAGE'):n.type==='moon'?(n.enemyKind==='celestine'?'MOON MINI-BOSS · CELESTINE · THE BROKEN SERAPH':n.enemyKind==='nyxara'?'MOON MINI-BOSS · NYXARA · THE VELVET WIDOW':n.enemyKind==='mirielle'?'MOON MINI-BOSS · MIRIELLE · THE SHATTERED BALLERINA':aspenor?'MOON MINI-BOSS · ASPENOR · THE MOONFIRE DRAGON':seraphine?'MOON MINI-BOSS · LADY SERAPHINE · THE BLOOD COUNTESS':mai?'MOON MINI-BOSS · MAI, THE FALLEN':lamia?'MOON MINI-BOSS · LAMIA, THE SERPENT SORCERESS':'MOON MINI-BOSS · ECLIPSE MOTH'):(wolfPack?(state.packKind&&MD_PACKS[state.packKind]?'LESSER MINIONS APPEAR!\n'+mdPackName().toUpperCase():'STAR ENCOUNTER · THORNBOUND WOLF PACK · THREE PREDATORS'):weeping?'STAR ENCOUNTER · WEEPING PETAL · THE FORSAKEN BLOSSOM':moth?'STAR ENCOUNTER · ECLIPSE MOTH · LUNAR HORROR':lamia?'STAR ENCOUNTER · LAMIA · SERPENT SORCERESS':mai?'STAR ENCOUNTER · MAI, THE FALLEN':suu?'STAR ENCOUNTER · SUU · GIANT SLIME':firstKitsune?'STAR ENCOUNTER · AMETHYST KITSUNE · TRICKSTER':'SKIRMISH · MOONLIT SHADE'));}
 start=function(h){window.MoonlightSoundtrack?.leaveTy();mdTyClearUI();window.MoonlightSoundtrack?.leaveBoss();if(mdBodyPreview)mdFinishBodyPreview();mdCancelBodyLoot();if(mdEventPreview)mdFinishEventPreview();window.MDChefEncounter?.cancel();window.MoonlightSoundtrack?.leaveTy();mdTyClearUI();mdRunGeneration++;victoryPending=false;mdCloseRewards();mdRewardSession=null;originalStart(h);state.mdLegendaryUsed=[];state.mdLegendaryExhausted=[];state.mapStrength=0;mdAct=1;mdActTransitionPending=false;mdDefeatedFinalBosses=[];coins=20;corruption=0;bonusManaBattles=0;familiarBattles=0;romanceBattles=0;runRelics=[];charonSpent=false;lootClaimed=0;makeMap();updateEconomy();show()};
 let victoryPending=false;
 finish=function(win){
@@ -7554,7 +7802,7 @@ finish=function(win){
  victoryPending=true;
  window.MDChefEncounter?.cancel();
  const generation=mdRunGeneration;
- if(!win){window.MoonlightSoundtrack?.leaveTy();window.MoonlightSoundtrack?.leaveBoss();mdCloseRewards();originalFinish(false);return;}
+ if(!win){if(mdA2StoryDungeon){mdA2Defeat();return;}window.MoonlightSoundtrack?.leaveTy();window.MoonlightSoundtrack?.leaveBoss();mdCloseRewards();originalFinish(false);return;}
  busy=true;render();
  if(!activeNode){setTimeout(()=>{if(generation===mdRunGeneration)mdShowVictory(null,true)},650);return;}
  const n=activeNode;n.defeated=true;if(n.row===rows.length-2&&n.enemyKind!=='chef')window.MoonlightSoundtrack?.fadeBeforeBoss();
@@ -8355,8 +8603,23 @@ window.MDRunPersistence={
   mdLeaveBodyLoot=function(...args){return mdRunTransaction('corpse-left',()=>previousLeave(...args));};
   const previousField=mdShowBodyField;
   mdShowBodyField=function(...args){const result=previousField(...args);mdRunCheckpoint('corpse-field');return result;};
+  let mdEncounterLoadingReady=false;
+  const previousMapShow=show;
+  show=function(...args){
+    if(mdEncounterLoadingReady && !mdA2StoryDungeon && !(mdRewardUI?.overlay && !mdRewardUI.overlay.hidden) && window.MDEncounterTransition?.play){
+      mdEncounterLoadingReady=false;
+      hide();
+      window.MDEncounterTransition.play(()=>previousMapShow(...args));
+      return;
+    }
+    return previousMapShow(...args);
+  };
   const previousComplete=complete;
-  complete=function(node){const result=previousComplete(node);if(mdPendingNotice?.nodeId===node.id)mdPendingNotice=null;mdRunCheckpoint('room-completed');return result;};
+  complete=function(node){
+    const result=previousComplete(node);
+    if(node?.defeated && ['star','fodder','moon','skull'].includes(node.type) && !mdA2StoryDungeon){mdEncounterLoadingReady=true;}
+    if(mdPendingNotice?.nodeId===node.id)mdPendingNotice=null;mdRunCheckpoint('room-completed');return result;
+  };
   const previousSelect=select;
   select=function(node){return mdRunTransaction('room-entered',()=>previousSelect(node));};
   const previousFinish=finish;
@@ -8376,6 +8639,145 @@ window.MDRunPersistence={
   const previousEconomy=updateEconomy;
   updateEconomy=function(...args){const result=previousEconomy(...args);mdRunCheckpoint('economy-change');return result;};
 }
+
+function mdA2Stop(){document.body.classList.remove('md-static-story-rogue');document.body.classList.remove('md-act2-combat');mdA2StoryDungeon=false;mdA2StoryKind=null;mdA2StoryCallback=null;$('md-a2-counter')?.remove();}
+function mdA2SnapshotSaves(){let keys=window.MDAutosave?.keys||{};const snapshot={};for(const key of [keys.primary,keys.backup])if(key){try{snapshot[key]=localStorage.getItem(key);}catch(_){snapshot[key]=null;}}return snapshot;}
+function mdA2RestoreSaves(){if(!mdA2SavedAutosave)return;for(const [key,value] of Object.entries(mdA2SavedAutosave)){try{if(value==null)localStorage.removeItem(key);else localStorage.setItem(key,value);}catch(_){}}mdA2SavedAutosave=null;}
+function mdA2Return(result){const callback=mdA2StoryCallback;window.MoonAct2Combat.lastResult=mdA2StoryKind==='bellbound'?{bellmakerRescued:result==='victory'&&state.turn<=5,civiliansSaved:result==='victory'?Math.max(1,6-Math.floor((state.turn||1)/2)):0,turns:state.turn}:null;mdA2Stop();mdRunGeneration++;mdCloseRewards();mdRewardSession=null;window.MoonlightSoundtrack?.leaveBoss?.();if(mdActTwoPreview)mdRestoreActTwoPreview();mdA2RestoreSaves();
+ document.getElementById('moonTestMenu')?.classList.add('hidden');document.getElementById('moonTestExit')?.setAttribute('hidden','');
+ if(callback){
+   if(result==='victory' && window.MDEncounterTransition?.play){
+     window.MDEncounterTransition.play(()=>callback(result));
+   }else callback(result);
+ }
+ // The inherited combat engine can reveal the title screen while restoring its prior run.
+ // On return from a Story Mode battle, the story overlay must take precedence.
+ if(document.getElementById('mdAct2Overlay')?.classList.contains('md2-visible')){
+  document.getElementById('moonLaunch')?.classList.add('hidden');
+  document.getElementById('moonTestMenu')?.classList.add('hidden');
+  document.getElementById('startOverlay')?.classList.add('hidden');
+ }
+}
+function mdA2Defeat(){window.MoonlightSoundtrack?.leaveBoss();const warehouse=mdA2StoryKind==='bandit';const ui=mdShowPage('defeat',warehouse?'WAREHOUSE AMBUSH · DEFEAT':'DUNGEON DEFEAT',warehouse?'The bandits are still guarding the warehouse. Retry the encounter.':'Your Story Mode chapter can be retried. This is not Game Over.',null,warehouse?'Act I · Bellhaven':'Act II chapter checkpoint');
+ const text=document.createElement('p');text.textContent=warehouse?'Your earlier decisions remain intact. Retry this single warehouse battle using your selected Story Mode character and Grimoire.':'The chapter will restart from its first scene. Earlier completed chapters remain saved. Your chosen character and Grimoire stay the same.';ui.body.appendChild(text);
+ ui.actions.appendChild(mdButton(warehouse?'Retry Warehouse Battle':'Retry Chapter',()=>mdA2Return('defeat'),'primary','retry'));
+}
+function mdA2Victory(node){const boss=MD_A2_BOSS[mdA2StoryKind]||MD_A2_BOSS.keeper;const ui=mdShowPage('victory','✦ VICTORY ✦',boss.name+' has been defeated.',null,mdA2StoryKind==='bandit'?'Act I · Warehouse':'Act II story dungeon');
+ const p=document.createElement('p');p.textContent='The dungeon is cleared. Your victory will be recorded after the loot screen.';ui.body.appendChild(p);
+ ui.actions.appendChild(mdButton('Continue to Loot',()=>mdA2Loot(),'primary','continue'));
+}
+function mdA2Loot(){
+ const kind=mdA2StoryKind,boss=MD_A2_BOSS[kind]||MD_A2_BOSS.keeper;
+ const ui=mdShowPage('loot','✧ CHOOSE YOUR SPOILS ✧',boss.name+' · The road continues',null,kind==='bandit'?'Act I · Warehouse Victory':'Act II · Story Victory');
+ ui.dialog.classList.add('md-a2-loot-dialog');
+ const profile=window.MDStoryProfile?.get?.();
+ const already=!!profile?.awarded?.[kind];
+ const relicByBoss={keeper:'Io Ember',warden:'Callisto Shield',regulator:'Triton Fang',revenant:'Titan Heart',bellbound:'Enceladus Tear',smuggler:'Europa Pearl',bandit:'Bandit Emblem'};
+ const relicDetails={'Io Ember':'Begin later fights with +4 Block.','Callisto Shield':'Begin later fights with +6 Block.','Triton Fang':'Begin later fights with +1 Strength.','Titan Heart':'Gain +6 maximum HP.','Enceladus Tear':'Restore 3 HP at the start of later encounters.','Europa Pearl':'A lasting lunar relic from the smuggler route.','Bandit Emblem':'A keepsake of the warehouse victory.'};
+ const relic=relicByBoss[kind]||'Io Ember';
+ const layout=document.createElement('section');layout.className='md-a2-loot-layout';ui.body.appendChild(layout);
+ const summary=document.createElement('aside');summary.className='md-a2-loot-summary';layout.appendChild(summary);
+ const portrait=document.createElement('div');portrait.className='md-a2-loot-portrait';summary.appendChild(portrait);
+ if(boss.fallen){const pic=document.createElement('img');pic.src=boss.fallen;pic.alt=boss.name+' defeated';pic.loading='eager';portrait.appendChild(pic);}
+ const defeated=document.createElement('div');defeated.className='md-a2-loot-label';defeated.textContent='✦ BOSS DEFEATED ✦';summary.appendChild(defeated);
+ const bossName=document.createElement('strong');bossName.textContent=boss.name;summary.appendChild(bossName);
+ const prize=document.createElement('div');prize.className='md-a2-loot-prizes';prize.innerHTML='<div><span>☾</span><div><b>+100 Moon Coins</b><small>Added to your Story Mode purse</small></div></div><div><span>✧</span><div><b></b><small></small></div></div>';
+ prize.querySelectorAll('b')[1].textContent=relic;
+ prize.querySelectorAll('small')[1].textContent=relicDetails[relic]||'An earned lunar relic';summary.appendChild(prize);
+ const offers=document.createElement('section');offers.className='md-a2-loot-offers';layout.appendChild(offers);
+ const heading=document.createElement('div');heading.className='md-a2-loot-head';heading.innerHTML='<span class="md-a2-loot-label">NEW SPELL DISCOVERY</span><h3>Choose one card</h3><p>Your choice joins your Story Mode deck and stays with you for future bosses.</p>';offers.appendChild(heading);
+ const poolIds=Object.keys(window.MDExpansionArtwork||{});
+ const sets={poison:0,water:1,chaos:2,beast:3,melee:4,ranger:5};
+ const begin=(sets[chosenDeck]||0)*12;
+ const pool=poolIds.slice(begin,begin+12).filter(id=>!!CARDS[id]);
+ const offset=Math.max(0,Math.min(pool.length-3,(Object.keys(MD_A2_BOSS).indexOf(kind)*2)%Math.max(1,pool.length-2)));
+ const offered=pool.length?pool.slice(offset,offset+3):Array.from(new Set(DECKS[chosenDeck].cards)).slice(0,3);
+ function grant(cardId){const awarded=window.MDStoryProfile?.awardBoss?.(kind,relic,cardId);if(!awarded)return;coins+=100;runRelics.push(relic);mdA2Return('victory');}
+ if(!already){
+  const shelf=document.createElement('div');shelf.className='md-story-loot-cards';offers.appendChild(shelf);
+  offered.forEach((id,i)=>{
+   const card=CARDS[id];if(!card)return;
+   const btn=document.createElement('button');btn.type='button';btn.className='md-a2-spell-choice';btn.setAttribute('aria-label','Take '+card.name+' for '+card.cost+' mana. '+(card.desc||''));
+   const badge=document.createElement('span');badge.className='md-a2-card-cost';badge.textContent=String(card.cost);badge.title=card.cost+' Mana';btn.appendChild(badge);
+   const rarity=document.createElement('span');rarity.className='md-a2-card-rarity';rarity.textContent=(card.rarity||'SPELL').toUpperCase();btn.appendChild(rarity);
+   const art=document.createElement('span');art.className='md-a2-card-art';
+   const originalArt=window.MDExpansionArtwork?.[id];
+   if(typeof originalArt==='string'&&originalArt){const img=document.createElement('img');img.src=originalArt;img.alt='';img.loading='lazy';art.appendChild(img);}else art.textContent=['✦','☽','✧'][i%3];
+   btn.appendChild(art);
+   const title=document.createElement('strong');title.textContent=card.name;btn.appendChild(title);
+   const type=document.createElement('span');type.className='md-a2-card-type';type.textContent=(card.type||'Skill')+' · '+card.cost+' Mana';btn.appendChild(type);
+   const effect=document.createElement('span');effect.className='md-a2-card-effect';effect.textContent=card.desc||cardText(id,card)||'Gain a new spell.';btn.appendChild(effect);
+   const take=document.createElement('span');take.className='md-a2-card-take';take.textContent='✦ ADD TO DECK';btn.appendChild(take);
+   btn.addEventListener('click',()=>grant(id));shelf.appendChild(btn);
+  });
+ }
+ if(already||!offered.length){
+  heading.querySelector('h3').textContent=already?'Rewards already collected':'Continue your journey';
+  heading.querySelector('p').textContent=already?'Your earned coins, relic and card remain in your inventory.':'No new spell options are available for this Grimoire.';
+  ui.actions.appendChild(mdButton('Continue Story',()=>{if(!already)window.MDStoryProfile?.awardBoss?.(kind,relic,null);mdA2Return('victory');},'primary','claim'));
+ }
+ ui.status.textContent=already?'Rewards retained.': 'Select exactly one spell. Coins and relic are granted with it.';
+}
+
+window.MoonAct2Combat={
+ start(kind,callback){
+   document.getElementById('mscOverlay')?.classList.remove('msc-active');
+   document.getElementById('mdStoryIntro')?.classList.remove('md-story-visible');
+   if(!MD_A2_BOSS[kind]||mdA2StoryDungeon)return false;
+   // A previously opened boss-test preview must not silently hijack story combat.
+   if(mdActTwoPreview){console.warn('Closing stale dungeon preview before Act II boss',kind);mdRestoreActTwoPreview();}
+   if(!mdCaptureActTwoPreview())return false;
+   mdA2SavedAutosave=mdA2SnapshotSaves();mdA2StoryDungeon=true;mdA2StoryKind=kind;mdA2StoryCallback=callback;
+   document.body.classList.toggle('md-static-story-rogue',kind==='smuggler');
+   document.body.classList.add('md-act2-combat');
+   const storyProfile=window.MDStoryProfile?.get?.();
+   if(!storyProfile||!DECKS[storyProfile.grimoire]){console.error('Story loadout missing');mdA2Stop();return false;}
+   chosenDeck=storyProfile.grimoire;setupDeckPicker();
+   const combatHero=storyProfile.character;
+   mdRunGeneration++;mdCloseRewards();mdRewardSession=null;originalStart(combatHero);
+   // Previously earned Story Mode cards are part of the same Grimoire for every boss.
+   for(const cardId of storyProfile.lootCards||[]){if(CARDS[cardId])state.deck.push(cardId);}
+   mdAct=2;mdActTransitionPending=false;corruption=0;coins=20;runHP=state.hp;runRelics=[];
+   // Story Mode is exactly ONE encounter: never generate or display the tower map.
+   // Use the tower's original beginFight() and drag-and-drop card engine directly.
+   // activeNode=null selects the engine's direct-encounter Victory path instead of
+   // advancing map nodes or awarding multi-room dungeon rewards.
+   const storyBoss=['keeper','warden','regulator','revenant','smuggler','bandit'].includes(kind);
+   const encounter={id:'act2-direct-'+kind,row:0,type:storyBoss?'skull':'star',enemyKind:kind,done:false,parents:[],children:[]};
+   activeNode=null;
+   hide();
+   document.getElementById('rogueMap')?.classList.remove('visible');
+   document.getElementById('startOverlay')?.classList.add('hidden');
+   document.getElementById('moonTestMenu')?.classList.add('hidden');
+   document.getElementById('moonLaunch')?.classList.add('hidden');
+   beginFight(encounter);
+   // Previous boss relics carry forward, rather than resetting after Victory → Loot.
+   runRelics=[...(storyProfile.relics||[])];
+   if(runRelics.includes('Io Ember'))state.block+=4;
+   if(runRelics.includes('Callisto Shield'))state.block+=6;
+   if(runRelics.includes('Triton Fang'))state.strength+=1;
+   if(runRelics.includes('Titan Heart')){state.maxHP+=6;state.hp+=6;}
+   if(runRelics.includes('Enceladus Tear'))state.hp=Math.min(state.maxHP,state.hp+3);
+   render();
+   // Prevent legacy delayed map calls from concealing the single-encounter battlefield.
+   map.classList.remove('visible');
+   document.getElementById('rogueMap')?.classList.remove('visible');
+   document.getElementById('startOverlay')?.classList.add('hidden');
+   // Keep regular Tower Acts I & II unchanged: no makeMap(), select(), or map progression here.
+   log('ACT II STORY · SINGLE '+(storyBoss?'BOSS':'COMBAT')+' ENCOUNTER · '+combatHero.toUpperCase()+' · '+DECKS[chosenDeck].title);
+   return true;
+ },
+ useItem(key){
+  if(!mdA2StoryDungeon||!state||state.hp<=0||state.enemyHP<=0)return false;
+  if(key==='bread')state.hp=Math.min(state.maxHP,state.hp+8);
+  else if(key==='tonic')state.hp=Math.min(state.maxHP,state.hp+15);
+  else if(key==='stabilizer')state.block+=15;
+  else return false;
+  log('STORY ITEM USED · '+key.toUpperCase());render();return true;
+ },
+ getStatus(){return {active:mdA2StoryDungeon,kind:mdA2StoryKind,character:hero,grimoire:chosenDeck}}
+};
+
 
 })();
 
@@ -11754,6 +12156,9 @@ body.md-mopsy-open{overflow:hidden;}
     return latest;
   }
   function ready() {
+    // Story Mode saves its own chapters/loadout and uses direct boss battles without
+    // the Tower's map rows. A Tower checkpoint here fails schema validation.
+    if(document.body.classList.contains('md-act2-combat') || document.body.classList.contains('md-story-act2'))return false;
     if (mode !== 'live' || restoring || writing || conflict || !runAPI()?.hasRun?.()) return false;
     const info = runAPI().getStatus?.() || {};
     return !info.preview && combatAPI()?.readyToSave?.() !== false && runAPI().readyToSave?.() !== false;
@@ -11802,7 +12207,7 @@ body.md-mopsy-open{overflow:hidden;}
   }
   function checkpoint(reason = 'checkpoint') {
     lastReason = reason;
-    if (queued || restoring || mode !== 'live') return;
+    if (queued || restoring || mode !== 'live' || !ready()) return;
     queued = true;
     microtask(() => { queued = false; flush(lastReason); });
   }
@@ -12342,12 +12747,17 @@ html:has(#mdRewardOverlay:not([hidden])), body.md-rewards-open { overflow: hidde
  function targetNeeded(id){
    const card=CARDS?.[id];if(!card)return false;
    const base=(typeof cardBaseId==='function'?cardBaseId(id,card):card.evolutionBaseId||card.baseId||id);
+   // Only cards explicitly aimed at an enemy need the drag/tap target flow.
+   // Skill and Power descriptions can mention Poison, Weak or damage as a
+   // passive/synergy while the card itself heals, blocks or buffs the caster.
+   // Do not infer enemy targeting from that descriptive text.
    if(SELF_IDS.has(base))return false;
    if(base==='packtactics')return state?.summon>0;
    if(TARGET_IDS.has(base))return true;
+   if(card.type!=='Attack')return false;
    const desc=String(card.desc||'');
    if(/random (?:enemy|target|foe)/i.test(desc))return false;
-   return card.type==='Attack'||/\b(?:deal|apply|inflict|trigger)\b.{0,80}\b(?:damage|poison|weak|bleed|vulnerable)\b/i.test(desc);
+   return true;
  }
  function cardForElement(el){
    const h=document.getElementById('hand');if(!h||!el)return null;
@@ -12386,7 +12796,7 @@ html:has(#mdRewardOverlay:not([hidden])), body.md-rewards-open { overflow: hidde
    const pack=actor.querySelector('.wolf-pack-art');
    if(pack&&getComputedStyle(pack).display!=='none'){
      const matches=[...pack.querySelectorAll('.wolf-unit:not(.defeated):not(:disabled)')]
-       .filter(w=>{const img=w.querySelector('img');return img&&visiblePixel(img,x,y)});
+       .filter(w=>{const img=w.querySelector('img');if(!img)return false;const r=img.getBoundingClientRect();return x>=r.left&&x<=r.right&&y>=r.top&&y<=r.bottom});
      if(matches.length){
        matches.sort((a,b)=>{const ar=a.querySelector('img').getBoundingClientRect(),br=b.querySelector('img').getBoundingClientRect();return Math.abs(x-(ar.left+ar.width/2))-Math.abs(x-(br.left+br.width/2))});
        return matches[0];
@@ -12423,21 +12833,9 @@ html:has(#mdRewardOverlay:not([hidden])), body.md-rewards-open { overflow: hidde
      x=r.left+(r.width-w)/2;
      y=r.top+(r.height-h)*yAlign;
    }
-   // Only use the actually painted image area, not the large transparent CSS box.
-   const cx=x+w*.5,cy=y+h*.5;
-   // Ty is a large fully isolated sprite. Avoid 161 canvas readbacks on
-   // every pointermove; the stable target center is both accurate and fast.
-   if(state?.enemyType==='ty'&&target?.id==='enemyActor')return {x:cx,y:cy};
-   if(img?.complete&&img.naturalWidth){
-     for(let i=0;i<=160;i++){
-       const t=i/160,px=start.x+(cx-start.x)*t,py=start.y+(cy-start.y)*t;
-       if(visiblePixel(img,px,py))return {x:px,y:py};
-     }
-   }
-   // A safe fallback: intersection with the nearest edge of the painted area.
-   const dx=cx-start.x,dy=cy-start.y;
-   const scale=Math.max(Math.abs(dx)/Math.max(1,w*.48),Math.abs(dy)/Math.max(1,h*.48),1);
-   return {x:cx-dx/scale,y:cy-dy/scale};
+   // Use the displayed artwork center. Repeated per-pixel canvas readbacks
+   // during pointer movement were stalling drag targeting on detailed sprites.
+   return {x:x+w*.5,y:y+h*.5};
  }
  function handAnchor(card){
    const r=card.getBoundingClientRect();
@@ -12574,7 +12972,13 @@ html:has(#mdRewardOverlay:not([hidden])), body.md-rewards-open { overflow: hidde
    installFilter();createOverlay();
    const arena=document.getElementById('arena');if(arena&&!document.getElementById('md-drag-instruction')){let n=document.createElement('div');n.id='md-drag-instruction';n.textContent='';arena.appendChild(n)}
    document.addEventListener('pointerdown',down,true);
-   document.addEventListener('pointermove',e=>{if(e.pointerType!=='touch'&&active)draw(e.clientX,e.clientY)},true);
+   let pointerFrame=0,lastPointerX=0,lastPointerY=0;
+   document.addEventListener('pointermove',e=>{
+     if(e.pointerType==='touch'||!active)return;
+     lastPointerX=e.clientX;lastPointerY=e.clientY;
+     if(pointerFrame)return;
+     pointerFrame=requestAnimationFrame(()=>{pointerFrame=0;if(active)draw(lastPointerX,lastPointerY)});
+   },true);
    document.addEventListener('pointerup',e=>{if(e.pointerType!=='touch')finish(e.clientX,e.clientY)},true);
    document.addEventListener('pointercancel',e=>{if(e.pointerType!=='touch')cleanup()},true);
    document.addEventListener('touchstart',touchStart,{capture:true,passive:true});
@@ -12590,13 +12994,19 @@ html:has(#mdRewardOverlay:not([hidden])), body.md-rewards-open { overflow: hidde
      if(e.target.closest?.('.inspect-trigger'))return;
      const data=cardForElement(e.target);if(!data)return;
      e.preventDefault();e.stopImmediatePropagation();
-     if(Date.now()<suppressClickUntil||!ready())return;
-     if(targetNeeded(data.id)){
+     if(!ready())return;
+     const needsTarget=targetNeeded(data.id);
+     if(needsTarget){
+       // Only enemy-targeted cards use the temporary drag-click guard.
+       if(Date.now()<suppressClickUntil)return;
        if(active)cleanup();
        start(data.card,data.index,data.card.getBoundingClientRect().left+data.card.offsetWidth*.5,data.card.getBoundingClientRect().top,true);
        message('TAP AN ENEMY TO CAST · CANCEL TO RETURN');return;
      }
-     if(CARDS[data.id]?.cost>state.energy){message('NOT ENOUGH MANA');return;}
+     // A self-use card must cast on one click, even after a drag was cancelled
+     // or an enemy-targeted card is still armed for mobile tap-to-target.
+     if(active)cleanup();
+     if(mdCurrentCardCost(CARDS[data.id])>state.energy){message('NOT ENOUGH MANA');return;}
      try{play(data.index)}catch(err){console.error('Self cast:',err);message('COULD NOT CAST')}
    },true);
    document.addEventListener('keydown',e=>{if(e.key==='Escape'&&active){cleanup();cancelHold();}});
@@ -14122,11 +14532,11 @@ async function openIntro(){
  voiceStarting=false;
  raf=requestAnimationFrame(frame);
 }
-function closeIntro(){
+function closeIntro(enterChapter=false){
  clearTimers();isPlaying=false;ending=false;voiceStarting=false;
  voice.pause();try{voice.currentTime=0;}catch(_){}
  overlay.classList.remove('md-story-visible');finish.classList.remove('is-visible');
- line.textContent='';if(launch)launch.classList.remove('hidden');
+ line.textContent='';if(launch)launch.classList.toggle('hidden',!!enterChapter);
  window.MoonlightSoundtrack?.resumeFromStory?.();
  window.MoonlightSoundtrack?.setMode?.('main');
 }
@@ -14136,8 +14546,36 @@ if(storyButton){storyButton.onclick=openIntro;storyButton.setAttribute('aria-lab
 document.getElementById('mdStoryExit').addEventListener('click',closeIntro);
 document.getElementById('mdStoryReturn').addEventListener('click',closeIntro);
 document.getElementById('mdStoryReplay').addEventListener('click',openIntro);
-document.getElementById('mdStoryToChapter').addEventListener('click',()=>{closeIntro();window.MoonStoryChapter?.start();});
-document.getElementById('mdStorySkipPrologue').addEventListener('click',()=>{closeIntro();window.MoonStoryChapter?.start();});
+function mdGoDirectlyToChapterOne(e){
+ e?.preventDefault();e?.stopPropagation();e?.stopImmediatePropagation?.();
+ // The Chapter One bundle must be present before ending the prologue.
+ // Do not expose the menu on a failed or delayed handoff.
+ const chapter=window.MoonStoryChapter;
+ if(typeof chapter?.start!=='function'){
+  indicator.textContent='CHAPTER ONE IS STILL LOADING';
+  console.error('Chapter One controller not ready for Skip Prologue');
+  return;
+ }
+ clearTimers();isPlaying=false;ending=false;voiceStarting=false;
+ voice.pause();try{voice.currentTime=0;}catch(_ignored){}
+ finish.classList.remove('is-visible');
+ try{
+  chapter.start();
+  const chapterScreen=document.getElementById('mscOverlay');
+  if(!chapterScreen?.classList.contains('msc-active'))throw new Error('Chapter One did not activate');
+  overlay.classList.remove('md-story-visible');
+  line.textContent='';
+  if(launch)launch.classList.add('hidden');
+  document.getElementById('startOverlay')?.classList.add('hidden');
+  // Chapter One owns soundtrack state after this point.
+ }catch(err){
+  console.error('Could not enter Chapter One:',err);
+  overlay.classList.add('md-story-visible');
+  indicator.textContent='COULD NOT OPEN CHAPTER ONE — TRY SKIP AGAIN';
+ }
+}
+document.getElementById('mdStoryToChapter').addEventListener('click',mdGoDirectlyToChapterOne);
+document.getElementById('mdStorySkipPrologue').addEventListener('click',mdGoDirectlyToChapterOne);
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&overlay.classList.contains('md-story-visible'))closeIntro();});
 window.MoonStoryOpening={play:openIntro,exit:closeIntro,sceneCues:SCENE_CUES.slice()};
 })();
@@ -14224,7 +14662,7 @@ body:has(#moonLaunch.hidden) #mdChapterOneTestButton{display:none!important}
 <div id="mscDialogueWrap"><img id="mscDialogueFrame" alt=""/><div id="mscSpeaker"></div><div id="mscText"></div><button id="mscContinue" type="button" aria-label="Continue dialogue or reveal full sentence"></button></div>
 <div id="mscChoices" role="group" aria-label="Choose a response"></div>
 <div id="mscEnd"><h2 id="mscEndTitle"></h2><p id="mscEndText"></p><button id="mscEndAgain" type="button">RESTART CHAPTER ONE</button><button id="mscEndMenu" type="button">RETURN TO MAIN MENU</button></div>
-</div></section><script src="assets/scripts/md-story-bundle.js"></script><!-- Ty dedicated battle testing: launches the production encounter, without replacing boss logic. -->
+</div></section><script src="assets/scripts/md-story-bundle.js"></script><script defer src="assets/scripts/md-act2-story-bundle.js"></script><!-- Ty dedicated battle testing: launches the production encounter, without replacing boss logic. -->
 <style id="md-ty-dedicated-test-style">
 #mdTyQuickTest{position:fixed;left:12px;bottom:56px;z-index:1100;padding:9px 15px;background:linear-gradient(130deg,#51236f,#2b103e);color:#fff1c6;border:2px solid #e4b960;border-radius:10px;font:700 13px Georgia,serif;box-shadow:0 3px 14px #0a0515a8;cursor:pointer}
 #mdTyQuickTest:hover,#mdTyTestPanel button:hover{filter:brightness(1.2)}
@@ -14320,6 +14758,136 @@ if(window.MDAutosave?.returnToTitle){window.MDAutosave.returnToTitle();return;}
 window.alert('Return to title is unavailable until the save manager is ready.');
 }));};
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',installMap,{once:true});else installMap();
+})();
+</script>
+<style id="md-v19-story-layout">
+/* The same Chapter One dialogue frame, no label for narration and no Back/Continue controls. */
+#mdAct2Overlay #md2Speaker{left:9.6%!important;top:18.8%!important;width:30%!important;text-align:center!important;font-size:clamp(13px,1.35vw,21px)!important;line-height:1.15!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#mdAct2Overlay .md2Text{cursor:pointer;pointer-events:auto!important}
+#mdAct2Overlay .md2Bottom{pointer-events:none!important}
+#mdAct2Overlay #md2Dialogue{pointer-events:auto;cursor:pointer;user-select:none}
+#mdAct2Overlay #md2Buttons:empty,#mdAct2Overlay .md2Actions:has(#md2Buttons:empty){display:none!important}
+#mdAct2Overlay .md2Panel.md2-has-choices #md2Dialogue{font-size:clamp(16px,1.5vw,24px)!important;line-height:1.3}
+#mdAct2Overlay .md2Panel.md2-has-choices .md2Actions{bottom:107%!important;z-index:15}
+#mdAct2Overlay .md2Panel.md2-has-choices .md2Actions #md2Buttons button{min-height:40px;font-size:clamp(14px,1.22vw,19px)}
+#mdAct2Overlay #md2Exit{pointer-events:auto}
+.mdsp-modal[hidden]{display:none!important}
+.mdsp-modal{position:fixed;inset:0;background:#080314e8;z-index:2147483645;display:flex;align-items:center;justify-content:center;padding:16px;font-family:Georgia,serif;color:#ffebc6}
+.mdsp-card{width:min(750px,96vw);max-height:89vh;overflow:auto;border:2px solid #f1c779;border-radius:18px;background:linear-gradient(150deg,#361547,#130823);box-shadow:0 0 40px #5a2d93ba;padding:23px;text-align:center}
+.mdsp-card h2,.mdsp-card h3{font-family:Georgia,serif;color:#ffda9a;margin:8px 0 15px}
+.mdsp-hero,.mdsp-grimoires{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:16px}
+.mdsp-grimoires{grid-template-columns:repeat(3,minmax(0,1fr))}
+.mdsp-card button{cursor:pointer;color:#fff1d3;background:linear-gradient(#622779,#321444);border:1px solid #d8b36d;border-radius:8px;padding:11px}
+.mdsp-card button.chosen{border:3px solid #ffd986;background:#874594;box-shadow:0 0 12px #d588ff}
+.mdsp-card button:disabled{opacity:.4}
+.mdsp-card button.mdsp-confirm{min-width:200px;background:linear-gradient(#9957a7,#602877);font-weight:bold}
+#mdStoryInventoryButton{position:fixed;top:65px;right:12px;z-index:2147483641;padding:8px 12px;border:1px solid #f3ca7b;background:#401657;color:#ffedb3;border-radius:10px;font:700 12px Georgia,serif;cursor:pointer;display:none}
+body:has(#mscOverlay.msc-active) #mdStoryInventoryButton,body.md-story-act2 #mdStoryInventoryButton,body.md-act2-combat #mdStoryInventoryButton{display:block}
+body.md-story-act2 #mdStoryInventoryButton{top:46px}
+.mdsp-item{display:flex;gap:12px;align-items:center;text-align:left;border-bottom:1px solid #65496f;padding:10px 0}
+.mdsp-item img{width:48px;height:48px;flex:none}
+.mdsp-item div{flex:1}.mdsp-item small{display:block;color:#dcbde9;margin-top:3px}
+.mdsp-note{font-size:13px;color:#dec4e6}
+.md-story-loot-cards{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:15px auto}
+.md-story-loot-cards button{max-width:230px;min-height:100px;display:flex;flex-direction:column;gap:10px;align-items:center;justify-content:center}
+.md-story-loot-cards small{font-size:12px;font-weight:400}
+@media(max-width:620px){.mdsp-grimoires{grid-template-columns:repeat(2,minmax(0,1fr))}#mdAct2Overlay #md2Speaker{top:17%!important;font-size:12px!important}}
+</style><script id="md-story-profile-v19">/* Moonlight Duel v1.9 · persistent Story Mode loadout, usable supplies and inventory */
+(()=>{'use strict';
+const KEY='MoonlightDuel.StoryProfile.v1';
+const LOADOUTS={poison:'Venom',water:'Tidal',chaos:'Chaos',beast:'Beastmaster',melee:'Blademaster',ranger:'Ranger'};
+const ICONS={
+ bread:`<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><path d="M13 48Q9 32 24 27Q27 14 43 18Q57 12 64 31Q76 38 64 57L21 59Z" fill="#a75a27" stroke="#f6c878" stroke-width="3"/><path d="M16 44Q29 24 42 31Q59 20 67 39" fill="none" stroke="#ffe0a0" stroke-width="7"/><path d="M31 37L26 44M47 34l-4 9" stroke="#8e4b1f" stroke-width="3" stroke-linecap="round"/></svg>`,
+ potion:`<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><path d="M32 7H49V22H57V30L66 62Q63 71 40 71Q16 71 14 62L25 30V22H32Z" fill="#7e3195" stroke="#ffe09b" stroke-width="3"/><path d="M19 53Q38 45 60 52L63 63Q43 73 18 63Z" fill="#ff79cf"/><path d="M30 16H53" stroke="#f0ba62" stroke-width="7"/><circle cx="40" cy="51" r="7" fill="#fff8c4" opacity=".9"/></svg>`,
+ relic:`<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><path d="M40 4L62 27L57 58L40 75L22 58L17 27Z" fill="#5e278c" stroke="#f7c969" stroke-width="6"/><path d="M40 9L50 29L40 64L29 29Z" fill="#d68bff"/><path d="M25 35L55 35" stroke="#fff0b2" stroke-width="4"/></svg>`,
+ coins:`<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="40" r="32" fill="#b87926" stroke="#f7d685" stroke-width="5"/><circle cx="40" cy="40" r="25" fill="#dba03f" stroke="#ffe39f" stroke-width="2"/><path d="M48 20A21 21 0 1 0 52 57A17 17 0 1 1 48 20" fill="#fff2b7"/></svg>`,
+ card:`<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect x="17" y="7" width="47" height="65" rx="5" fill="#43196c" stroke="#f7c969" stroke-width="4"/><path d="M40 20l13 18-13 22-13-22Z" fill="#d47aff" stroke="#ffe4b8" stroke-width="3"/></svg>`
+};
+function icon(name){return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(ICONS[name]||ICONS.relic);}
+const ITEM_DATA={bread:{name:'Village Mother’s Bread',effect:'Restore 8 HP during a Story Mode battle.',icon:'bread'},tonic:{name:'Mopsy’s Healing Tonic',effect:'Restore 15 HP during a Story Mode battle.',icon:'potion'},stabilizer:{name:'Mopsy’s Stable Potion',effect:'Gain 15 Block in a Story Mode battle.',icon:'potion'}};
+let profile=null;try{profile=JSON.parse(localStorage.getItem(KEY)||'null');}catch(_){};
+let modal=null,chooser=null,inventoryButton=null;
+const clone=v=>JSON.parse(JSON.stringify(v));
+const normalize=(p)=>{if(!p||!LOADOUTS[p.grimoire]||!['isa','rei'].includes(p.character))return null;
+ return {character:p.character,grimoire:p.grimoire,coins:Math.max(0,Number(p.coins)||0),relics:Array.isArray(p.relics)?p.relics:[],items:p.items||{},unlocked:p.unlocked||{},lootCards:Array.isArray(p.lootCards)?p.lootCards:[],awarded:p.awarded||{},source:p.source||'story'};};
+profile=normalize(profile);
+function save(){if(profile)try{localStorage.setItem(KEY,JSON.stringify(profile));}catch(e){console.warn('Story profile could not be saved',e);}}
+function get(){return profile&&clone(profile);}
+function snapshot(){return get();}
+function restore(p){const q=normalize(p);if(q){profile=q;save();renderInventory();}}
+function ensure(key,count=1){if(!profile||profile.unlocked[key])return;profile.unlocked[key]=true;profile.items[key]=(profile.items[key]||0)+count;save();}
+function syncFlags(flags){if(!profile||!flags)return;if(flags.bread)ensure('bread');if(flags.tonic_reward)ensure('tonic');if(flags.stable_potion)ensure('stabilizer');}
+function syncActI(act){if(!profile||!act)return;syncFlags(act.flags);if(!profile.unlocked.act1Coins){profile.coins=Math.max(profile.coins,Math.max(0,Number(act.coins)||0));profile.unlocked.act1Coins=true;save();}}
+function awardBoss(kind,relic,card){if(!profile||profile.awarded[kind])return false;profile.awarded[kind]=true;profile.coins+=100;if(relic&&!profile.relics.includes(relic))profile.relics.push(relic);if(card)profile.lootCards.push(card);save();renderInventory();return true;}
+function canUse(key){return !!profile?.items?.[key]&&document.body.classList.contains('md-act2-combat');}
+function useItem(key){if(!canUse(key))return false;const result=window.MoonAct2Combat?.useItem?.(key);if(!result)return false;profile.items[key]--;save();renderInventory();return true;}
+function button(label,fn,klass){const b=document.createElement('button');b.type='button';b.textContent=label;b.className=klass||'mdsp-button';b.addEventListener('click',fn);return b;}
+function showInventory(){if(!profile)return;syncFlags(window.MoonStoryChapter?.getState?.()||{});try{syncActI(JSON.parse(localStorage.getItem('MoonlightDuel.ActOne.latest')||'null'));}catch(_){}
+ if(!modal){modal=document.createElement('div');modal.id='mdStoryInventoryPanel';modal.className='mdsp-modal';modal.innerHTML='<section class="mdsp-card" role="dialog" aria-label="Story Mode Inventory"><header><h2>☾ Story Inventory</h2></header><div class="mdsp-contents"></div></section>';document.body.appendChild(modal);modal.addEventListener('click',e=>{if(e.target===modal)modal.hidden=true;});}
+ modal.hidden=false;renderInventory();}
+function renderInventory(){if(!modal||modal.hidden||!profile)return;
+ const box=modal.querySelector('.mdsp-contents');box.replaceChildren();
+ const head=document.createElement('p');head.textContent=(profile.character==='isa'?'Isa':'Rei')+' · '+LOADOUTS[profile.grimoire]+' Grimoire · '+profile.coins+' Moon Coins';box.append(head);
+ for(const [key,item] of Object.entries(ITEM_DATA)){
+  const n=profile.items[key]||0;if(!n)continue;
+  const line=document.createElement('div');line.className='mdsp-item';
+  const image=document.createElement('img');image.src=icon(item.icon);image.alt='';
+  const details=document.createElement('div');details.innerHTML='<strong>'+item.name+' ×'+n+'</strong><small>'+item.effect+'</small>';
+  const use=button('Use',()=>useItem(key));use.disabled=!canUse(key);
+  line.append(image,details,use);box.append(line);
+ }
+ const note=document.createElement('p');note.className='mdsp-note';note.textContent='Items can be used in Story Mode boss combat. Story rewards and loot remain with this character and Grimoire.';box.append(note);
+ if(profile.relics.length){const p=document.createElement('p');p.textContent='Relics: '+profile.relics.join(' · ');box.append(p);}
+ if(profile.lootCards.length){const p=document.createElement('p');p.textContent='Cards earned: '+profile.lootCards.length+' · '+profile.lootCards.join(', ');box.append(p);}
+ box.append(button('Close',()=>{modal.hidden=true;}));
+}
+function installInventory(){if(inventoryButton)return;inventoryButton=button('✦ INVENTORY',showInventory);inventoryButton.id='mdStoryInventoryButton';document.body.appendChild(inventoryButton);}
+function select(next){if(profile)return next?.();
+ if(!chooser){chooser=document.createElement('div');chooser.id='mdStoryLoadout';chooser.className='mdsp-modal';chooser.innerHTML='<section class="mdsp-card mdsp-chooser" role="dialog" aria-label="Choose your Story Mode hero and Grimoire"><h2>☾ Choose your Story Mode Hero</h2><p>This character and Grimoire are yours for the entire story, including the final battle.</p><div class="mdsp-hero"></div><h3>Choose a Grimoire</h3><div class="mdsp-grimoires"></div><footer></footer></section>';document.body.appendChild(chooser);}
+ const heroes=chooser.querySelector('.mdsp-hero'),grim=chooser.querySelector('.mdsp-grimoires'),foot=chooser.querySelector('footer');heroes.replaceChildren();grim.replaceChildren();foot.replaceChildren();
+ let selectedHero='isa',selectedDeck='poison';const heroControls=[];const grimControls=[];
+ function update(){heroControls.forEach(([id,b])=>b.classList.toggle('chosen',id===selectedHero));grimControls.forEach(([id,b])=>b.classList.toggle('chosen',id===selectedDeck));}
+ for(const [id,label] of [['isa','ISA · Moonlight Healer'],['rei','REI · Eternal Archmage']]){const b=button(label,()=>{selectedHero=id;update();});heroes.append(b);heroControls.push([id,b]);}
+ for(const [id,label] of Object.entries(LOADOUTS)){const b=button(label,()=>{selectedDeck=id;update();});grim.append(b);grimControls.push([id,b]);}
+ foot.append(button('Begin Story',()=>{profile={character:selectedHero,grimoire:selectedDeck,coins:0,relics:[],items:{},unlocked:{},lootCards:[],awarded:{},source:'story'};save();chooser.hidden=true;installInventory();next?.();},'mdsp-confirm'));
+ chooser.hidden=false;update();}
+function intercept(id,fn){const el=document.getElementById(id);if(!el)return;el.addEventListener('click',e=>{if(profile)return;e.stopImmediatePropagation();e.preventDefault();select(fn);},true);}
+function setup(){installInventory();intercept('moonLaunchStory',()=>window.MoonStoryOpening?.play?.());intercept('md2TestLaunch',()=>window.MoonAct2Story?.start?.({test:true}));intercept('md2Launch',()=>window.MoonAct2Story?.start?.());}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>setTimeout(setup,0),{once:true});else setTimeout(setup,0);
+window.MDStoryProfile={get,snapshot,restore,syncFlags,syncActI,awardBoss,installInventory,showInventory,renderInventory,useItem,select,icon,LOADOUTS,ITEM_DATA};
+})();
+</script>
+<script id="md-v20-transition-bridge">
+(()=>{'use strict';
+ const IMAGES=["assets/ui/loading-isa.webp","assets/ui/loading-athena.webp","assets/ui/loading-mopsy.webp","assets/ui/loading-rei.webp"];
+ let layer,photo,busy=false,timer=0,lastIndex=-1;
+ function build(){
+  if(layer)return;
+  layer=document.createElement('div');layer.id='mdEncounterLoading';
+  layer.setAttribute('role','status');layer.setAttribute('aria-label','Loading the next scene');
+  layer.style.cssText='position:fixed;inset:0;z-index:2147483646;background:#000;display:none;align-items:center;justify-content:center;overflow:hidden;pointer-events:auto;';
+  photo=document.createElement('img');photo.alt='Moonlight Duel · loading';
+  photo.style.cssText='display:block;max-width:100vw;max-height:100dvh;width:auto;height:auto;object-fit:contain;image-rendering:auto;';
+  layer.appendChild(photo);document.body.appendChild(layer);
+ }
+ function randomIndex(){
+  if(IMAGES.length<=1)return 0;
+  if(lastIndex<0)return Math.floor(Math.random()*IMAGES.length);
+  const offset=1+Math.floor(Math.random()*(IMAGES.length-1));
+  return (lastIndex+offset)%IMAGES.length;
+ }
+ function play(onDone){
+  const done=typeof onDone==='function'?onDone:()=>{};
+  if(busy){done();return false;}
+  build();busy=true;
+  lastIndex=randomIndex();
+  photo.src=IMAGES[lastIndex];
+  layer.style.display='flex';
+  clearTimeout(timer);
+  timer=setTimeout(()=>{layer.style.display='none';busy=false;try{done();}catch(err){console.error('Scene resume failed',err)}},1900);
+  return true;
+ }
+ window.MDEncounterTransition={play,get active(){return busy},images:IMAGES.length};
 })();
 </script>
 </body></html>
