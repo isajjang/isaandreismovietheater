@@ -6056,7 +6056,7 @@ function mdTravelToActTwo(){
 }
 
 let mdPopupRevision=0,mdEventPreview=null;
-const MD_EVENT_NAMES=["The Moonlit Mirror", "The Wandering Witch", "The Forgotten Altar", "The Sleeping Familiar", "The Celestial Tarot", "The Hungry Grimoire", "The Forgotten Lovers", "The Blood Moon Altar", "The Merchant's Last Customer", "The Moonlit Bathhouse"];
+const MD_EVENT_NAMES=["The Moonlit Mirror", "The Wandering Witch", "The Forgotten Altar", "The Sleeping Familiar", "The Celestial Tarot", "The Hungry Grimoire", "The Forgotten Lovers", "The Blood Moon Altar", "The Merchant's Last Customer", "The Moonlit Bathhouse", "Blessing of the Moon"];
 const random=(a)=>a[Math.floor(Math.random()*a.length)];
 const shuffle=a=>a.slice().sort(()=>Math.random()-.5);
 function el(tag,attrs,parent=svg){const e=document.createElementNS(NS,tag);Object.entries(attrs).forEach(([k,v])=>e.setAttribute(k,v));parent.appendChild(e);return e;}
@@ -6341,7 +6341,7 @@ function offerEvent(n,options={}){
   const events=[
     {title:'The Moonlit Mirror',art:'f088704b9201acc6f76cd77a.webp',desc:'Your reflection smiles before you do. What will you surrender for power?',choices:[{label:'Embrace Reflection · +1 mana for 2 battles · +25 corruption',ok:()=>{bonusManaBattles=2;addCorruption(25)}},{label:'Shatter Mirror · Gain a lunar relic',ok:()=>{mdEquipRelic('Mirror Shard',mdEventReplacement)}},{label:'Walk Away · Purify 10 corruption',ok:()=>addCorruption(-10)}]},
     {title:'The Wandering Witch',art:'ee9987bc7cdd85541279ec4b.webp',desc:'An enigmatic merchant offers dangerous bargains under a violet lantern.',choices:[{label:'Healing Draught · 30 coins · Heal 20 HP',cost:30,ok:()=>state.hp=Math.min(state.maxHP,state.hp+20)},{label:'Moon Relic · 60 coins · +1 permanent Strength',cost:60,ok:()=>{mdEquipRelic('Witch’s Charm',mdEventReplacement)}},{label:'Steal Forbidden Magic · +30 corruption · +2 Strength',ok:()=>{state.mapStrength=(state.mapStrength||0)+2;addCorruption(30)}}]},
-    {title:'The Forgotten Altar',art:'4a6fe7c67b70ee017f63ba23.webp',desc:'A silent celestial altar asks for a sacrifice.',choices:[{label:'Offer Blood · Lose 15 HP · +5 maximum HP',disabled:()=>state.hp<=15,reason:'Requires at least 16 HP',ok:()=>{state.hp-=15;state.maxHP+=5}},{label:'Offer Coins · 40 coins · Purify 30 corruption',cost:40,ok:()=>addCorruption(-30)},{label:'Refuse the Altar · +10 corruption',ok:()=>addCorruption(10)}]},
+    {title:'The Forgotten Altar',art:'4a6fe7c67b70ee017f63ba23.webp',desc:'A silent celestial altar asks for a sacrifice.',choices:[{label:'Offer Blood · Lose 15 HP · +5 maximum HP',disabled:()=>state.hp<=15,reason:'Requires at least 16 HP',ok:()=>{state.hp-=15;mdGrantMaximumHP(5)}},{label:'Offer Coins · 40 coins · Purify 30 corruption',cost:40,ok:()=>addCorruption(-30)},{label:'Refuse the Altar · +10 corruption',ok:()=>addCorruption(10)}]},
     {title:'The Sleeping Familiar',art:'a29a1cc4de12af95c0fc82bf.webp',desc:'A tiny lunar spirit sleeps beside a cracked crystal.',choices:[{label:'Awaken Familiar · Deal 3 bonus damage for 3 battles',ok:()=>{familiarBattles=3}},{label:'Absorb Magic · +40 coins · +20 corruption',ok:()=>{addCoins(40);addCorruption(20)}},{label:'Protect It · Heal 12 HP',ok:()=>{state.hp=Math.min(state.maxHP,state.hp+12)}}]},
     {title:'The Celestial Tarot',art:'416170cf124037924ab1e271.webp',desc:'Three shimmering cards hang in the air, awaiting your choice.',choices:[{label:'The Star · Gain 25 moon coins',ok:()=>addCoins(25)},{label:'The Moon · +1 Strength · +20 corruption',ok:()=>{state.mapStrength=(state.mapStrength||0)+1;addCorruption(20)}},{label:'The Eclipse · Gain 60 coins, lose 12 HP',ok:()=>{addCoins(60);state.hp=Math.max(1,state.hp-12)}}]},
 
@@ -6351,7 +6351,7 @@ function offerEvent(n,options={}){
       {label:'Refuse Its Hunger · Lose 10 HP',ok:()=>{state.hp=Math.max(0,state.hp-10)}}
     ]},
     {title:'The Forgotten Lovers',art:'event_lovers',newEvent:true,desc:'Beneath a ruined archway, two translucent women sit with their hands intertwined. One asks you whether love can survive death.',choices:[
-      {label:'Promise Them It Does · Gain 8 permanent maximum HP',ok:()=>{state.maxHP+=8;state.hp+=8}},
+      {label:'Promise Them It Does · Gain 8 permanent maximum HP',ok:()=>{mdGrantMaximumHP(8);state.hp=Math.min(state.maxHP,state.hp+8)}},
       {label:'Tell Them Truth Is Uncertain · Remove 10 Corruption · Draw 1 extra card in your next combat',ok:()=>{addCorruption(-10);state.eventBonusDrawBattles=1}},
       {label:'Ask For Their Treasure · Gain 30 Moon Coins · Gain 15 Corruption',ok:()=>{addCoins(30);addCorruption(15)}}
     ]},
@@ -6375,10 +6375,17 @@ function offerEvent(n,options={}){
     ]},
   ];
   const explicitIndex=Number.isInteger(options.index)?options.index:n.eventState?.index;
-  const index=Number.isInteger(explicitIndex)?Math.max(0,Math.min(events.length-1,explicitIndex)):Math.floor(Math.random()*events.length);
-  const e=events[index];
+  const index=Number.isInteger(explicitIndex)?Math.max(0,Math.min(MD_EVENT_NAMES.length-1,explicitIndex)):(Math.random()<0.08?MD_EVENT_NAMES.length-1:Math.floor(Math.random()*events.length));
+  let e=events[index];
   if(!options.onDone)n.eventState=n.eventState||{kind:'event',index,committed:false};
-   const choices=e.newEvent?e.choices:[...e.choices,{label:'Drink From The Moonwell · 25 Moon Coins · Gain 8 maximum HP and heal 8',cost:25,ok:()=>{state.maxHP+=8;state.hp=Math.min(state.maxHP,state.hp+8)}}];
+   if(index===MD_EVENT_NAMES.length-1){
+     e={title:'Blessing of the Moon',art:'4a6fe7c67b70ee017f63ba23.webp',newEvent:true,desc:'A rare Moon Goddess shrine offers the gift of life, or life bought with corruption.',choices:[
+       {label:'Moon’s Embrace · +10 maximum HP · Heal 5 HP',ok:()=>{mdGrantMaximumHP(10);state.hp=Math.min(state.maxHP,state.hp+5)}},
+       {label:'Moon’s Sacrifice · +15 maximum HP · +10 Corruption',ok:()=>{mdGrantMaximumHP(15);addCorruption(10)}},
+       {label:'Decline the Blessing · Walk away unchanged',ok:()=>{}}
+     ]};
+   }
+   const choices=e.newEvent?e.choices:[...e.choices,{label:'Drink From The Moonwell · 25 Moon Coins · Gain 8 maximum HP and heal 8',cost:25,ok:()=>{mdGrantMaximumHP(8);state.hp=Math.min(state.maxHP,state.hp+8)}}];
    popup(e.title,e.desc,choices.map((c,choiceIndex)=>({
      label:c.label,
      disabled:()=>!!(c.disabled&&c.disabled())||!!(c.cost&&coins<c.cost)||!!(c.pick==='upgrade'&&!listRunCardCopies().some(card=>card.eligible))||!!(c.pick==='remove'&&!listRunCardCopies().length),
@@ -6511,9 +6518,21 @@ function mdPreviewEvent(index=0,settings={}){
   offerEvent({id:'event-preview-'+eventIndex,type:'chest',done:false},{index:eventIndex,onDone:mdFinishEventPreview});
   return true;
 }
+const MD_MAX_RUN_HP = 120;
+function mdGrantMaximumHP(amount) {
+  if (!state) return 0;
+  const prior = Math.max(1, Number(state.maxHP)||45);
+  const added = Math.max(0, Math.min(Math.max(0,Number(amount)||0), MD_MAX_RUN_HP-prior));
+  state.maxHP = Math.min(MD_MAX_RUN_HP, prior + added);
+  // Increasing maximum HP deliberately does NOT heal current HP.
+  runHP=state.hp;
+  updateEconomy();
+  window.MDInventory?.refresh?.();
+  return added;
+}
 function complete(n){n.done=true;current=n.id;activeNode=null;renderMap();}
 function offerMerchant(n){let mdMerchantReplacement=null;const done=()=>{complete(n);eventBox.classList.remove('open');show()};
-const menu=[{label:'Moonwell Tonic · 25 coins · +8 maximum HP and heal 8',price:25,apply:()=>{state.maxHP+=8;state.hp=Math.min(state.maxHP,state.hp+8)}},
+const menu=[{label:'Moonwell Tonic · 25 coins · +8 maximum HP and heal 8',price:25,apply:()=>{mdGrantMaximumHP(8);state.hp=Math.min(state.maxHP,state.hp+8)}},
 {label:'Restorative Elixir · 18 coins · Heal 20 HP',price:18,apply:()=>{state.hp=Math.min(state.maxHP,state.hp+20)}},
 {label:'Purifying Incense · 25 coins · Remove 25 corruption',price:25,apply:()=>addCorruption(-25)},
 {label:'Lunar Catalyst · 45 coins · Evolve a card',price:45,catalyst:true},
@@ -6534,7 +6553,7 @@ const LUNAR_LOOT=[
 {name:'Enceladus Tear',moon:'Enceladus · Saturn',rarity:'Rare',weight:35,effect:'Heal 3 HP at battle start.',apply:()=>{}},
 {name:"Rhea's Veil",moon:'Rhea · Saturn',rarity:'Rare',weight:25,effect:'Gain 5 Block at the start of mini-boss encounters.',apply:()=>{}},
 {name:'Triton Fang',moon:'Triton · Neptune',rarity:'Epic',weight:50,effect:'Start battles with +1 Strength.',apply:()=>{}},
-{name:'Titan Heart',moon:'Titan · Saturn',rarity:'Epic',weight:30,effect:'Gain 6 permanent maximum HP and heal 6.',apply:()=>{state.maxHP+=6;state.hp=Math.min(state.maxHP,state.hp+6)}},
+{name:'Titan Heart',moon:'Titan · Saturn',rarity:'Epic',weight:30,effect:'Gain 6 permanent maximum HP and heal 6.',apply:()=>{mdGrantMaximumHP(6);state.hp=Math.min(state.maxHP,state.hp+6)}},
 {name:'Miranda Mirror',moon:'Miranda · Uranus',rarity:'Epic',weight:20,effect:'Draw 1 extra opening card.',apply:()=>{}},
 {name:'Ganymede Crown',moon:'Ganymede · Jupiter',rarity:'Legendary',weight:70,effect:'Start battles with +1 mana.',apply:()=>{}},
 {name:'Charon Oath',moon:'Charon · Pluto',rarity:'Legendary',weight:30,effect:'Survive one lethal hit per run.',apply:()=>{}}
@@ -7359,6 +7378,17 @@ window.MoonlightBodyLoot={
 
 function mdLootOffers(node) {
   if (node.rewardOffers) return node.rewardOffers;
+  if(node.type === 'moon') {
+    const pool=mdAdditionSpellPool();
+    const rareIds=Object.keys(pool).filter(id=>['Rare','Epic','Legendary'].includes(pool[id].rarity));
+    const choices=shuffle(rareIds).slice(0,3);
+    node.rewardOffers=[
+      {id:'maxhp7',title:'Heart of the Fallen',badge:'Vitality',rarity:'rare',art:'bloodstone',description:'Increase maximum HP by up to 7 (cap: 120). Does not heal current HP.',claimLabel:'Gain maximum HP',disabled:state.maxHP>=MD_MAX_RUN_HP},
+      {id:'coins100',title:'Moon Coin Treasure',badge:'100 Moon Coins',rarity:'rare',art:'coin',description:'Gain 100 Moon Coins.',claimLabel:'Claim 100 coins'},
+      {id:'discovery',title:'Rare Spell Discovery',badge:'Rare or better',badgeTone:'spell',art:'discovery',description:'Choose one rare-or-better spell to add to your deck.',note:'One rare-or-better spell joins your deck.',cards:choices.length?choices:lootSpellChoices(true),claimLabel:'Choose a rare spell'}
+    ];
+    return node.rewardOffers;
+  }
   const rare = node.type === 'moon';
   const newCards = lootSpellChoices(rare);
   if (Math.random() < .025) newCards[2] = 'loot_covenant';
@@ -7409,6 +7439,14 @@ function mdClaimSelectedReward(session, selected, replacementName=null) {
       if (selected.relic) {const hpBefore=state.hp;if(!mdEquipRelic(selected.relic.name,replacementName))return {ok:false,error:'Choose a relic to replace.'};if(state.hp>hpBefore)window.MoonlightCombatAudio?.heal();}
       else addCoins(30);
       return { title: selected.title + ' claimed', description: selected.description, offer: selected, detail: selected.description };
+    }
+    if (selected.id === 'maxhp7') {
+      const gained=mdGrantMaximumHP(7);
+      return { title:'Heart of the Fallen claimed',description:'Maximum HP increased by '+gained+'.',detail:'HP: '+state.hp+' / '+state.maxHP+' (no healing)',offer:selected };
+    }
+    if (selected.id === 'coins100') {
+      addCoins(100);
+      return { title:'Moon Coin Treasure claimed',description:'Received 100 Moon Coins.',detail:'Moon Coins: '+coins,offer:selected };
     }
     if (selected.id === 'bloodstone') {
       const before = state.hp;
@@ -7707,9 +7745,9 @@ function mdInnOpen(n){
  const leave=map.querySelector('#mdInnExitButton');if(leave){leave.hidden=false;leave.onclick=()=>{mdInnClearVisual();eventBox.classList.remove('open');complete(n);busy=false;show();mdRunCheckpoint('inn-exited');};}
  const outcome=inns.claimed;
  if(outcome){
-   const resting=inns.choice==='rest';
-   const portrait=(hero==='rei'?(resting?art.reiRest:art.reiRomance):(resting?art.isaRest:art.isaRomance));
-   popup(resting?'A Well-Earned Rest':'A Night to Remember',resting?'You wake restored. +15 HP (up to your maximum).':'You emerge from the inn rejuvenated. +2 Strength for the next 3 combat encounters.',[
+   const resting=inns.choice==='rest',sacred=inns.choice==='sacred';
+   const portrait=sacred?art.menu:(hero==='rei'?(resting?art.reiRest:art.reiRomance):(resting?art.isaRest:art.isaRomance));
+   popup(sacred?'Sacred Heart':resting?'A Well-Earned Rest':'A Night to Remember',sacred?'The moon strengthens your life force. Maximum HP increases by up to 5 (cap: 120). Current HP remains unchanged.':resting?'You wake restored. +15 HP (up to your maximum).':'You emerge from the inn rejuvenated. +2 Strength for the next 3 combat encounters.',[
      {label:'Continue to the Lunar Path',action:()=>{
        mdInnClearVisual();eventBox.classList.remove('open');complete(n);busy=false;show();mdRunCheckpoint('inn-completed');
      }}
@@ -7722,6 +7760,7 @@ function mdInnOpen(n){
    popup('THE RESTFUL INN','You have reached a peaceful refuge. How will you spend your stay?',[
      {label:'Rest at the Inn · Recover 15 HP',action:()=>mdInnChoose(n,'rest')},
      {label:'Give Into Corporeal Pleasures · +2 Strength for the next 3 combats',action:()=>mdInnChoose(n,'romance')},
+     {label:'Sacred Heart · +5 maximum HP (no healing, cap 120)',disabled:()=>state.maxHP>=MD_MAX_RUN_HP,action:()=>mdInnChoose(n,'sacred')},
      {label:'Return to the Lunar Path · Leave without resting',action:()=>{
        mdInnClearVisual();eventBox.classList.remove('open');complete(n);busy=false;show();mdRunCheckpoint('inn-completed');
      }}
@@ -7733,17 +7772,18 @@ function mdInnOpen(n){
  }
 }
 function mdInnChoose(n,choice){
- if(!n||n.done||n.type!=='inn'||n.innState?.claimed||!['rest','romance'].includes(choice))return;
+ if(!n||n.done||n.type!=='inn'||n.innState?.claimed||!['rest','romance','sacred'].includes(choice))return;
  n.innState={choice,claimed:true};
  if(choice==='rest'){const before=state.hp;state.hp=Math.min(state.maxHP,state.hp+15);window.MoonlightCombatAudio?.heal();}
- else romanceBattles=3;
+ else if(choice==='romance')romanceBattles=3;
+ else if(choice==='sacred')mdGrantMaximumHP(5);
  runHP=state.hp;
  // Commit BEFORE showing the result: a reload may not grant the effect twice.
  mdRunCheckpoint('inn-'+choice+'-committed');
  mdInnOpen(n);
 }
 function select(n){if(!available(n))return;activeNode=n;if(n.type==='inn'){mdInnOpen(n);mdRunCheckpoint('inn-entered');return;}if(n.type==='merchant'){offerMerchant(n);return}if(n.type==='chest'){
-  if(!n.eventState)n.eventState=Math.random()<.15?{kind:'catalyst',committed:false}:{kind:'event',index:Math.floor(Math.random()*MD_EVENT_NAMES.length),committed:false};
+  if(!n.eventState)n.eventState=Math.random()<.15?{kind:'catalyst',committed:false}:{kind:'event',index:(Math.random()<0.08?MD_EVENT_NAMES.length-1:Math.floor(Math.random()*(MD_EVENT_NAMES.length-1))),committed:false};
   if(n.eventState.kind==='catalyst')mdOpenChestCatalyst(n);else offerEvent(n);return}
 runHP=state.hp;hide();beginFight(n)}
 // Chef escape is a completed encounter, separate from victory and defeat.
@@ -8194,6 +8234,7 @@ const restart=document.getElementById('restartBtn'),again=document.getElementByI
   window.MDMopsyBridge={
     getState:()=>state,
     getCoins:()=>coins,
+    increaseMaxHP(amount){if(!currentRun()||!state)return {ok:false,error:'No active dungeon run.'};const gained=mdGrantMaximumHP(amount);if(gained<=0)return {ok:false,error:'Maximum HP has reached 120.'};update();mdRunCheckpoint('mopsy-vitality-purchased');return {ok:true,gained,maxHP:state.maxHP,hp:state.hp};},
     getCorruption:()=>corruption,
     getQueuedMana:()=>state?.mopsyOpeningMana||0,
     getPendingOperation:()=>activeItemOperation&&!activeItemOperation.test&&activeItemOperation.persistence?JSON.parse(JSON.stringify(activeItemOperation.persistence)):null,
@@ -8231,12 +8272,12 @@ const restart=document.getElementById('restartBtn'),again=document.getElementByI
             if(index<0)return;
             if(replacementName==='Titan Heart'){demo.maxHP=Math.max(1,demo.maxHP-6);demo.hp=Math.max(1,Math.min(demo.hp,demo.maxHP));}
             demo.relics.splice(index,1);demo.relics.push(relicView(relic));
-            if(relic.name==='Titan Heart'){demo.maxHP+=6;demo.hp=Math.min(demo.maxHP,demo.hp+6);}
+            if(relic.name==='Titan Heart'){demo.maxHP=Math.min(120,demo.maxHP+6);demo.hp=Math.min(demo.maxHP,demo.hp+6);}
             window.MDInventory?.consume('relic',{testSession:demo});window.MDInventory?.refresh?.();
           },()=>{runRelics=saved;});
           return {ok:true,pending:true};
         }
-        demo.relics.push(relicView(relic));if(relic.name==='Titan Heart'){demo.maxHP+=6;demo.hp=Math.min(demo.maxHP,demo.hp+6);}
+        demo.relics.push(relicView(relic));if(relic.name==='Titan Heart'){demo.maxHP=Math.min(120,demo.maxHP+6);demo.hp=Math.min(demo.maxHP,demo.hp+6);}
       }else{
         if(runRelics.length>=MD_RELIC_LIMIT){
           mdChooseRelicSlot(relic.name,replacementName=>{
@@ -8770,7 +8811,7 @@ window.MoonAct2Combat={
    if(runRelics.includes('Io Ember'))state.block+=4;
    if(runRelics.includes('Callisto Shield'))state.block+=6;
    if(runRelics.includes('Triton Fang'))state.strength+=1;
-   if(runRelics.includes('Titan Heart')){state.maxHP+=6;state.hp+=6;}
+   if(runRelics.includes('Titan Heart')){mdGrantMaximumHP(6);state.hp=Math.min(state.maxHP,state.hp+6);}
    if(runRelics.includes('Enceladus Tear'))state.hp=Math.min(state.maxHP,state.hp+3);
    render();
    map.classList.remove('visible');document.getElementById('rogueMap')?.classList.remove('visible');document.getElementById('startOverlay')?.classList.add('hidden');
@@ -10714,8 +10755,28 @@ body.md-mopsy-open{overflow:hidden;}
       const select=element('select','md-mopsy-scene-select');select.setAttribute('aria-label','Preview shop scene');
       SCENES.forEach((s,i)=>{const option=element('option','',(i+1)+'. '+s.name);option.value=String(i);select.appendChild(option);});
       select.value=String(session.scene);select.addEventListener('change',()=>{session.scene=Number(select.value);renderScene();});toolbar.appendChild(select);
-      toolbar.append(control('Random Scene',()=>{session.scene=Math.floor(Math.random()*SCENES.length);rebuildToolbar();renderScene();}),control('450 Coins',()=>{session.demo.coins=450;refresh();say('Demo purse refilled! Even my accounting is imaginary in here.');}),control('0 Coins',()=>{session.demo.coins=0;refresh();say('Demo wallet: empty! Try a Buy button to hear my response.');}),control('Restock',()=>{session.stock=Object.fromEntries(PRODUCTS.map(p=>[p.id,1+Math.floor(Math.random()*2)]));refresh();say('Test shelves restocked! The real dungeon is unchanged.');}));
+      toolbar.append(control('Random Scene',()=>{session.scene=Math.floor(Math.random()*SCENES.length);rebuildToolbar();renderScene();}),control('450 Coins',()=>{session.demo.coins=450;refresh();say('Demo purse refilled! Even my accounting is imaginary in here.');}),control('0 Coins',()=>{session.demo.coins=0;refresh();say('Demo wallet: empty! Try a Buy button to hear my response.');}),control('Restock',()=>{session.stock=Object.fromEntries(PRODUCTS.map(p=>[p.id,1+Math.floor(Math.random()*2)]));session.stock.vitality=1;refresh();say('Test shelves restocked! The real dungeon is unchanged.');}));
     }
+    const vitality=control('♥ Vitality Elixir · 120 Coins · +8 Max HP',()=>{
+      if(!session||closing||session.purchasing)return;
+      if(session.stock.vitality<=0){say('Sold out, superstar! One Vitality Elixir per visit.');return;}
+      if(money()<120){say(choose(LINES.poor));return;}
+      const hp=session.demo?session.demo:window.MDMopsyBridge?.getState?.();
+      if(!hp||hp.maxHP>=120){say('Maximum HP is already 120, honey!');return;}
+      session.purchasing=true;
+      try {
+        if(session.demo){session.demo.coins-=120;session.demo.maxHP=Math.min(120,session.demo.maxHP+8);}
+        else {
+          if(!window.MDMopsyBridge?.spend(120))return;
+          const result=window.MDMopsyBridge.increaseMaxHP(8);
+          if(!result.ok){window.MDMopsyBridge.refund(120);say(result.error);return;}
+        }
+        session.stock.vitality=0;
+        if(!session.demo)window.MDAutosave?.checkpoint?.('mopsy-vitality-sold');
+        refresh();say('Vitality Elixir complete! Your maximum HP increased, but your current HP did not change. ♡');
+      } finally {session.purchasing=false;}
+    },'md-mopsy-vitality');
+    vitality.id='mdMopsyVitality';toolbar.append(vitality);
     toolbar.append(control('Inventory',()=>{
       if(!window.MDInventory){say('The inventory could not load. Please check that all game folders were uploaded.');return;}
       window.MDInventory.open({testSession:session.demo||undefined,onClose:()=>{refresh();}});
@@ -10746,6 +10807,8 @@ body.md-mopsy-open{overflow:hidden;}
   }
   function refresh(){
     if(!session||!balance)return;
+    const vitality=document.getElementById('mdMopsyVitality');
+    if(vitality){const hp=session.demo||window.MDMopsyBridge?.getState?.();vitality.disabled=closing||!session.stock.vitality||money()<120||(hp?.maxHP>=120);vitality.title='Vitality Elixir: 120 Moon Coins, +8 Max HP (cap 120), no healing, once per shop visit';}
     const value=money();balance.replaceChildren(element('strong','',String(value)),element('small','','Moon Coins'));balance.setAttribute('aria-label',value+' Moon Coins');
     stage.querySelectorAll('.md-mopsy-buy').forEach(button=>{
       const remaining=Math.max(0,Number(session.stock[button.dataset.item])||0);
@@ -10801,12 +10864,13 @@ body.md-mopsy-open{overflow:hidden;}
   function open(options={}){
     ensureUI();if(session)return;
     const node=options.node||null, demo=options.testSession||null;
-    if(node&&!node.mopsyVisit)node.mopsyVisit={scene:Math.floor(Math.random()*SCENES.length),stock:Object.fromEntries(PRODUCTS.map(p=>[p.id,1+Math.floor(Math.random()*2)]))};
+    if(node&&!node.mopsyVisit)node.mopsyVisit={scene:Math.floor(Math.random()*SCENES.length),stock:{...Object.fromEntries(PRODUCTS.map(p=>[p.id,1+Math.floor(Math.random()*2)])),vitality:1}};
     const visit=node?.mopsyVisit;
     previousFocus=document.activeElement;
     session={node,demo,scene:options.scene??visit?.scene??Math.floor(Math.random()*SCENES.length),stock:visit?.stock||{},onLeave:options.onLeave,previousMode:window.MoonlightSoundtrack?.getMode()||'main',fromTestMenu:!!options.fromTestMenu,purchasing:false};
     // Existing saved stores using the old sold/not-sold format stay sold out, not restocked.
     for(const p of PRODUCTS){if(session.stock[p.id]===undefined)session.stock[p.id]=1+Math.floor(Math.random()*2);else session.stock[p.id]=session.stock[p.id]===true?0:session.stock[p.id]===false?1:Math.max(0,Math.floor(Number(session.stock[p.id])||0));}
+    if(session.stock.vitality===undefined)session.stock.vitality=1;
     session.scene=Math.max(0,Math.min(4,Number(session.scene)||0));
     closing=false;overlay.hidden=false;document.body.classList.add('md-mopsy-open');overlay.dataset.test=String(!!demo);
     window.MDInventory?.setTestSession?.(demo);
