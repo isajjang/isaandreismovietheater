@@ -2959,6 +2959,30 @@ body.md-act2-combat #restartBtn{display:none!important}
 body.md-act2-combat #mdAct2IntegrityTest,body.md-act2-combat #md2TestLaunch,body.md-act2-combat #mdChapterOneTestButton,body.md-act2-combat #md2TestButton{display:none!important;pointer-events:none!important}
 @media(max-width:700px){body.md-act2-combat #mdStoryBattleExit{font-size:10px!important;padding:5px 7px!important;min-height:30px}}
 </style>
+<style id="md-miniboss-reward-mobile-fix">
+/* Keep selectable rewards and Exit visible on mobile even when card content is tall. */
+@media (max-width: 700px) {
+ #mdRewardOverlay[data-stage="rewards"] .md-reward-body {
+  display: block!important; overflow-y: auto!important; overflow-x: hidden!important;
+  align-items: initial!important; justify-content: initial!important;
+  overscroll-behavior: contain; scrollbar-width: thin!important;
+ }
+ #mdRewardOverlay[data-stage="rewards"] .md-reward-grid[data-count] {
+  display: grid!important; grid-template-columns: 1fr!important;
+  width:100%!important; height:auto!important; align-items:start!important;
+ }
+ #mdRewardOverlay[data-stage="rewards"] .md-reward-grid>.md-reward-card {
+  grid-column:1/-1!important; height:auto!important; max-height:none!important;
+  overflow:visible!important; padding:10px!important;
+ }
+ #mdRewardOverlay[data-stage="rewards"] .md-reward-footer {
+  flex-shrink:0!important; position:relative; z-index:2;
+ }
+ #mdRewardOverlay[data-stage="rewards"] [data-action="exit"] {
+  min-width:90px!important; min-height:40px!important;
+ }
+}
+</style>
 </head><body><div class="game"><header class="hud"><div class="logo"><img class="hud-logo-art" alt="Moonlight Duel" src="2f22d1b4265cbbd5751c3ed5.png"></div><div class="hud-center"><img class="hud-portrait" id="hudPortrait" alt="Isa portrait" src="9faa605c076e5dac214565a5.png"><div class="hud-identity"><span class="hudstat" id="heroName">Isa</span><small id="heroTitle">The Mooncaller</small></div><span class="hudstat hud-health">❤️ <b id="topHP">82/82</b></span></div><div class="floor">The Sunken Basilica<small>ACT I · MOONLIT RUINS</small></div><div class="top-actions"><button class="iconbtn" id="helpBtn" title="How to play">?</button><button class="iconbtn" id="restartBtn" title="Restart">↻</button></div></header><section class="arena" id="arena"><div class="status-row" id="statusRow"></div><div id="mdChefTurnCounter" role="status" aria-live="polite" aria-label="Chef encounter turn count" hidden><div class="chef-counter-kicker">☾ CHEF'S ESCAPE ☽</div><div class="chef-counter-number" id="mdChefTurnNumber">TURN 1 / 5</div><div class="chef-counter-pips" id="mdChefTurnPips"><i class="used"></i><i></i><i></i><i></i><i></i></div><div class="chef-counter-foot" id="mdChefTurnFoot">4 turns until escape</div></div><div class="stars"></div><div class="art-moon-haze"></div><div class="petals" id="petals"></div><div class="intent" id="intent">☠ Preparing a spell</div><div class="combatlog" id="combatlog"></div><div class="actor player" id="playerActor"><img alt="Isa or Rei standing on the battlefield" class="isa-portrait" id="heroSprite"/></div><div class="actor enemy" id="enemyActor"><img alt="Shadow Archmage" class="archmage-art" src="204110a13624aec8588cd73a.webp"/></div><div class="unitbar p"><div class="name" id="playerLabel">ISA · THE MOONCALLER</div><div class="track"><div class="fill" id="playerFill"></div><span id="playerHP">82/82</span></div><div class="name shield-status" id="playerBlock">✧ 0 Block</div></div><div class="unitbar e"><div class="name" id="enemyLabel">SHADOW ARCHMAGE</div><div class="track"><div class="fill" id="enemyFill"></div><span id="enemyHP">114/114</span></div><div class="name shield-status" id="enemyBlock">✧ 0 Block</div></div><div class="toast" id="toast"></div><div class="battle-ornament ornament-left">✦ ☽ ✦</div><div class="battle-ornament ornament-right">✦ ☾ ✦</div></section><section class="lower"><div class="energyzone"><div class="energy"><span id="energy">3/3</span><small>ENERGY</small></div><button aria-label="Draw pile" class="pile pile-deck" title="Draw pile" type="button"><div class="pile-art"></div><span><b id="deckCount">0</b></span></button></div><div class="hand-area"><div class="cards" id="hand"></div></div><div class="turnzone"><button class="turnbtn" id="endTurn">☾ End Turn</button><div class="hint">Tap a card to play · ⓘ to inspect<br/>End turn discards your hand · Draw 5 next turn</div></div><button aria-label="Discard pile" class="pile pile-discard" title="Discard pile" type="button"><div class="pile-art"></div><span><b id="discardCount">0</b></span></button></section></div>
 <div class="overlay hidden" id="startOverlay"><div class="modal md-final-selection" role="dialog" aria-label="Select your sorcerer and grimoire">
   <div class="md-final-art" id="mdFinalSelectionArt"><img class="md-final-background" alt="Moonlight Duel: choose your sorcerer and grimoire" src="assets/media/e93124f2e433ddcf.webp" />
@@ -6894,7 +6918,13 @@ function mdOfferArtwork(offer) {
     const image = mdElement('img'); image.src = CARD_ART.lotus; image.alt = ''; return image;
   }
   if (offer.id === 'cursed') return mdSpellArtwork('entropy');
-  return MDRewardArt.sprite(offer.art || 'spell');
+  // Guard against unavailable/new reward sprite IDs: a missing icon must never
+  // prevent the reward choices and the Exit control from being created.
+  try { return MDRewardArt.sprite(offer.art || 'spell'); }
+  catch (error) {
+    console.warn('Missing reward artwork; using a known fallback:', offer?.art, error);
+    return MDRewardArt.sprite('relic');
+  }
 }
 
 function mdCreateChoice(offer, onSelect, onInspect) {
@@ -7422,7 +7452,7 @@ function mdLootOffers(node) {
     const rareIds=Object.keys(pool).filter(id=>['Rare','Epic','Legendary'].includes(pool[id].rarity));
     const choices=shuffle(rareIds).slice(0,3);
     node.rewardOffers=[
-      {id:'maxhp7',title:'Heart of the Fallen',badge:'Vitality',rarity:'rare',art:'bloodstone',description:'Increase maximum HP by up to 7 (cap: 120). Does not heal current HP.',claimLabel:'Gain maximum HP',disabled:state.maxHP>=MD_MAX_RUN_HP},
+      {id:'maxhp7',title:'Heart of the Fallen',badge:'Vitality',rarity:'rare',art:'relic',description:'Increase maximum HP by up to 7 (cap: 120). Does not heal current HP.',claimLabel:'Gain maximum HP',disabled:state.maxHP>=MD_MAX_RUN_HP},
       {id:'coins100',title:'Moon Coin Treasure',badge:'100 Moon Coins',rarity:'rare',art:'coin',description:'Gain 100 Moon Coins.',claimLabel:'Claim 100 coins'},
       {id:'discovery',title:'Rare Spell Discovery',badge:'Rare or better',badgeTone:'spell',art:'discovery',description:'Choose one rare-or-better spell to add to your deck.',note:'One rare-or-better spell joins your deck.',cards:choices.length?choices:lootSpellChoices(true),claimLabel:'Choose a rare spell'}
     ];
@@ -7565,6 +7595,8 @@ function openLoot(node) {
   grid.dataset.secondaryCount = String(offers.filter(offer => !['transmutation', 'discovery', 'catalyst'].includes(offer.id)).length);
   ui.status.textContent = 'Selecting a reward locks it in. Complete your choice or Exit.';
   ui.body.appendChild(grid);
+  // Make the exit usable even if an individual reward's artwork is broken.
+  ui.actions.appendChild(mdButton('Exit', () => mdExitReward(session), 'secondary', 'exit'));
   offers.forEach(offer => {
     const display = offer.id === 'catalyst' && !listRunCardCopies().some(copy => copy.eligible)
       ? { ...offer, disabled: true, note: 'No eligible cards can evolve.' } : offer;
@@ -7575,7 +7607,6 @@ function openLoot(node) {
     });
     grid.appendChild(card);
   });
-  ui.actions.appendChild(mdButton('Exit', () => mdExitReward(session), 'secondary', 'exit'));
 }
 
 function mdSpellChoices(session, offer) {
